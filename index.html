@@ -11,8 +11,15 @@ layout: default
       <div class="entry">
         {{ post.excerpt }}
       </div>
-
-      <a href="{{ site.baseurl }}{{ post.url }}" class="read-more">Read More</a>
+      
+      <div class="date">
+        <table border="0" width="100%"> <!-- old skool -->
+          <tr>
+            <td>{{ post.date | date: "%B %e, %Y" }}</td>
+            <td align="right"><a href="{{ site.baseurl }}{{ post.url }}" class="read-more">Read More</a></td>
+          </tr>
+        </table>
+      </div>
     </article>
   {% endfor %}
 </div>
