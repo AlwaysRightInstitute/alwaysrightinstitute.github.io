@@ -3,7 +3,7 @@ layout: post
 title: Swifter Design
 ---
 **TL;DR**:
-Swifter is the complete opposite of Swifter. Instead of focusing on making 
+Swifter is the complete opposite of Swift. Instead of focusing on making 
 everything C++-like vtably static, Swifter goes back to the rootz of Objective-C
 and makes everything dynamic.
 
