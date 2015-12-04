@@ -105,7 +105,7 @@ Apple says we also need to install clang, so lets do this as well:
 
     sudo apt-get install clang
 
-Thats it, afterwards we can run the interactive `swift` tool and execute some
+That's it, afterwards we can run the interactive `swift` tool and execute some
 awesome Swift code:
 
 <center><img src=
