@@ -217,9 +217,13 @@ Including the package you love most:
 As part of the Swift OpenSource release Apple also happens to provide the 
 [code of libdispatch on GitHub](https://github.com/apple/swift-corelibs-libdispatch).
 
-Lets compile that as well. First we need to install a few build tools:
+Lets compile that as well. First we need to install a few build tools and some
+kqueue stuff:
 
-    sudo apt-get install autoconf libtool pkg-config
+    sudo apt-get install autoconf libtool pkg-config \
+                         libblocksruntime-dev \
+                         libkqueue-dev \
+                         libpthread-workqueue-dev
 
 Then we can do:
 
@@ -227,20 +231,24 @@ Then we can do:
     git clone git@github.com:apple/swift-corelibs-libdispatch.git
     cd swift-corelibs-libdispatch
     sh autogen.sh
+    ./configure
 
 And finally:
 
-    ./configure
+    make -s
 
 But well, this will give us a
 
-    checking for KQUEUE... configure: error: Package requirements (libkqueue) were not met:
-    No package 'libkqueue' found
+    bsdtests.c:28:10: fatal error: 'crt_externs.h' file not found
+    #include <crt_externs.h>
+             ^
 
 So we are stuck and waiting for a Linux port of the `Dispatch` Swift module.
 Well, there is supposed to be a Linux port related to the
 [GNUstep](http://www.gnustep.org/) 
-project. Didn't bother, didn't try.
+project and I also found this Linux port:
+[nickhutchinson/libdispatch](https://github.com/nickhutchinson/libdispatch).
+Didn't bother, didn't try.
 
 
 ## Summary
