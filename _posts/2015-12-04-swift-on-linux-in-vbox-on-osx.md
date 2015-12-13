@@ -235,8 +235,12 @@ Then we can do:
     ./configure
     pushd src && dtrace -h -s provider.d
     make -s
+    popd
+    sudo make install
 
-Which gives us a `.libs/libdispatch.so`.
+Which gives us a `/usr/local/lib/libdispatch.so`, `/usr/local/include/dispatch`
+as well as manpages
+(tests fail to compile, ignore that - who needs tests anyways!).
 
 > To be continued...
 
