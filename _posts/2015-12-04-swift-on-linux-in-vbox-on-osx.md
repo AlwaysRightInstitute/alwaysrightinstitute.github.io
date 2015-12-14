@@ -226,7 +226,8 @@ kqueue stuff:
     sudo apt-get install autoconf libtool pkg-config \
                          libblocksruntime-dev \
                          libkqueue-dev \
-                         libpthread-workqueue-dev
+                         libpthread-workqueue-dev \
+                         systemtap-sdt-dev
 
 Then we can do:
 
@@ -235,23 +236,16 @@ Then we can do:
     cd swift-corelibs-libdispatch
     sh autogen.sh
     ./configure
-
-And finally:
-
+    pushd src && dtrace -h -s provider.d
     make -s
+    popd
+    sudo make install
 
-But well, this will give us a
+Which gives us a `/usr/local/lib/libdispatch.so`, `/usr/local/include/dispatch`
+as well as manpages
+(tests fail to compile, ignore that - who needs tests anyways!).
 
-    bsdtests.c:28:10: fatal error: 'crt_externs.h' file not found
-    #include <crt_externs.h>
-             ^
-
-So we are stuck and waiting for a Linux port of the `Dispatch` Swift module.
-Well, there is supposed to be a Linux port related to the
-[GNUstep](http://www.gnustep.org/) 
-project and I also found this Linux port:
-[nickhutchinson/libdispatch](https://github.com/nickhutchinson/libdispatch).
-Didn't bother, didn't try.
+> To be continued...
 
 
 ## Summary
