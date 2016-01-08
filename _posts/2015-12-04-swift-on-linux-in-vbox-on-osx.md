@@ -243,6 +243,9 @@ Then we can do:
 Which gives us a `/usr/local/lib/libdispatch.so`, `/usr/local/include/dispatch`
 as well as manpages.
 
+The next step would be to create a Swift module for libdispatch, but there is
+[Linux - module using <dispatch/dispatch.h> does not compile cleanly](https://bugs.swift.org/browse/SR-397) ...
+
 > To be continued...
 
 
