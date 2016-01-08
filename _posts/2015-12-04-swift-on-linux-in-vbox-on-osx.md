@@ -227,7 +227,8 @@ kqueue stuff:
                          libblocksruntime-dev \
                          libkqueue-dev \
                          libpthread-workqueue-dev \
-                         systemtap-sdt-dev
+                         systemtap-sdt-dev \
+                         libbsd-dev libbsd0 libbsd0-dbg
 
 Then we can do:
 
@@ -236,14 +237,11 @@ Then we can do:
     cd swift-corelibs-libdispatch
     sh autogen.sh
     ./configure
-    pushd src && dtrace -h -s provider.d
     make -s
-    popd
     sudo make install
 
 Which gives us a `/usr/local/lib/libdispatch.so`, `/usr/local/include/dispatch`
-as well as manpages
-(tests fail to compile, ignore that - who needs tests anyways!).
+as well as manpages.
 
 > To be continued...
 
