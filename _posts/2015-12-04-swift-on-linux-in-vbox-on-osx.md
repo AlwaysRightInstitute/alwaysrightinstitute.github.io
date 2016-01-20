@@ -95,10 +95,10 @@ Lets do this:
     mkdir swift-not-so-much
     pushd swift-not-so-much
     
-    wget https://swift.org/builds/ubuntu1510/swift-2.2-SNAPSHOT-2015-12-10-a/swift-2.2-SNAPSHOT-2015-12-10-a-ubuntu15.10.tar.gz
+    wget https://swift.org/builds/ubuntu1510/swift-2.2-SNAPSHOT-2016-01-11-a/swift-2.2-SNAPSHOT-2016-01-11-a-ubuntu15.10.tar.gz
     
-    tar zxf swift-2.2-SNAPSHOT-2015-12-10-a-ubuntu15.10.tar.gz
-    export PATH="~/swift-not-so-much/swift-2.2-SNAPSHOT-2015-12-10-a-ubuntu15.10/usr/bin:$PATH"
+    tar zxf swift-2.2-SNAPSHOT-2016-01-11-a-ubuntu15.10.tar.gz
+    export PATH="~/swift-not-so-much/swift-2.2-SNAPSHOT-2016-01-11-a-ubuntu15.10/usr/bin:$PATH"
     popd
 
 Apple says we also need to install clang, so lets do this as well:
@@ -115,7 +115,7 @@ awesome Swift code:
 You probably want to persist the `PATH` export in your ~/.profile:
 
     export EDITOR=vi
-    export PATH="~/swift-not-so-much/swift-2.2-SNAPSHOT-2015-12-10-a-ubuntu15.10/usr/bin:$PATH"
+    export PATH="~/swift-not-so-much/swift-2.2-SNAPSHOT-2016-01-11-a-ubuntu15.10/usr/bin:$PATH"
 
 
 ## Emacs
@@ -160,13 +160,13 @@ Sample `config.make`:
     UNAME_S := $(shell uname -s)
     
     ifeq ($(UNAME_S),Darwin)
-      SWIFT_SNAPSHOT=swift-2.2-SNAPSHOT-2015-12-10-a
+      SWIFT_SNAPSHOT=swift-2.2-SNAPSHOT-2016-01-11-a
       SWIFT_TOOLCHAIN_BASEDIR=/Library/Developer/Toolchains
       SWIFT_TOOLCHAIN=$(SWIFT_TOOLCHAIN_BASEDIR)/$(SWIFT_SNAPSHOT).xctoolchain/usr/bin
     else
       OS=$(shell lsb_release -si | tr A-Z a-z)
       VER=$(shell lsb_release -sr)
-      SWIFT_SNAPSHOT=swift-2.2-SNAPSHOT-2015-12-10-a-$(OS)$(VER)
+      SWIFT_SNAPSHOT=swift-2.2-SNAPSHOT-2016-01-11-a-$(OS)$(VER)
       SWIFT_TOOLCHAIN_BASEDIR=~/swift-not-so-much
       SWIFT_TOOLCHAIN=$(SWIFT_TOOLCHAIN_BASEDIR)/$(SWIFT_SNAPSHOT)/usr/bin
     endif
@@ -244,7 +244,8 @@ Which gives us a `/usr/local/lib/libdispatch.so`, `/usr/local/include/dispatch`
 as well as manpages.
 
 The next step would be to create a Swift module for libdispatch, but there is
-[Linux - module using <dispatch/dispatch.h> does not compile cleanly](https://bugs.swift.org/browse/SR-397) ...
+[Linux - module using <dispatch/dispatch.h> does not compile cleanly](https://bugs.swift.org/browse/SR-397).
+A solution seems to be on the horizon: [SR-577](https://bugs.swift.org/browse/SR-577) ...
 
 > To be continued...
 
