@@ -246,6 +246,9 @@ as well as manpages.
 The next step would be to create a Swift module for libdispatch, but there is
 [Linux - module using <dispatch/dispatch.h> does not compile cleanly](https://bugs.swift.org/browse/SR-397).
 A solution seems to be on the horizon: [SR-577](https://bugs.swift.org/browse/SR-577) ...
+We wrapped up Daniel's patch in the ARI
+[PDispatch](https://github.com/AlwaysRightInstitute/PDispatch) module,
+but programs using that simply crash :-)
 
 > To be continued...
 
