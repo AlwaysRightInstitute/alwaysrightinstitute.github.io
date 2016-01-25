@@ -16,3 +16,7 @@
     <meta property="og:title" content="{{ page.title }}" />
     <meta property="twitter:title" content="{{ page.title }}" />
     {% endif %}
+
+    {% for tag in page.tags %}
+    <meta property="article:tag" content="{{ tag| strip_html }}" />
+    {% endfor %}

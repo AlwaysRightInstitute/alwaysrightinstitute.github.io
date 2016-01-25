@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Updating to Zurb Foundation 6, not.
-tags: Zurb, Foundation, Migration
+tags: Zurb Foundation Migration
 ---
 The Always Right Institute is being right in doing some of its websites using 
 Zurb's [Foundation 5](http://foundation.zurb.com/sites/docs/v/5.5.3/).

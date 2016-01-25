@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Testing Linux Swift on MacOS via VirtualBox
-tags: Linux, Swift, VirtualBox
+tags: Linux Swift VirtualBox
 ---
 So you are living on MacOS but you want to try the
 [Linux port of Swift](https://swift.org/blog/swift-linux-port/).

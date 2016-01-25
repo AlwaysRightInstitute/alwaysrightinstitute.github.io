@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Swifter Design
+tags: Swifter SwifterLang
 ---
 **TL;DR**:
 Swifter is the complete opposite of Swift. Instead of focusing on making 

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: SwiftSockets CocoaPod
+tags: SwiftSockets Swift
 ---
 SwiftSockets is now available via
 [CocoaPods](https://cocoapods.org/?q=SwiftSockets).
