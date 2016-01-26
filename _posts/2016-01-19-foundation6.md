@@ -293,7 +293,7 @@ a bit off.
 
 Our impression is that most of the pending work is due to reasonable changes
 (less defaults).
-The thing which _looks_ buggy is `Interchange`.
-And getting the Top Bar to look right also sounds like a lot of fiddling.
+Getting the Top Bar to look right & stick sounds like some fiddling we don't
+want to do right now.
 
 Hence we chose to wait a little longer and stick to Foundation 5.
