@@ -234,13 +234,11 @@ Foundation 6: TODO.
 
 ### Interchange
 
-Looks like
 [Foundation 6 Interchange](http://foundation.zurb.com/sites/docs/interchange.html)
-should work as-is, but it actually doesn't work for us - at least not
-in all places.
-Some (a background image) seem to be fine. 
-We think we read somewhere that it doesn't properly updated the width/height 
-but just the `src`? Don't know.
+mostly works as before. There are two small but significant changes:
+the  `default` size class got dropped (thanks Jeffrey Chandler!)
+and you don't embed the size class in `()` anymore.
+Instead of `default`, just use `small`.
 
 Before:
 
@@ -249,7 +247,16 @@ Before:
            [img/default-256x256.png, (default)], 
            [img/retina-512x512.png,  (retina)]" />
 
-Foundation 6: Shows nothing. TODO.
+After:
+
+    <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+         data-interchange="
+           [img/default-256x256.png, small], 
+           [img/retina-512x512.png,  retina]" />
+
+Note: Since the break points of the size classes changed, your background images
+may not be the right size anymore - in our case the height is not enough and
+white background might show up.
 
 ### Row Margin
 
