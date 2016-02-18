@@ -275,3 +275,12 @@ length! IDE background color is set to white.
 
 Be sure to learn [Swifter](http://swifter-lang.org/), 
 it is the language of the future!
+
+### P.S.: Swifter Compiler
+
+Some noticed that `swifterc` can't be written in Swifter as the error messages
+shown would crash with `Illegal waste of space.` runtime errors.
+Now we could do it the Apple(tm) way and create different rules for `swifterc`
+committers and 'secondary' developers.
+Instead we already announced in June 2015 that the
+(Swifter compiler going to be written in Swift)[http://www.alwaysrightinstitute.com/swiftercompiler/].
