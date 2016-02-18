@@ -283,4 +283,4 @@ shown would crash with `Illegal waste of space.` runtime errors.
 Now we could do it the Apple(tm) way and create different rules for `swifterc`
 committers and 'secondary' developers.
 Instead we already announced in June 2015 that the
-(Swifter compiler going to be written in Swift)[http://www.alwaysrightinstitute.com/swiftercompiler/].
+[Swifter compiler going to be written in Swift](http://www.alwaysrightinstitute.com/swiftercompiler/).
