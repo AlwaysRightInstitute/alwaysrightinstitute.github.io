@@ -98,7 +98,7 @@ Lets do this:
     wget https://swift.org/builds/development/ubuntu1510/swift-DEVELOPMENT-SNAPSHOT-2016-03-01-a/swift-DEVELOPMENT-SNAPSHOT-2016-03-01-a-ubuntu15.10.tar.gz
     
     tar zxf swift-DEVELOPMENT-SNAPSHOT-2016-03-01-a-ubuntu15.10.tar.gz
-    export PATH="~/swift-not-so-much/swift-DEVELOPMENT-SNAPSHOT-2016-03-01-a-ubuntu15.10/usr/bin:$PATH"
+    export PATH="${HOME}/swift-not-so-much/swift-DEVELOPMENT-SNAPSHOT-2016-03-01-a-ubuntu15.10/usr/bin:$PATH"
     popd
 
 Apple says we also need to install clang, so lets do this as well:
@@ -115,7 +115,7 @@ awesome Swift code:
 You probably want to persist the `PATH` export in your ~/.profile:
 
     export EDITOR=vi
-    export PATH="~/swift-not-so-much/swift-DEVELOPMENT-SNAPSHOT-2016-03-01-a-ubuntu15.10/usr/bin:$PATH"
+    export PATH="${HOME}/swift-not-so-much/swift-DEVELOPMENT-SNAPSHOT-2016-03-01-a-ubuntu15.10/usr/bin:$PATH"
 
 
 ## Emacs
