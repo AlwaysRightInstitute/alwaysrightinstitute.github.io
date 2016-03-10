@@ -116,7 +116,68 @@ You probably want to persist the `PATH` export in your ~/.profile:
 
     export EDITOR=vi
     export PATH="${HOME}/swift-not-so-much/swift-DEVELOPMENT-SNAPSHOT-2016-03-01-a-ubuntu15.10/usr/bin:$PATH"
+    export LD_LIBRARY_PATH="/usr/local/lib:${LD_LIBRARY_PATH}"
 
+Note that `/usr/local/lib` is added to the shared library lookup path too. This
+can be right :-)
+
+## Grand Central Dispatch
+
+A lot of Swift code requires GCD (Grand Central Dispatch) aka libdispatch.
+Including the package you love most:
+[SwiftSockets](https://github.com/AlwaysRightInstitute/SwiftSockets).
+As part of the Swift OpenSource release Apple also happens to provide the 
+[code of libdispatch on GitHub](https://github.com/apple/swift-corelibs-libdispatch).
+
+Lets compile that as well. First we need to install a few build tools and some
+kqueue stuff:
+
+    sudo apt-get install autoconf libtool pkg-config \
+                         libblocksruntime-dev \
+                         libkqueue-dev \
+                         libpthread-workqueue-dev \
+                         systemtap-sdt-dev \
+                         libbsd-dev libbsd0 libbsd0-dbg
+
+Then we can do:
+
+    cd ~/swift-not-so-much
+    git clone --recursive git@github.com:apple/swift-corelibs-libdispatch.git
+    cd swift-corelibs-libdispatch
+    sh autogen.sh
+    ./configure \
+      --with-swift-toolchain=$HOME/swift-not-so-much/swift-DEVELOPMENT-SNAPSHOT-2016-03-01-a-ubuntu15.10/usr \
+      --prefix=$HOME/swift-not-so-much/swift-DEVELOPMENT-SNAPSHOT-2016-03-01-a-ubuntu15.10/usr
+    make -s
+    make install
+
+This installs GCD into the Swift snapshot, including a
+
+    /usr/lib/swift/linux/x86_64/Dispatch.swiftmodule
+
+Lets try it:
+
+    $ swift
+    Welcome to Swift version 3.0-dev (LLVM b361b0fc05, Clang 11493b0f62, Swift 24a0c3de75). Type :help for assistance.
+      1> import Dispatch
+    module 'Dispatch' requires feature 'blocks'could not build Objective-C module 'Dispatch'
+
+Argh no, so close, why??? OK, turns out this can be fixed.
+The blocks runtime needs to be enabled using some magical flags:
+`-Xcc -fblocks -Xlinker -ldispatch`
+
+    $ swift -Xcc -fblocks -Xlinker -ldispatch
+    Welcome to Swift version 3.0-dev (LLVM b361b0fc05, Clang 11493b0f62, Swift 24a0c3de75). Type :help for assistance.
+      1> import Dispatch
+      2> let Q = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+    Q: dispatch_queue_t = 0x00007ffff4144a00
+      3> dispatch_async(Q, { print("Hello!"); })
+      4> import Glibc
+      5> sleep(5)
+    Hello!
+    $R0: UInt32 = 0
+
+Very well, that seems to work!
 
 ## Emacs
 
@@ -171,7 +232,9 @@ Sample `config.make`:
       SWIFT_TOOLCHAIN=$(SWIFT_TOOLCHAIN_BASEDIR)/$(SWIFT_SNAPSHOT)/usr/bin
     endif
     
-    SWIFT_BUILD_TOOL=$(SWIFT_TOOLCHAIN)/swift build
+    SWIFT_BUILD_FLAGS = -Xcc -fblocks -Xlinker -ldispatch
+    
+    SWIFT_BUILD_TOOL=$(SWIFT_TOOLCHAIN)/swift build $(SWIFT_BUILD_FLAGS)
     SWIFT_CLEAN_TOOL=$(SWIFT_TOOLCHAIN)/swift clean
     SWIFT_BUILD_DIR=$(PACKAGE_DIR)/.build/debug
 
@@ -211,44 +274,6 @@ When in Emacs, you can do `M-x compile` and all is awezome:
 compile existing code.)
 
 
-## Grand Central Dispatch
-
-A lot of Swift code requires GCD (Grand Central Dispatch) aka libdispatch.
-Including the package you love most:
-[SwiftSockets](https://github.com/AlwaysRightInstitute/SwiftSockets).
-
-As part of the Swift OpenSource release Apple also happens to provide the 
-[code of libdispatch on GitHub](https://github.com/apple/swift-corelibs-libdispatch).
-
-Lets compile that as well. First we need to install a few build tools and some
-kqueue stuff:
-
-    sudo apt-get install autoconf libtool pkg-config \
-                         libblocksruntime-dev \
-                         libkqueue-dev \
-                         libpthread-workqueue-dev \
-                         systemtap-sdt-dev \
-                         libbsd-dev libbsd0 libbsd0-dbg
-
-Then we can do:
-
-    cd ~/swift-not-so-much
-    git clone --recursive git@github.com:apple/swift-corelibs-libdispatch.git
-    cd swift-corelibs-libdispatch
-    sh autogen.sh
-    ./configure
-    make -s
-    sudo make install
-
-Which gives us a `/usr/local/lib/libdispatch.so`, `/usr/local/include/dispatch`
-as well as manpages.
-
-The next step would be to create a Swift module for libdispatch, but there is
-[Linux - module using <dispatch/dispatch.h> does not compile cleanly](https://bugs.swift.org/browse/SR-397).
-A solution seems to be on the horizon: [SR-577](https://bugs.swift.org/browse/SR-577) ...
-We wrapped up Daniel's patch in the ARI
-[PDispatch](https://github.com/AlwaysRightInstitute/PDispatch) module,
-but programs using that simply crash :-)
 
 > To be continued...
 
