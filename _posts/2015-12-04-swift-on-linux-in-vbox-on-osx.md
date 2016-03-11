@@ -221,18 +221,22 @@ Sample `config.make`:
     UNAME_S := $(shell uname -s)
     
     ifeq ($(UNAME_S),Darwin)
-      SWIFT_SNAPSHOT=swift-DEVELOPMENT-SNAPSHOT-2016-03-01-a
       SWIFT_TOOLCHAIN_BASEDIR=/Library/Developer/Toolchains
-      SWIFT_TOOLCHAIN=$(SWIFT_TOOLCHAIN_BASEDIR)/$(SWIFT_SNAPSHOT).xctoolchain/usr/bin
+      SWIFT_TOOLCHAIN=$(SWIFT_TOOLCHAIN_BASEDIR)/swift-latest.xctoolchain/usr/bin
     else
       OS=$(shell lsb_release -si | tr A-Z a-z)
       VER=$(shell lsb_release -sr)
       SWIFT_SNAPSHOT=swift-DEVELOPMENT-SNAPSHOT-2016-03-01-a-$(OS)$(VER)
       SWIFT_TOOLCHAIN_BASEDIR=~/swift-not-so-much
       SWIFT_TOOLCHAIN=$(SWIFT_TOOLCHAIN_BASEDIR)/$(SWIFT_SNAPSHOT)/usr/bin
+      SWIFT_BUILD_FLAGS += -Xcc -fblocks -Xlinker -ldispatch  
     endif
     
-    SWIFT_BUILD_FLAGS = -Xcc -fblocks -Xlinker -ldispatch
+    ifeq ($(debug),on)
+      SWIFT_INTERNAL_BUILD_FLAGS += -c debug
+    else
+      SWIFT_INTERNAL_BUILD_FLAGS += -c release
+    endif
     
     SWIFT_BUILD_TOOL=$(SWIFT_TOOLCHAIN)/swift build $(SWIFT_BUILD_FLAGS)
     SWIFT_CLEAN_TOOL=$(SWIFT_TOOLCHAIN)/swift clean
