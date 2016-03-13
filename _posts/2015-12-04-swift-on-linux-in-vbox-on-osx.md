@@ -142,7 +142,7 @@ kqueue stuff:
 Then we can do:
 
     cd ~/swift-not-so-much
-    git clone --recursive git@github.com:apple/swift-corelibs-libdispatch.git
+    git clone --recursive https://github.com/apple/swift-corelibs-libdispatch.git
     cd swift-corelibs-libdispatch
     sh autogen.sh
     ./configure \
