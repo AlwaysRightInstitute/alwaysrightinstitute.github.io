@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Testing Linux Swift on MacOS via VirtualBox
+title: Testing Linux Swift 2.2 on MacOS via VirtualBox
 tags: Linux Swift VirtualBox
 ---
 So you are living on MacOS but you want to try the
@@ -95,10 +95,10 @@ Lets do this:
     mkdir swift-not-so-much
     pushd swift-not-so-much
     
-    wget https://swift.org/builds/development/ubuntu1510/swift-DEVELOPMENT-SNAPSHOT-2016-03-16-a/swift-DEVELOPMENT-SNAPSHOT-2016-03-16-a-ubuntu15.10.tar.gz
+    wget https://swift.org/builds/swift-2.2-release/ubuntu1510/swift-2.2-RELEASE/swift-2.2-RELEASE-ubuntu15.10.tar.gz
     
-    tar zxf swift-DEVELOPMENT-SNAPSHOT-2016-03-16-a-ubuntu15.10.tar.gz
-    export PATH="${HOME}/swift-not-so-much/swift-DEVELOPMENT-SNAPSHOT-2016-03-16-a-ubuntu15.10/usr/bin:$PATH"
+    tar zxf swift-2.2-RELEASE-ubuntu15.10.tar.gz
+    export PATH="${HOME}/swift-not-so-much/swift-2.2-RELEASE-ubuntu15.10/usr/bin:$PATH"
     popd
 
 Apple says we also need to install clang, so lets do this as well:
@@ -115,7 +115,7 @@ awesome Swift code:
 You probably want to persist the `PATH` export in your ~/.profile:
 
     export EDITOR=vi
-    export PATH="${HOME}/swift-not-so-much/swift-DEVELOPMENT-SNAPSHOT-2016-03-16-a-ubuntu15.10/usr/bin:$PATH"
+    export PATH="${HOME}/swift-not-so-much/swift-2.2-RELEASE-ubuntu15.10/usr/bin:$PATH"
     export LD_LIBRARY_PATH="/usr/local/lib:${LD_LIBRARY_PATH}"
 
 Note that `/usr/local/lib` is added to the shared library lookup path too. This
@@ -146,19 +146,19 @@ Then we can do:
     cd swift-corelibs-libdispatch
     sh autogen.sh
     ./configure \
-      --with-swift-toolchain=$HOME/swift-not-so-much/swift-DEVELOPMENT-SNAPSHOT-2016-03-16-a-ubuntu15.10/usr \
-      --prefix=$HOME/swift-not-so-much/swift-DEVELOPMENT-SNAPSHOT-2016-03-16-a-ubuntu15.10/usr
+      --with-swift-toolchain=$HOME/swift-not-so-much/swift-2.2-RELEASE-ubuntu15.10/usr \
+      --prefix=$HOME/swift-not-so-much/swift-2.2-RELEASE-ubuntu15.10/usr
     make -s
     make install
 
-This installs GCD into the Swift snapshot, including a
+This installs GCD into the Swift release directory, including a
 
     /usr/lib/swift/linux/x86_64/Dispatch.swiftmodule
 
 Lets try it:
 
     $ swift
-    Welcome to Swift version 3.0-dev (LLVM b361b0fc05, Clang 11493b0f62, Swift 24a0c3de75). Type :help for assistance.
+    Welcome to Swift version 2.2 (swift-2.2-RELEASE). Type :help for assistance.
       1> import Dispatch
     module 'Dispatch' requires feature 'blocks'could not build Objective-C module 'Dispatch'
 
@@ -167,7 +167,7 @@ The blocks runtime needs to be enabled using some magical flags:
 `-Xcc -fblocks -Xlinker -ldispatch`
 
     $ swift -Xcc -fblocks -Xlinker -ldispatch
-    Welcome to Swift version 3.0-dev (LLVM b361b0fc05, Clang 11493b0f62, Swift 24a0c3de75). Type :help for assistance.
+    Welcome to Swift version 2.2 (swift-2.2-RELEASE). Type :help for assistance.
       1> import Dispatch
       2> let Q = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
     Q: dispatch_queue_t = 0x00007ffff4144a00
@@ -226,7 +226,7 @@ Sample `config.make`:
     else
       OS=$(shell lsb_release -si | tr A-Z a-z)
       VER=$(shell lsb_release -sr)
-      SWIFT_SNAPSHOT=swift-DEVELOPMENT-SNAPSHOT-2016-03-16-a-$(OS)$(VER)
+      SWIFT_SNAPSHOT=swift-2.2-RELEASE-$(OS)$(VER)
       SWIFT_TOOLCHAIN_BASEDIR=~/swift-not-so-much
       SWIFT_TOOLCHAIN=$(SWIFT_TOOLCHAIN_BASEDIR)/$(SWIFT_SNAPSHOT)/usr/bin
       SWIFT_BUILD_FLAGS += -Xcc -fblocks -Xlinker -ldispatch  
