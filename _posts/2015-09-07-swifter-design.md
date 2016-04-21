@@ -97,9 +97,9 @@ Kinda like this:
     class ImagesViewController : NSViewController {
     
       IBOutlet tableView
-    
+      
       viewDidLoad {
-        super viewDidLoad
+        super viewDidLoad // or just `super`?
     
         con = NSApp delegate. dockerConnection
         log: "Con: %@" with: con
@@ -108,14 +108,14 @@ Kinda like this:
           if error != nil log: "ERROR: %@" with: error
       
           dispatch_async(dispatch_get_main_queue()) {
-            representObject = images
+            representedObject = images
             tableView reloadData
           }
         }
       }
-    
+      
       numberOfRowsInTableView: {
-        return representedObject. count
+        return representedObject.count
       }
     
       tableView objectValueForTableColumn: tc row {
@@ -145,6 +145,9 @@ Things to note:
 - default arguments names (the `row` part of the selector in the last method becomes the local variable name)
 - all variables are `id`, so blocks are Swift like simple
 - return value of a method is the last expression
+- `super` could also do a lot of implicit stuff. If you don't specify an
+  explicit method to call, it could automatically call _cmd - with the same
+  arguments specified (as this is quite common ...)
 
 ### Looking for a job?
 
