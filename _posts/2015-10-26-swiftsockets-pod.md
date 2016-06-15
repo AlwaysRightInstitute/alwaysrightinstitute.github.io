@@ -27,7 +27,7 @@ let socket = PassiveSocket<sockaddr_in>(address: sockaddr_in(port: 4242))
   }
 ```
 
-Important goals included:
+Important goals include:
 
 - Max line length: 80 characters
 - Use as many language features Swift provides, such as:
