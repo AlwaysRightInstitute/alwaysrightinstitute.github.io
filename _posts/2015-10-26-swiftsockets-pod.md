@@ -11,7 +11,10 @@ I'm still not sure whether that is a good idea, since SwiftSockets is:
 > real world project. In most real world Swift apps you have access to Cocoa,
 > use it.
 
-<center>[![SwiftSockets]({{ site.baseurl }}/images/swiftsockets.png)](http://alwaysrightinstitute.github.io/SwiftSockets/)</center>
+<center>
+  <a href="http://alwaysrightinstitute.github.io/SwiftSockets/"
+     ><img src="{{ site.baseurl }}/images/swiftsockets.png" /></a>
+</center>
 
 Sample:
 
