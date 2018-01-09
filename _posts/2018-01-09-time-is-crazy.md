@@ -53,7 +53,7 @@ more rare.
 
 For example the opening times for a "7-Eleven" are most correctly expressed as 
 "7:00-23:00-floating".
-(Only if you tie to a particular store, you can attached a point in time to it,
+(Only if you tie to a particular store, you can attach a point in time to it,
  and even that only really for 'past' openings)
 
 Another example: You are travelling with friends alongside timezone 
