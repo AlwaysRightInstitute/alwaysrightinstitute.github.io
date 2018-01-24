@@ -946,6 +946,8 @@ for a more complete version of a synchronous Express-like Swift API.
 
 ### Links
 
+- Finished [MicroExpress](https://github.com/AlwaysRightInstitute/MicroExpress)
+  package on GitHub
 - Swift Server Working Group
   - [Homepage](https://swift.org/server-apis/)
   - [HTTP API on GitHub](https://github.com/swift-server/http)
