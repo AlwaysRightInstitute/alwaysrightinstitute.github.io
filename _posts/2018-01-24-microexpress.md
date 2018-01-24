@@ -321,7 +321,7 @@ there is a little more to it
 ([mounting](http://expressjs.com/de/api.html#app.mountpath) etc.),
 but for our purposes think of a router as a simple list of
 middleware functions.
-Middleware is added to (not doing) that list using the `use()` function.
+Middleware is added to that list using the `use()` function.
 
 When handling a request, the router just steps through its list
 of middleware until one of them **doesn't** call `next`.
