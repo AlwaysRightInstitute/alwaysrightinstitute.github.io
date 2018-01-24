@@ -531,7 +531,7 @@ app.get("/moo") { req, res, next in
 ```
 
 This is only triggered if the HTTP method is `GET` and the URL path
-starts with `/cow`.
+starts with `/moo`.
 Suprisingly trivial to add to `Router.swift`:
 
 GitHub: [Router.swift](https://github.com/AlwaysRightInstitute/MicroExpress/blob/tutorial/2-api-sugar/Sources/MicroExpress/Router.swift#L46)
