@@ -49,7 +49,7 @@ And all that with just a µscopic amount of code.
 The final package has a little more than **200 lines of code**
 (as if that would say anything).
 
-To get there we need to add this to the 
+To get there we are going to add this to the 
 [raw Swift Server API 0.1.0](https://github.com/swift-server/http/tree/0.1.0):
 
 1. a response object, and an improved request object
@@ -85,29 +85,29 @@ Creating Tests/
 
 As
 [last time](http://www.alwaysrightinstitute.com/http-010/)
-(the first and only release so far),
 we are going to use the 
-[0.1.0 version of the API](http://www.alwaysrightinstitute.com/http-010/),
+[0.1.0 version of the API](http://www.alwaysrightinstitute.com/http-010/)
+(the first and only release so far),
 so add this to the dependencies section of the 
 [`Package.swift`](https://github.com/AlwaysRightInstitute/MicroExpress/blob/tutorial/1-hello-world/Package.swift) 
 file:
 
 ```swift
-    dependencies: [
-        .package(url: "https://github.com/swift-server/http", 
-                 from: "0.1.0")
-    ],
+dependencies: [
+  .package(url: "https://github.com/swift-server/http", 
+           from: "0.1.0")
+],
 ```
 
 And make MicroExpress depend on it:
 
 ```swift
-        .target(
-            name: "MicroExpress",
-            dependencies: [ "HTTP" ]),
+.target(
+  name: "MicroExpress",
+  dependencies: [ "HTTP" ]),
 ```
 
-You don't have to (just call `swift build` to build in other environments),
+You don't have to
 but most people are going to use Xcode, so lets create an Xcode
 project for the package:
 
@@ -260,7 +260,8 @@ try response.send("Hello World!")
 Want to set the HTTP status and add a header?
 ```swift
 response.status = .notFound
-response.headers["X-Powered-By"] = "MicroExpress/0.13.37"
+response.headers["X-Powered-By"] = 
+  "MicroExpress/0.13.37"
 try response.send("404 - Not Found")
 ```
 
@@ -305,8 +306,10 @@ GitHub: [Middleware.swift](https://github.com/AlwaysRightInstitute/MicroExpress/
 // File: Middleware.swift - create this in Sources/MicroExpress
 
 public typealias Middleware =
-         ( IncomingMessage, ServerResponse, () -> () )
-         throws -> Void
+         ( IncomingMessage, 
+           ServerResponse, 
+           () -> ()
+         ) throws -> Void
 ```
 
 That's it. There is no magic to a middleware, it is just a simple
@@ -338,14 +341,17 @@ open class Router {
   
   /// Add another middleware (or many) to the list
   open func use(_ middleware: Middleware...) {
-    self.middleware.append(contentsOf: middleware)
+    self.middleware
+      .append(contentsOf: middleware)
   }
   
-  /// Request handler. Calls its middleware list
-  /// in sequence until one doesn't call `next()`.
+  /// Request handler. Calls its middleware
+  /// in sequence until one doesn't call 
+  /// `next()`.
   func handle(request  : IncomingMessage,
               response : ServerResponse,
-              next     : () -> () = {}) throws
+              next     : () -> () = {})
+         throws
   {
     var didCallNext = true // to handle the empty case
     
@@ -391,8 +397,8 @@ router.use { _, res, _ in
   res.send("hello!") // response is done.
 }
 router.use { _, _, _ in
-  // we never get here, because the middleware above
-  // did not call `next`
+  // we never get here, because the 
+  // middleware above did not call `next`
 }
 ```
 
@@ -435,11 +441,13 @@ open class Express : Router {
         
         // trigger Router
         do {
-          try self.handle(request: req, response: res)
+          try self.handle(request: req, 
+                          response: res)
         }
         catch {
           res.status = .internalServerError
-          try? res.send("Swift Error: \(error)")
+          try? res.send("Swift Error:" +
+                        " \(error)")
         }
         
         // We do not process `POST` input in MicroExpress 😎
@@ -447,7 +455,8 @@ open class Express : Router {
       }
     }
     catch {
-      fatalError("failed to start server: \(error)")
+      fatalError("failed to start server:" +
+                 " \(error)")
     }
     
     // never exits:
@@ -482,12 +491,15 @@ GitHub: [main.swift](https://github.com/AlwaysRightInstitute/MicroExpress/blob/t
 
 let app = Express()
 
-app.use { req, res, next in // Logging
-  print("\(req.header.method): \(req.header.target)")
+// Logging
+app.use { req, res, next in
+  print("\(req.header.method): " +
+        "\(req.header.target)")
   next() // continue processing
 }
 
-app.use { _, res, _ in      // Request Handling
+// Request Handling
+app.use { _, res, _ in
   try res.send("Hello, Schwifty world!")
 }
 
@@ -563,8 +575,12 @@ otherwise it just passes on using `next`.
 Using this we can now actually "route", for example:
 
 ```swift
-app.get("/hello") { _, res, _ in res.send("Hello") }
-app.get("/moo")   { _, res, _ in res.send("Moo!") }
+app.get("/hello") { _, res, _ in 
+  res.send("Hello")
+}
+app.get("/moo")   { _, res, _ in 
+  res.send("Moo!") 
+}
 ```
 
 ## Step 6: Reusable Middleware
@@ -583,16 +599,22 @@ GitHub: [QueryString.swift](https://github.com/AlwaysRightInstitute/MicroExpress
 
 import Foundation
 
-fileprivate let paramDictKey = "de.zeezide.µe.param"
+fileprivate let paramDictKey = 
+                  "de.zeezide.µe.param"
 
-/// A middleware which parses the URL query parameters.
-/// You can then access the parameters using
-///   `req.param("id")`.
-public func querystring(req  : IncomingMessage,
-                        res  : ServerResponse,
-                        next : () -> ())
+/// A middleware which parses the URL query
+/// parameters. You can then access them
+/// using:
+///
+///     req.param("id")
+///
+public 
+func querystring(req  : IncomingMessage,
+                 res  : ServerResponse,
+                 next : () -> ())
 {
-  // use Foundation to parse the `?a=x` parameters
+  // use Foundation to parse the `?a=x` 
+  // parameters
   if let queryItems = URLComponents(string: req.header.target)?.queryItems {
     req.userInfo[paramDictKey] =
       Dictionary(grouping: queryItems, by: { $0.name })
@@ -600,7 +622,8 @@ public func querystring(req  : IncomingMessage,
 	               .joined(separator: ",") }
   }
   
-  next() // pass on control to next middleware
+  // pass on control to next middleware
+  next()
 }
 
 public extension IncomingMessage {
@@ -611,7 +634,8 @@ public extension IncomingMessage {
   ///     let token  = req.param("token")
   ///
   func param(_ id: String) -> String? {
-    return (userInfo[paramDictKey] as? [ String : String ])?[id]
+    return (userInfo[paramDictKey] 
+       as? [ String : String ])?[id]
   }
 }
 ```
@@ -624,9 +648,10 @@ Want to try it? You could modify the `main.swift` like this:
 ```swift
 app.use(querystring) // parse query params
 
-app.get { req, res, _ in // Request Handling
-  let text = req.param("text") ?? "Schwifty"
-  try res.send("Hello, \(text) world! ")
+app.get { req, res, _ in
+  let text = req.param("text")
+          ?? "Schwifty"
+  try res.send("Hello, \(text) world!")
 }
 ```
 
@@ -660,12 +685,16 @@ struct Todo : Codable {
   var completed : Bool
 }
 
-// Our fancy todo "database". Since it is immutable
-// it is very very fast, if not useless.
+// Our fancy todo "database". Since it is
+// immutable it is webscale and lock free, 
+// if not useless.
 let todos = [
-  Todo(id: 42,   title: "Buy beer",      completed: false),
-  Todo(id: 1337, title: "Buy more beer", completed: false),
-  Todo(id: 88,   title: "Drink beer",    completed: true)
+  Todo(id: 42,   title: "Buy beer",
+       completed: false),
+  Todo(id: 1337, title: "Buy more beer",
+       completed: false),
+  Todo(id: 88,   title: "Drink beer",
+       completed: true)
 ]
 ```
 
@@ -684,14 +713,18 @@ import Foundation
 
 public extension ServerResponse {
   
-  /// Send a Codable object as JSON to the client.
+  /// Send a Codable object as JSON to the 
+  /// client.
   func json<T: Codable>(_ model: T) throws {
-    // create a Data struct from the Codable object
-    let data = try JSONEncoder().encode(model)
+    // create a Data struct from the object
+    let data =
+          try JSONEncoder().encode(model)
     
     // setup headers
-    headers["Content-Type"]   = "application/json"
-    headers["Content-Length"] = "\(data.count)"
+    headers["Content-Type"]   = 
+               "application/json"
+    headers["Content-Length"] = 
+               "\(data.count)"
     
     // send the headers and the data
     try flushHeader()
@@ -708,7 +741,8 @@ GitHub: [main.swift](https://github.com/AlwaysRightInstitute/MicroExpress/blob/t
 // File: main.swift - add this to main.swift
 
 app.get("/todomvc") { _, res, _ in
-  try res.json(todos) // send JSON to the browser
+  // send JSON to the browser
+  try res.json(todos)
 }
 ```
 
@@ -716,9 +750,12 @@ To check whether it works, rebuild and rerun the project.
 Then open [http://localhost:1337/todomvc/](http://localhost:1337/todomvc/)
 in the browser. You should see the proper JSON:
 ```json
-[ {"id": 42,   "title": "Buy beer",      "completed": false },
-  {"id": 1337, "title": "Buy more beer", "completed": false },
-  {"id": 88,   "title": "Drink beer",    "completed": true  } ]
+[ { "id": 42,   "title": "Buy beer", 
+    "completed": false },
+  { "id": 1337, "title": "Buy more beer",
+    "completed": false },
+  { "id": 88,   "title": "Drink beer",
+    "completed": true  } ]
 ```
 
 Lets try our API with the actual TodoBackend client:<br>
@@ -728,7 +765,8 @@ If we do this, the todo list in the client shows up empty! 🤔
 If you open the JavaScript console in the browser debugger, you'll see an
 error like this:
 ```
-Origin http://todobackend.com is not allowed by \
+Origin http://todobackend.com \
+  is not allowed by \
   Access-Control-Allow-Origin. \
   http://localhost:1337/todomvc/
 ```
@@ -748,13 +786,16 @@ GitHub: [CORS.swift](https://github.com/AlwaysRightInstitute/MicroExpress/blob/t
 ```swift
 // File: CORS.swift - create this in Sources/MicroExpress
 
-public func cors(allowOrigin origin: String) -> Middleware {
+public func cors(allowOrigin origin: String) 
+            -> Middleware
+{
   return { req, res, next in
     res.headers["Access-Control-Allow-Origin"]  = origin
     res.headers["Access-Control-Allow-Headers"] = "Accept, Content-Type"
     res.headers["Access-Control-Allow-Methods"] = "GET, OPTIONS"
     
-    if req.header.method == .options { // we handle the options
+    // we handle the options
+    if req.header.method == .options {
       res.headers["Allow"] = "GET, OPTIONS"
       try res.send("")
     }
@@ -773,7 +814,8 @@ GitHub: [main.swift](https://github.com/AlwaysRightInstitute/MicroExpress/blob/t
 ```swift
 // File: main.swift - change this in main.swift
 
-app.use(querystring, cors(allowOrigin: "*"))
+app.use(querystring, 
+        cors(allowOrigin: "*"))
 ```
 
 > Note: For `cors()` we use a common pattern done in JavaScript,
@@ -815,18 +857,19 @@ GitHub: [Package.swift](https://github.com/AlwaysRightInstitute/MicroExpress/blo
 ```swift
 // File: Package.swift - update existing file
     
-    products: [
-        .library(name: "MicroExpress", targets: ["MicroExpress"]),
-    ],
+products: [
+  .library(name: "MicroExpress", 
+           targets: ["MicroExpress"]),
+],
 ...
-    targets: [
-        .target(
-            name: "MicroExpress",
-            dependencies: [ "HTTP" ]),
-        .target(
-            name: "MicroHelloServer",
-            dependencies: [ "MicroExpress" ]),
-    ]
+targets: [
+  .target(
+    name: "MicroExpress",
+    dependencies: [ "HTTP" ]),
+  .target(
+    name: "MicroHelloServer",
+    dependencies: [ "MicroExpress" ]),
+]
 ```
 
 After any change to `Package.swift`, you need to regenerate the Xcode
@@ -836,7 +879,7 @@ project:
 $ swift package generate-xcodeproj
   generated: ./MicroExpress.xcodeproj
 
-$ open MicroExpress.xcodeproj # and Xcode should open
+$ open MicroExpress.xcodeproj
 ```
 
 Again, after doing this, make sure you select the right scheme 
@@ -864,10 +907,12 @@ you can start using it in other packages, that is,
 as an own package dependency:
 
 ```swift
-    dependencies: [
-      .package(url: "https://github.com/AlwaysRightInstitute/MicroExpress.git", 
-               .branch("master"))
-    ],
+dependencies: [
+  .package(url: 
+    "https://github.com/AlwaysRightInstitute/MicroExpress.git", 
+    .branch("master")
+  )
+],
 ```
 
 ### Using the Package
@@ -902,7 +947,9 @@ Change the `main.swift` from `print("Hello World")` into:
 import MicroExpress
 
 let app = Express()
-app.get("/") { _, res, _ in try res.send("Hello World") }
+app.get("/") { _, res, _ in 
+  try res.send("Hello World")
+}
 app.listen(1337)
 ```
 
