@@ -975,7 +975,7 @@ app.listen(1337)
 
 Let's add some routes to that!
 
-TODO <img src="/images/gh.svg" style="height: 1em; margin-bottom: -0.1em; text-align: bottom;"/>
+<img src="/images/gh.svg" style="height: 1em; margin-bottom: -0.1em; text-align: bottom;"/>
 [main.swift](https://github.com/AlwaysRightInstitute/MicroExpress/blob/nio-tutorial/3-middleware/MicroExpress/Sources/MicroExpress/main.swift)
 ```swift
 // File: main.swift - update existing file
@@ -1385,7 +1385,7 @@ Stuff which breaks the scope of the post but which you can add easily:
 
 ### Links
 
-- TODO Finished [MicroExpress](https://github.com/AlwaysRightInstitute/MicroExpress)
+- [MicroExpress](https://github.com/AlwaysRightInstitute/MicroExpress)
   package on GitHub (contains branches of all steps above!)
 - [swift-nio](https://github.com/apple/swift-nio)
 - Swift Server Working Group
@@ -1394,7 +1394,7 @@ Stuff which breaks the scope of the post but which you can add easily:
 - JavaScript Originals
   - [Connect](https://github.com/senchalabs/connect)
   - [Express.js](http://expressjs.com/en/starter/hello-world.html)
-- TODO: [Noze.io](https://github.com/modswift/ExExpress)
+- [Noze.io](http://noze.io)
 - [ExExpress](https://github.com/modswift/ExExpress)
 - [SPM](https://swift.org/blog/swift-package-manager-manifest-api-redesign/)
 - [Swiftmon/S](https://github.com/NozeIO/swiftmons)
