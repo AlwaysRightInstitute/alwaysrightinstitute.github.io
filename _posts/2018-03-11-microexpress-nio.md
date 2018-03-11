@@ -42,13 +42,13 @@ import MicroExpress
 let app = Express()
 
 app.get("/moo") { req, res, next in
-  try res.send("Muhhh")
+  res.send("Muhhh")
 }
 app.get("/json") { _, res, _ in
-  try res.json([ "a": 42, "b": 1337 ])
+  res.json([ "a": 42, "b": 1337 ])
 }
 app.get("/") { _, res, _ in
-  try res.send("Homepage")
+  res.send("Homepage")
 }
 
 app.listen(1337)
