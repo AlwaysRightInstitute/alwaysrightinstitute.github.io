@@ -13,13 +13,18 @@ we wrote a straight Google replacement using just the
 This time we are going to write a micro server framework wrapping that API.
 Say `Hello World` to *MicroExpress*!
 
+*2018-03-01 Breaking News*:
+The [Swift Server API](https://github.com/swift-server/http/tree/0.1.0)
+has been sherlocked.
+Checkout our follow up article: [A micro tutorial on Swift NIO](/microexpress-nio/).
+
 > If you haven't read 
 > [Using the Swift Server API 0.1.0](http://www.alwaysrightinstitute.com/http-010/),
 > we suggest you do this first.
 > The article explains the basics of the Swift Server API.
 
 *Swift Server API Series*:
-[Part1 - Raw API](/http-010/) ✭ Part2 µExpress
+[Part1 - Raw API](/http-010/) ✭ Part2 µExpress ✭ [Part3 µExpress/NIO](/microexpress-nio)
 
 **The goal**. Instead of providing a low level handler function, we
 want to write a Swift service 
