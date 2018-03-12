@@ -1399,10 +1399,14 @@ Stuff which breaks the scope of the post but which you can add easily:
 - [SPM](https://swift.org/blog/swift-package-manager-manifest-api-redesign/)
 - [Swiftmon/S](https://github.com/NozeIO/swiftmons)
 
-### Contact
+## Contact
 
 Hey, we love feedback!
 Twitter, any of those:
 [@helje5](https://twitter.com/helje5),
 [@ar_institute](https://twitter.com/ar_institute).<br>
 Email: [wrong@alwaysrightinstitute.com](mailto:wrong@alwaysrightinstitute.com).
+
+## No tutorial w/o Cows
+
+<img src="http://zeezide.com/img/swift-nio-cows.gif" />
