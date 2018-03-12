@@ -316,7 +316,7 @@ open class Express {
 > But lets ignore that part for now. Read it as:
 > once `addHTTPServerHandlers` completed, add our own handler.
 
-We put the actual handly into the `Express` object:
+We put the actual handler into the `Express` object:
 
 <img src="/images/gh.svg" style="height: 1em; margin-bottom: -0.1em; text-align: bottom;"/>
 [Express.swift](https://github.com/AlwaysRightInstitute/MicroExpress/blob/nio-tutorial/1-hello-world/MicroExpress/Sources/MicroExpress/Express.swift#L45)
