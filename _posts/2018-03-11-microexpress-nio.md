@@ -1410,3 +1410,11 @@ Email: [wrong@alwaysrightinstitute.com](mailto:wrong@alwaysrightinstitute.com).
 ## No tutorial w/o Cows
 
 <img src="http://zeezide.com/img/swift-nio-cows.gif" />
+
+
+#### P.S.
+
+<div style="font-size: 8pt; margin-bottom: 2em;">
+The attentive reader may have noticed that the `next` closure features
+a retain cycle 😎.
+</div>
