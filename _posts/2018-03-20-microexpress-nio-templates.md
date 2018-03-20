@@ -358,7 +358,7 @@ fs.readFile("/etc/passwd") { err, data in
 
 So we have a function which can read a file asynchronously,
 without blocking an event loop.
-We are going to use this function to load or Mustache template.
+We are going to use this function to load our Mustache template.
 
 #### Don't forget about Grand Central Dispatch
 
