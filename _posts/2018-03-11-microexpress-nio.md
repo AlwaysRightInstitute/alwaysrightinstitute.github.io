@@ -1368,13 +1368,19 @@ and can accomplish a lot w/ very little code and dependencies.
 In about an hour you can spin your own.
 Choose independent reusable modules with as little dependencies as possible.
 
+What's next? Add support for Mustache templates using our
+"[µExpress/NIO - Adding Templates](/microexpress-nio-templates/)"
+tutorial.
+
 ### Enhancements
 
 Stuff which breaks the scope of the post but which you can add easily:
 
 - POST processing (consuming) input, ~50 LOC
 - Template handling. Make use of the Swift NIO FileIOHelper,
-  and you favorite templating library. ~50 LOC
+  and you favorite templating library.
+  New: "[µExpress/NIO - Adding Templates](/microexpress-nio-templates/)"
+  tutorial!
 - Add support for error middleware: ~50 LOC
 - Matching pathes w/ inline arguments (`/users/:id`), ~100 LOC
 - Database access using your favorite library,
