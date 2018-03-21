@@ -722,7 +722,7 @@ Spoiler: Easy to add!
 
 In the example we use different endpoints for the JSON delivery of the todos,
 and the HTML delivery of the todos.
-We could also use content-negotation to switch between the two:
+We could also use content-negotiation to switch between the two:
 check [ExExpress](https://github.com/modswift/ExExpress/blob/develop/Sources/ExExpress/connect/TypeIs.swift#L12)
 for a sample.
 
