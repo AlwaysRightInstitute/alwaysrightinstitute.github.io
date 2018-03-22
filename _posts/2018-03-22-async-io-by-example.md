@@ -107,7 +107,7 @@ app.get("/orders") { request, response, next in
 
 Again, like Promises, async/await does not change the fundamental flow.
 It is just a compiler feature which un-nests the callback hell.
-Like "throws" silently adds another return value (the `Error`),
+Like `throws` silently adds another return value (the `Error`),
 marking a function as `async` would (conceptually) silently add a closure
 which is run when the return value becomes available.
 
