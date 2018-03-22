@@ -148,7 +148,7 @@ The function has a clear, sequential flow:
 The important thing is that any of those operations can **block**.
 For example to connect to the database, your web framework has to establish
 a socket connection to your PostgreSQL server and perform the login.<br>
-The same goes for the SQL query, your functions sends the query to the
+The same goes for the SQL query, your function sends the query to the
 SQL server and it then has to wait for it to perform the query and return
 the results. Again, while doing this, your function is "stopped" by the
 operation system until results come in.
