@@ -185,7 +185,7 @@ Do you expect your backend to serve more than a million *concurrent* users
 (i.e. are you Google, Twitter or iCloud)?
 Then NIO is something you should definitely look into.
 
-The problem is, that an operating system thread is a pretty expensive resource.
+The problem is that an operating system thread is a pretty expensive resource.
 It has a stack, it needs to be scheduled using the kernel, there are expensive
 context switches. In short: they are not cheap.<br>
 You can have a few thousand threads on a modern machine (e.g. my MacPro
