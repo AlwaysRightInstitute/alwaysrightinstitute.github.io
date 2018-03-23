@@ -151,7 +151,7 @@ a socket connection to your PostgreSQL server and perform the login.<br>
 The same goes for the SQL query, your function sends the query to the
 SQL server and it then has to wait for it to perform the query and return
 the results. Again, while doing this, your function is "stopped" by the
-operation system until results come in.
+operating system until results come in.
 
 > When we say "blocked", we are not (usually) talking about minutes. We 
 > talk about maybe 100ms (20ms connect, 20ms perform SQL, 60ms handling 
@@ -163,7 +163,7 @@ operation system until results come in.
 
 Since we are a server, we want to handle a lot of clients at the same time.
 We can't, if the processing of our functions stops so often.
-To enable this all modern operation systems provide something called 
+To enable this all modern operating systems provide something called 
 [Threads](https://en.wikipedia.org/wiki/Thread_(computing))
 to virtualize the CPU and perform what we call multi-tasking.
 If one of your handler functions block a thread, another thread can run,
