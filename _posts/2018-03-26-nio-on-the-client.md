@@ -419,7 +419,7 @@ if you are interested in the details.
 
 The demo above actually does not work properly in the context of multi-tasking.
 If the user puts the app in the background, they kernel will eventually reclaim
-the port the server listening on.
+the port the server is listening on.
 So if you actually want to do something like above for whatever reason
 (maybe a Pied Piper competitor),
 you need to tear down the server when the app goes into background,
