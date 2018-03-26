@@ -418,7 +418,7 @@ if you are interested in the details.
 ### iOS Multi-Tasking
 
 The demo above actually does not work properly in the context of multi-tasking.
-If the user puts the app in the background, they kernel will eventually reclaim
+If the user puts the app in the background, the kernel will eventually reclaim
 the port the server is listening on.
 So if you actually want to do something like above for whatever reason
 (maybe a Pied Piper competitor),
