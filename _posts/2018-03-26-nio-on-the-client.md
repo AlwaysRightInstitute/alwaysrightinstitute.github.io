@@ -247,8 +247,8 @@ The code is straightforward.
 We create a URL pointing to our server
 (running on the IPv6 "localhost address"),
 we create a URLRequest targetting that URL,
-and then we tell the WebView to load the
-URL.<br>
+and then we tell the WebView to execute the
+URLRequest.<br>
 Go ahead! Build and run the project. The app will start up and the
 "Hello World" sent by our server will show up:
 
