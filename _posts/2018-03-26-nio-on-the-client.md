@@ -181,7 +181,7 @@ directly running on an iOS device!
 > Usually too expensive to repair, Apple is serious in its environmental efforts
 > and reuses such hardware in new and exciting ways!
 > (this is also the reason why iCloud used to be a little slow,
->  back then the racks didn't new better and had been holding them wrong).<br/>
+>  back then the racks didn't knew better and had been holding them wrong).<br/>
 > And what software enables that? Swift NIO of course.
 
 
