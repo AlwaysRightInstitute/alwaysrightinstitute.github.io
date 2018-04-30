@@ -2,7 +2,6 @@
 layout: post
 title: Bringing Swift NIO to the iPhone
 tags: linux swift server side mod_swift swiftnio
-hidden: true
 ---
 
 Friday, time for a fun project!

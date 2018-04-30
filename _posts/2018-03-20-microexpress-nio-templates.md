@@ -2,7 +2,6 @@
 layout: post
 title: µExpress/NIO - Adding Templates
 tags: linux swift server side mod_swift swiftnio
-hidden: true
 ---
 <img src="http://zeezide.com/img/MicroExpressNIOIcon1024.png"
      align="right" width="86" height="86" style="padding: 0 0 0.5em 0.5em;" />
