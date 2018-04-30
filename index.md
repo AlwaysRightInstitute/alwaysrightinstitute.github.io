@@ -6,7 +6,7 @@ tags: swift orm database server postgresql swifter
 
 <div class="posts">
   {% for post in site.posts %}
-    {% if !post.hidden  %}
+    {% unless post.hidden %}
       <article class="post">
         <h1><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h1>
 
@@ -23,6 +23,6 @@ tags: swift orm database server postgresql swifter
           </table>
         </div>
       </article>
-    {% endif %}
+    {% endunless %}
   {% endfor %}
 </div>
