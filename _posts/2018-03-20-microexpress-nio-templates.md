@@ -768,6 +768,8 @@ Stay tuned! 🤓
 - [MicroExpress](https://github.com/NozeIO/MicroExpress)
   package on GitHub (contains branches of all tutorial steps!)
 - [swift-nio](https://github.com/apple/swift-nio)
+- [Redi/S](https://github.com/NozeIO/redi-s) (Redis server written using NIO)
+- [SwiftNIO-IRC](https://github.com/NozeIO/swift-nio-irc-server) (IRC chat
 - [Express.js](http://expressjs.com/en/starter/hello-world.html)
 - [Noze.io](http://noze.io)
 - [ExExpress](https://github.com/modswift/ExExpress)

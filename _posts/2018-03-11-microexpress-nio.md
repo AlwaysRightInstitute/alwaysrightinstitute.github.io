@@ -1398,7 +1398,7 @@ Stuff which breaks the scope of the post but which you can add easily:
 - [MicroExpress](https://github.com/NozeIO/MicroExpress)
   package on GitHub (contains branches of all steps above!)
 - [swift-nio](https://github.com/apple/swift-nio)
-- [Redi/S](https://github.com/NozeIO/redi-s) (Redis Server written using NIO)
+- [Redi/S](https://github.com/NozeIO/redi-s) (Redis server written using NIO)
 - [SwiftNIO-IRC](https://github.com/NozeIO/swift-nio-irc-server) (IRC chat
   server, client, agents using NIO)
 - Swift Server Working Group
