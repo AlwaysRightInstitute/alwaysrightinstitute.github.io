@@ -73,7 +73,11 @@ Quite likely it is just monolithic bloat and you don't.
 
 It is what?
 Well, it is a toolkit to write Internet servers (and clients) of various kinds.
-Those can be web servers (HTTP), mail servers (IMAP4/SMTP), IRC servers, etc.
+Those can be 
+[web servers](https://github.com/NozeIO/swift-nio-irc-webclient) (HTTP),
+mail servers (IMAP4/SMTP),
+[Redis servers](https://github.com/NozeIO/redi-s),
+[IRC chat servers](https://github.com/NozeIO/swift-nio-irc-server), etc.
 It is built with a focus on very high performance and scalability.
 
 As a regular HTTP-toolkit developer, who uses stuff along the lines of
@@ -1394,6 +1398,9 @@ Stuff which breaks the scope of the post but which you can add easily:
 - [MicroExpress](https://github.com/NozeIO/MicroExpress)
   package on GitHub (contains branches of all steps above!)
 - [swift-nio](https://github.com/apple/swift-nio)
+- [Redi/S](https://github.com/NozeIO/redi-s) (Redis Server written using NIO)
+- [SwiftNIO-IRC](https://github.com/NozeIO/swift-nio-irc-server) (IRC chat
+  server, client, agents using NIO)
 - Swift Server Working Group
   - [Homepage](https://swift.org/server-apis/)
   - [HTTP API on GitHub](https://github.com/swift-server/http)

@@ -214,7 +214,7 @@ public enum fs {
       else { eventLoop.execute { cb(error, result) } }
     }
     
-    threadPool.submit {
+    threadPool.submit { // FIXME: update for NIO 1.7
       assert($0 == .active, "unexpected cancellation")
       
       let fh : NIO.FileHandle
@@ -315,6 +315,9 @@ We do this, because `FileHandle(path: path)` is also a *blocking* operation.
 Ever had Finder show the Spinning Beachball? That is likely because
 it is blocking on such a call.<br>
 This we need to avoid, hence we dispatch the call to the threadpool too.
+
+> This needs an update for newer NIO versions, which include non-blocking
+> open operations.
 
 Then we finally use the NIO helper and perform a read. We load the whole
 file in one go to keep it simple:
