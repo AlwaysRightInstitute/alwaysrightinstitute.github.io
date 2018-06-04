@@ -128,17 +128,22 @@ swift xcode link-templates
 Within Xcode, create a new project (⌘-Shift-N), and select the
 "Swift-NIO" template:
 
-<center><img src=
-  "{{ site.baseurl }}/images/microexpress-nio/01-new-project.jpg" 
-  /></center>
+<center><a href="{{ site.baseurl }}/images/microexpress-nio/01-new-project-template-type.png"
+  ><img src=
+  "{{ site.baseurl }}/images/microexpress-nio/01-new-project-template-type-zoom.png" 
+  /></a></center>
 
-Give it a name, e.g. "MicroExpress", and make sure that the
-"Include SwiftNIO HTTP1 module"
-option is checked:
+Give it a name, e.g. "MicroExpress".
+**Make sure that the "Generate Server Boilerplate" option is unchecked**,
+and the the 
+"Include SwiftNIO HTTP1 module" is option is checked
+(do not check the µExpress option, this is for including
+ the finished µExpress framework, which we are about to build):
 
-<center><img src=
-  "{{ site.baseurl }}/images/microexpress-nio/02-new-project.jpg" 
-  /></center>
+<center><a href="{{ site.baseurl }}/images/microexpress-nio/02-new-project-no-boilerplate-named.png"
+  ><img src=
+  "{{ site.baseurl }}/images/microexpress-nio/02-new-project-no-boilerplate-named-zoom.png" 
+  /></a></center>
   
 Build the project.
 
@@ -168,10 +173,8 @@ import NIOHTTP1
 
 open class Express {
   
-  override public init() {}
-  
   let loopGroup = 
-        MultiThreadedEventLoopGroup(numThreads: System.coreCount)
+        MultiThreadedEventLoopGroup(numberOfThreads: System.coreCount)
   
   open func listen(_ port: Int) {
     let reuseAddrOpt = ChannelOptions.socket(
@@ -182,7 +185,7 @@ open class Express {
       .serverChannelOption(reuseAddrOpt, value: 1)
       
       .childChannelInitializer { channel in
-        channel.pipeline.addHTTPServerHandlers()
+        channel.pipeline.configureHTTPServerPipeline()
         
         // this is where the action is going to be!
       }
@@ -222,7 +225,7 @@ The first thing it does is create a
 [MultiThreadedEventLoopGroup](https://github.com/apple/swift-nio/blob/1.1.0/Sources/NIO/EventLoop.swift#L641):
 ```swift
 let loopGroup = 
-      MultiThreadedEventLoopGroup(numThreads: System.coreCount)
+      MultiThreadedEventLoopGroup(numberOfThreads: System.coreCount)
 ```
 
 A Swift NIO 
@@ -246,7 +249,7 @@ open func listen(_ port: Int) {
   let bootstrap = ServerBootstrap(group: loopGroup)
     ...
     .childChannelInitializer { channel in
-      channel.pipeline.addHTTPServerHandlers()
+      channel.pipeline.configureHTTPServerPipeline()
       // this is where the action is going to be!
     }
   ...
@@ -283,7 +286,7 @@ which is simply a set of "handler" objects
 They get executed in sequence and can transform the incoming and outgoing data,
 or do other actions.
 
-So far we call `channel.pipeline.addHTTPServerHandlers()`.
+So far we call `channel.pipeline.configureHTTPServerPipeline()`.
 This adds handlers to the pipeline which:
 transform the incoming data
 (plain bytes) into higher level HTTP objects (i.e. requests),
@@ -296,7 +299,7 @@ Next we are going to add our own handler to that pipeline.
 ## Step 1b: Add an own NIO Handler
 
 Our handler is going to receive HTTP request parts (because we put 
-`addHTTPServerHandlers` in the pipeline before us),
+`configureHTTPServerPipeline` in the pipeline before us),
 and it is going to send back HTTP to the client:
 
 <img src="/images/gh.svg" style="height: 1em; margin-bottom: -0.1em; text-align: bottom;"/>
@@ -307,7 +310,7 @@ and it is going to send back HTTP to the client:
 open class Express {
   ...
       .childChannelInitializer { channel in
-        channel.pipeline.addHTTPServerHandlers().then {
+        channel.pipeline.configureHTTPServerPipeline().then {
           channel.pipeline.add(handler: HTTPHandler())
         }
       }
@@ -318,7 +321,7 @@ open class Express {
 > If you are wondering about the `.then`, most functions in NIO return a
 > [Future](https://github.com/apple/swift-nio/blob/1.1.0/Sources/NIO/EventLoopFuture.swift#L208).
 > But lets ignore that part for now. Read it as:
-> once `addHTTPServerHandlers` completed, add our own handler.
+> once `configureHTTPServerPipeline` completed, add our own handler.
 
 We put the actual handler into the `Express` object:
 
@@ -621,7 +624,7 @@ case .head(let header):
   let request  = IncomingMessage(header: header)
   let response = ServerResponse(channel: ctx.channel)
   
-  print("req:", header.method, header.uri)
+  print("req:", header.method, header.uri, request)
   response.send("Way easier to send data!!!")
 ```
 
@@ -916,14 +919,14 @@ We are going to change it so, that we:
       
       switch reqPart {
         case .head(let header):
-          let req = IncomingMessage(header: header)
-          let res = ServerResponse(channel: ctx.channel)
+          let request  = IncomingMessage(header: header)
+          let response = ServerResponse(channel: ctx.channel)
           
           // trigger Router
-          router.handle(request: req, response: res) {
+          router.handle(request: request, response: response) {
             (items : Any...) in // the final handler
-            res.status = .notFound
-            res.send("No middleware handled the request!")
+            response.status = .notFound
+            response.send("No middleware handled the request!")
           }
 
         // ignore incoming content to keep it micro :-)
@@ -952,7 +955,7 @@ we just pass in `self`:
 // File: Express.swift - adjust
 
   .childChannelInitializer { channel in
-    channel.pipeline.addHTTPServerHandlers().then {
+    channel.pipeline.configureHTTPServerPipeline().then {
       channel.pipeline.add(
         handler: HTTPHandler(router: self))
     }
@@ -1397,20 +1400,28 @@ Stuff which breaks the scope of the post but which you can add easily:
 
 - [MicroExpress](https://github.com/NozeIO/MicroExpress)
   package on GitHub (contains branches of all steps above!)
+- Other cool ARI projects:
+  - [ExExpress](https://github.com/modswift/ExExpress)
+  - [Swift NIO IRC](https://github.com/NozeIO/swift-nio-irc-server/blob/develop/README.md) 
+    (an IRC server, web client, Eliza chatbot written in Swift NIO)
+  - [Swift NIO Redis](https://github.com/NozeIO/swift-nio-redis/blob/develop/README.md)
+    (a Redis in-memory database server, written in Swift NIO)
+  - [SwiftObjects](http://SwiftObjects.org) (WebObjects API in Swift,
+    [WebObjects intro](http://www.alwaysrightinstitute.com/wo-intro/))
+  - [SwiftXcode](https://swiftxcode.github.io) (use Swift Package Manager 
+    projects directly within Xcode)
+  - [ZeeQL](http://zeeql.io) (an EOF/CoreData like framework for Swift)
+  - [mod_swift](http://mod-swift.org) (write Apache modules in Swift!)
+  - [Noze.io](http://noze.io) (Node.js like, but typesafe, async-IO streams)
+  - [Swiftmon/S](https://github.com/NozeIO/swiftmons)
 - [swift-nio](https://github.com/apple/swift-nio)
-- [Redi/S](https://github.com/NozeIO/redi-s) (Redis server written using NIO)
-- [SwiftNIO-IRC](https://github.com/NozeIO/swift-nio-irc-server) (IRC chat
-  server, client, agents using NIO)
 - Swift Server Working Group
   - [Homepage](https://swift.org/server-apis/)
   - [HTTP API on GitHub](https://github.com/swift-server/http)
 - JavaScript Originals
   - [Connect](https://github.com/senchalabs/connect)
   - [Express.js](http://expressjs.com/en/starter/hello-world.html)
-- [Noze.io](http://noze.io)
-- [ExExpress](https://github.com/modswift/ExExpress)
 - [SPM](https://swift.org/blog/swift-package-manager-manifest-api-redesign/)
-- [Swiftmon/S](https://github.com/NozeIO/swiftmons)
 
 ## Contact
 
