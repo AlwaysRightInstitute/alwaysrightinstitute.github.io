@@ -461,7 +461,7 @@ reporting the new temperature.
 The other way around, when a user either sends a private message to
 `lkbot` or a message into the `#linkerkit` channel, the
 IRCClient [callback](https://github.com/SwiftyLinkerKit/LinkerKitIRCBot/blob/develop/Sources/LinkerKitIRCBot/LinkerKitBot.swift#L317)
-will get call and invoke
+will get called and invoke
 [`userSentMessage(_,from:,to:)`](https://github.com/SwiftyLinkerKit/LinkerKitIRCBot/blob/develop/Sources/LinkerKitIRCBot/LinkerKitBot.swift#L204),
 our advanced NLS:
 
