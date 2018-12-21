@@ -435,7 +435,10 @@ lookup a Callable for a Swift function and dynamically invoke it via
 ## Streaming and Async I/O
 
 Using this library in server side code is not recommended, it is blocking and
-the stdout/err/in processing is not streaming.
+the stdout/err/in processing is not streaming. 
+(Also: do I have to talk about the security implications of doing such stuff
+ on the server? I hope not 😎)
+
 An example on how to do this properly can be found in 
 [Noze.io](http://noze.io/noze4nonnode/),
 which provides piping, backpressure aware streams, etc:
