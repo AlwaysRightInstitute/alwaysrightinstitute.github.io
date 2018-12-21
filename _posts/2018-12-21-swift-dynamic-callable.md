@@ -226,7 +226,7 @@ print(shell.python)
 Notice how the simple `shell.python` is expanded to the full path:
 `/usr/bin/python`.
 
-This trampoline accepts either absolute pathes in the `dynamicMember` subscript.
+This trampoline accepts absolute pathes in the `dynamicMember` subscript.
 If the path passed-in does not exist, it will search the lookup pathes
 stored in the `$PATH` environment variable
 (usually looks like `/usr/local/bin:/usr/bin:/sbin`),
