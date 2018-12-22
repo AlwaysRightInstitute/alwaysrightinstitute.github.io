@@ -431,6 +431,39 @@ Another limitation is that the reverse is not possible, i.e. you cannot
 lookup a Callable for a Swift function and dynamically invoke it via
 `m.dynamicallyCall(withArguments:)`. Aka reflection.
 
+At least the current implementation doesn't seem to support overloading, i.e.
+you can't have this:
+```swift
+@dynamicCallable
+public struct MyCallable {
+  @discardableResult
+  func dynamicallyCall(withArguments arguments: [ Int ]) -> Int {
+    return arguments.reduce(0, +)
+  }
+
+  @discardableResult
+  func dynamicallyCall(withArguments arguments: [ Any ]) -> String {
+    return arguments.map { "\($0)" }.joined(separator: ",")
+  }
+}
+let call = MyCallable()
+call.ints([1,2,3,4])
+call.joined(1, "5", [2,3,4])
+```
+
+You can't mix types, all arguments have to be the same type. I.e. this is
+not possible:
+```swift
+@discardableResult
+func dynamicallyCall(arg1: Int, arg2: String) -> String 
+```
+
+Or this, which is specifically annoying for APIs (though this goes away a
+little with async/await):
+```swift
+@discardableResult
+func dynamicallyCall<T>(withArguments arguments: [ Any ], yield: ( T ) -> Void)
+```
 
 ## Streaming and Async I/O
 
