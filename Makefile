@@ -15,5 +15,5 @@ docker :
 run :
 	docker run --rm -p $(DOCKER_JEKYLL_PORT):$(EXPOSED_JEKYLL_PORT) \
 		   --name $(LOCAL_DOCKER_INSTANCE_NAME) \
-		   -v "$PWD":/srv/jekyll \
+		   -v "$(PWD)":/srv/jekyll \
 		   $(LOCAL_DOCKER_IMAGE_NAME)
