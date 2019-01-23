@@ -10,7 +10,7 @@ all :
 	@echo "Use 'make run' to run in docker"
 
 docker :
-	docker build -t $(LOCAL_DOCKER_IMAGE_NAME) "$PWD"
+	docker build -t $(LOCAL_DOCKER_IMAGE_NAME) "$(PWD)"
 
 run :
 	docker run --rm -p $(DOCKER_JEKYLL_PORT):$(EXPOSED_JEKYLL_PORT) \
