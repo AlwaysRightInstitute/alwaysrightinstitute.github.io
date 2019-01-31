@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "@dynamicCallable: Unix Tools as Swift Functions"
-tags: swift process
+tags: swift process dynamicCallable
 ---
 
 A new feature in Swift 5 are
@@ -496,6 +496,8 @@ so let's at least have this one: 🐄
 
 ### Links
 
+- [@dynamicCallable Part 2: Swift/ObjC Bridge](http://www.alwaysrightinstitute.com/swift-objc-bridge/),
+- [@dynamicCallable Part 3: Mustacheable](http://www.alwaysrightinstitute.com/mustachable/),
 - [Shell module](https://github.com/AlwaysRightInstitute/Shell) on GitHub
 - [SE-0195 Dynamic Member Lookup](https://github.com/apple/swift-evolution/blob/master/proposals/0195-dynamic-member-lookup.md)
 - [SE-0216 Dynamic Callable](https://github.com/apple/swift-evolution/blob/master/proposals/0216-dynamic-callable.md)

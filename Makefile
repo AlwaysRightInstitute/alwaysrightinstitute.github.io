@@ -17,3 +17,6 @@ run :
 		   --name $(LOCAL_DOCKER_INSTANCE_NAME) \
 		   -v "$(PWD)":/srv/jekyll \
 		   $(LOCAL_DOCKER_IMAGE_NAME)
+
+clean :
+	rm -rf _site
