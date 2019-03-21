@@ -20,3 +20,4 @@ run :
 
 clean :
 	rm -rf _site
+
