@@ -43,19 +43,9 @@ Let's see how this works!
 You can follow along, or you can go ahead and 
 [grab `Shell` from GitHub](https://github.com/AlwaysRightInstitute/Shell).
 
+**Important**: Remember that you need to have Swift 5 via 
+[Xcode 10.2](https://developer.apple.com/xcode/).
 
-## Install a Swift 5 Snapshot
-
-For this to work, you need to have Swift 5 installed.
-As of today Swift 5 hasn't been released yet, but Apple is providing
-prebuilt Swift 5 development toolchains over at:
-[swift.org](https://swift.org/download/#swift-50-development).
-Just install the toolchain, and select it in the Xcode "Toolchains" menu:
-
-![](/images/xcode-swift5/XcodeToolchainSelect.png)
-
-If you are living on the commandline, make sure to call 
-`export TOOLCHAINS=swift` to get access to the selected version.
 
 ## SE-0195: Dynamic Member Lookup
 

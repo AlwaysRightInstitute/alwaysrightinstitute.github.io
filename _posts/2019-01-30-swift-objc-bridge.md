@@ -53,25 +53,8 @@ We recommend to read Part 1 first:
 [Unix Tools as Swift Functions](http://www.alwaysrightinstitute.com/swift-dynamic-callable/)
 to get the basics, though not strictly required.
 
-
-
-## Install a Swift 5 Snapshot
-
-For this to work, you need to have Swift 5 installed.
-As of today Swift 5 hasn't been released yet, but Apple is providing
-prebuilt Swift 5 development toolchains over at:
-[swift.org](https://swift.org/download/#swift-50-development),
-and you can also use the 
-[Xcode 10.2beta](https://developer.apple.com/download/).
-Just install the toolchain, and select it in the Xcode "Toolchains" menu:
-
-![](/images/xcode-swift5/XcodeToolchainSelect.png)
-
-If you are living on the commandline, make sure to call 
-`export TOOLCHAINS=swift` to get access to the selected version.
-
-To try out the samples below, you can either open a Swift 5 Playground or create
-a command line tool project project in Xcode.
+**Important**: Remember that you need to have Swift 5 via 
+[Xcode 10.2](https://developer.apple.com/xcode/).
 
 
 ## 1. Looking up Objective-C Classes

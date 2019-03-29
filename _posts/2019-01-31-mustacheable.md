@@ -19,8 +19,8 @@ This one may actually make some sense.
 This sample for 
 [Dynamic Callable](https://github.com/apple/swift-evolution/blob/master/proposals/0216-dynamic-callable.md)
 is much smaller and easier to follow along than the previous ones.
-Remember that you need to have Swift 5, e.g. via Xcode 10.2beta 
-([info](http://www.alwaysrightinstitute.com/swift-objc-bridge/)).
+Remember that you need to have Swift 5 via 
+[Xcode 10.2](https://developer.apple.com/xcode/).
 
 So what is 
 [Mustache](http://mustache.github.io)?
