@@ -29,6 +29,10 @@ Not interested to read? Just wanna see? At the bottom:
 
 ## Project Setup
 
+> Update 2019-06-25: Xcode 11 now includes some Swift Package Manager support.
+> This may or may not work with the SwiftXcode setup described here. So for
+> now consider this Xcode 10 only ;-)
+
 <a href="https://swiftxcode.github.io" target="extlink"><img src="http://zeezide.com/img/SwiftXcodePkgIcon.svg"
      align="right" width="86" height="86" style="padding: 0 0 0.5em 0.5em;" /></a>
 Instead of fiddling around with Swift Package Manager,

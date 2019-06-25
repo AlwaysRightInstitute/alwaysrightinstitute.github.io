@@ -14,6 +14,13 @@ templates.
 Again the goal is to use a minimal amount of code
 while still providing something useful.
 
+> Update 2019-06-25: Xcode 11 now includes some Swift Package Manager support.
+> This may or may not work with the SwiftXcode setup described here. So for
+> now consider this Xcode 10 only ;-)
+> Also: This is for NIO 1 aka Swift 4.2. The overall concepts are exactly the
+> same in NIO 2 (/Swift 5), but the API receives some renaming. 
+> Note that the upstream µExpress works w/ both, NIO 1 and 2.
+
 Using the [µExpress](/microexpress-nio) we built last time,
 we can already make endpoints which send String content and even JSON to the 
 client:

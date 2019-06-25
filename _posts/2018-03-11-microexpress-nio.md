@@ -12,6 +12,13 @@ Today we are going to have a look on how to use that Swift package,
 and build a tiny but useful web framework along the way.
 Say hello to µExpress. *Again.*
 
+> Update 2019-06-25: Xcode 11 now includes some Swift Package Manager support.
+> This may or may not work with the SwiftXcode setup described here. So for
+> now consider this Xcode 10 only ;-)
+> Also: This is for NIO 1 aka Swift 4.2. The overall concepts are exactly the
+> same in NIO 2 (/Swift 5), but the API receives some renaming. 
+> Note that the upstream µExpress works w/ both, NIO 1 and 2.
+
 Hey, but didn't we just [built µExpress a month ago](/microexpress/),
 using that offical
 [HTTP API](https://github.com/swift-server/http/tree/0.1.0)

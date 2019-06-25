@@ -15,6 +15,11 @@ you can do the same straight from Xcode,
 w/o touching the shell during development.
 We'll show you how!
 
+> Update 2019-06-25: Xcode 11 now includes some Swift Package Manager support
+> which obsoletes some parts of this.
+> It lacks some features of SwiftXcode (like the Kitura project templates),
+> but those could be added separately.
+
 When you are starting with Swift on Server, we generally recommend you either
 use [SwiftNIO](https://github.com/apple/swift-nio) directly,
 or a lightweight shim such as
