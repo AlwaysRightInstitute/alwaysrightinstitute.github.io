@@ -18,7 +18,7 @@ while still providing something useful.
 > This may or may not work with the SwiftXcode setup described here. So for
 > now consider this Xcode 10 only ;-)
 > Also: This is for NIO 1 aka Swift 4.2. The overall concepts are exactly the
-> same in NIO 2 (/Swift 5), but the API receives some renaming. 
+> same in NIO 2 (/Swift 5), but the API received some renaming. 
 > Note that the upstream µExpress works w/ both, NIO 1 and 2.
 
 Using the [µExpress](/microexpress-nio) we built last time,
