@@ -227,7 +227,7 @@ When the browser hits that server, it creates a
 and passes our (Text) View to that session.<br>
 Finally, from the View, SwiftWebUI creates a 
 “Shadow DOM” on the server,
-renders that as HTML and sends the result to the server.
+renders that as HTML and sends the result to the browser.
 That "Shadow DOM" (and a state object kept alongside) is
 stored in the session.
 
