@@ -102,9 +102,15 @@ but this one is recommended too (and the concepts are mostly supported in SwiftW
 
 ## Requirements
 
-As of today SwiftWebUI requires a 
+Update 2019-07-08: There are three options to run SwiftWebUI:
+
+### macOS Catalina
+
+One can use a
 [macOS Catalina](https://www.apple.com/macos/catalina-preview/)
-installation to run (“Swift ABI” 🤦‍♀️).
+installation to run SwiftWebUI.
+Make sure that the Catalina version matches your Xcode 11 beta! (“Swift ABI” 🤦‍♀️)
+
 Fortunately it is really easy to
 [install Catalina on a separate APFS volume](https://support.apple.com/en-us/HT208891).
 And an installation of
@@ -112,19 +118,28 @@ And an installation of
 is required to get the new Swift 5.1 features SwiftUI makes heavy use of.
 Got that? Very well!
 
-> Linux? The project is indeed _prepared_ to run on Linux,
-> but that hasn't been finished yet.
-> The only real thing missing is a simple implementation
-> of the 
-> [Combine](https://developer.apple.com/documentation/combine)
-> [PassthroughSubject](https://developer.apple.com/documentation/combine/passthroughsubject)
-> and a little infrastructure surrounding that.
-> Prepared: [NoCombine](https://github.com/SwiftWebUI/SwiftWebUI/blob/master/Sources/SwiftWebUI/Misc/NoCombine.swift).
-> PRs are welcome!
+> Why is Catalina required? SwiftUI makes use of new Swift 5.1 runtime features
+> (e.g. opaque result types).
+> Those features are not available in the Swift 5 runtime that ships with 
+> Mojave.
+> (another reason is the use of Combine which is only available in Catalina, 
+> though that part could be fixed using
+> [OpenCombine](https://github.com/broadwaylamb/OpenCombine))
 
-> Mojave? There is a chance to get this to run on Mojave w/ Xcode 11.
-> You'd need to create an iOS 13 simulator project and run the
-> whole thing within that.
+### tuxOS
+
+SwiftWebUI now runs on Linux using
+[OpenCombine](https://github.com/broadwaylamb/OpenCombine) (also works without
+that, but then some things don't work, e.g. `NavigationView`).
+
+A [Swift 5.1 snapshot](https://swift.org/download/#snapshots) is required.
+We also provide a Docker image containing a 5.1 snapshot over here:
+[helje5/swift](https://cloud.docker.com/repository/docker/helje5/swift/tags).
+
+### Mojave
+
+The Xcode 11beta iOS 13 simulators do run on Mojave.
+You might be able to run SwiftWebUI within an iOS app.
 
 
 ## Getting Started with a First App
