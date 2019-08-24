@@ -11,7 +11,7 @@ As an update to
 [Migrate Private GIT Repositories to GCrypt](/gcrypt),
 let's have a look at another option for encrypted git cloud storage:
 [Keybase](https://keybase.io/).
-Which has an ever expanding set of features, which happens
+Which has an ever expanding set of features, and that happens
 to include 
 [Encrypted git](https://keybase.io/blog/encrypted-git-for-everyone).
 
@@ -144,6 +144,8 @@ $ git checkout develop
 Branch 'develop' set up to track remote branch 'develop' from 'origin'.
 Switched to a new branch 'develop'
 ```
+
+Note how it says `Cryptographic cloning` - must be secure, right? 🤪
 
 ## Security
 
