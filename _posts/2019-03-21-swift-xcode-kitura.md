@@ -37,11 +37,6 @@ To fix that
 [Swift Package Manager](https://swift.org/package-manager/)
 projects directly from within Xcode. And hence: Kitura.
 
-> Is Xcode 11 with support for SPM projects finally going to be announced
-> at WWDC 2019? We'd love to be sherlocked! :-)
-> Meanwhile, you may want to checkout [SwiftStudio](https://swiftstudio.app),
-> a third-party IDE for Server Side Swift.
-
 
 ## Installing SwiftXcode & The Kitura Image
 
