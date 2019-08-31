@@ -286,7 +286,7 @@ The details, this is what happens:
    to the constant "IMPORTANT".
    If that is the case, the predicate matches, the rule is used and the
    `title` value will be `"Can wait."`.
-7. The rule system has no determined the value for `title` - `"Can wait."`,
+7. The rule system has now determined the value for `title` - `"Can wait."`,
    and returns that to the value for `navigationBarTitle`,
    which pushes the value into the `PageView`.
 
@@ -304,7 +304,11 @@ rules.
 
 The
 [repository](https://github.com/AlwaysRightInstitute/SwiftUIRules)
-features a minimal sample application in the `Samples` subfolder,
+features a minimal 
+[sample application](https://github.com/AlwaysRightInstitute/SwiftUIRules/tree/develop/Samples/RulesTestApp) 
+in the 
+[`Samples`](https://github.com/AlwaysRightInstitute/SwiftUIRules/tree/develop/Samples/)
+subfolder,
 take a look at it.<br>
 It is a non-sensical example, but demonstrates how to setup and run the
 machinery.
@@ -330,8 +334,10 @@ We've shown above how your declare your own environment keys for
 static environment values. To “rule enable” them, you have to tweak
 them a little.
 
-First, instead of declaring them as `EnvironmentKey`s,
-declare them as **`DynamicEnvironmentKey`**s.
+First, instead of declaring them as 
+[`EnvironmentKey`](https://developer.apple.com/documentation/swiftui/environmentkey)'s,
+declare them as 
+**[`DynamicEnvironmentKey`](https://github.com/AlwaysRightInstitute/SwiftUIRules/blob/develop/Sources/SwiftUIRules/DynamicEnvironment/DynamicEnvironmentKey.swift#L17)**'s.
 
 ```swift
 struct FancyColorEnvironmentKey: DynamicEnvironmentKey { // <==
@@ -340,8 +346,9 @@ struct FancyColorEnvironmentKey: DynamicEnvironmentKey { // <==
 ```
 
 Second, instead of declaring the property on `EnvironmentValues`,
-declare them on **`DynamicEnvironmentPathes`** and use the **`dynamic`
-subscript**:
+declare them on 
+**[DynamicEnvironmentPathes](https://github.com/AlwaysRightInstitute/SwiftUIRules/blob/develop/Sources/SwiftUIRules/DynamicEnvironment/DynamicEnvironmentPathes.swift#L19)**
+and use the **`dynamic` subscript**:
 ```swift
 extension DynamicEnvironmentPathes { // <==
   var fancyColor : Color {
@@ -449,7 +456,8 @@ In any case: We are interested in any idea how to use it!
 
 ### Only `DynamicEnvironmentKey`s
 
-Currently rules can only evaluate `DynamicEnvironmentKey`s,
+Currently rules can only evaluate 
+[`DynamicEnvironmentKey`](https://github.com/AlwaysRightInstitute/SwiftUIRules/blob/develop/Sources/SwiftUIRules/DynamicEnvironment/DynamicEnvironmentKey.swift#L17)'s,
 it doesn't take regular environment keys into account.
 That is, you can't drive for example the builtin SwiftUI `lineLimit`
 using the rulesystem.
@@ -460,10 +468,14 @@ using the rulesystem.
 ]
 ```
 **Does not work**. This is currently made explicit by requiring keys which
-are used w/ the system to have the `DynamicEnvironmentKey` type.
-SO you can't accidentially run into this.
+are used w/ the system to have the 
+[`DynamicEnvironmentKey`](https://github.com/AlwaysRightInstitute/SwiftUIRules/blob/develop/Sources/SwiftUIRules/DynamicEnvironment/DynamicEnvironmentKey.swift#L17)
+type.
+So you can't accidentially run into this.
 
-We may open it up to any `EnvironmentKey`, TBD.
+We may open it up to any 
+[`EnvironmentKey`](https://developer.apple.com/documentation/swiftui/environmentkey),
+TBD.
 
 ### No KeyPath'es in Assignments
 
