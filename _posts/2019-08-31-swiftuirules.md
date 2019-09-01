@@ -246,7 +246,7 @@ the `fancyColor` (key) which should be used is `gray` (rule value).
 
 A page defined like this:
 ```swift
-struct PageView: some View {
+struct PageView: View {
   
   @Environment(\.navigationBarTitle) var title
   
