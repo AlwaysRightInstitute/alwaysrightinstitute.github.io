@@ -12,7 +12,7 @@ supports a feature called the
 [Environment](https://developer.apple.com/documentation/swiftui/environment).
 It allows the injection of values into child views
 without the need to explicitly pass them along.
-[SwiftUI Rules](https://github.com/AlwaysRightInstitute/SwiftUIRules)
+[SwiftUI Rules](https://github.com/DirectToSwift/SwiftUIRules)
 adds a declarative rule system, think: Cascading Style Sheets for SwiftUI.
 
 > Going Fully Declarative: SwiftUI Rulez.
@@ -21,7 +21,7 @@ adds a declarative rule system, think: Cascading Style Sheets for SwiftUI.
 ## SwiftUI Environments
 
 Before we jump into 
-[SwiftUI Rules](https://github.com/AlwaysRightInstitute/SwiftUIRules),
+[SwiftUI Rules](https://github.com/DirectToSwift/SwiftUIRules),
 let's first review how regular environments
 work in
 [SwiftUI](https://developer.apple.com/xcode/swiftui/).
@@ -181,7 +181,7 @@ avoid the `.environment(\.fancyColor, .red)`
 and define our `fancyColor` based on the values of other environment keys.
 And maybe even **declare** rules on how to derive the value from other keys.
 **Welcome to
-[SwiftUI Rules](https://github.com/AlwaysRightInstitute/SwiftUIRules)**:
+[SwiftUI Rules](https://github.com/DirectToSwift/SwiftUIRules)**:
 
 ```swift
 let ruleModel : RuleModel = [
@@ -303,11 +303,11 @@ rules.
 # Using SwiftUIRules
 
 The
-[repository](https://github.com/AlwaysRightInstitute/SwiftUIRules)
+[repository](https://github.com/DirectToSwift/SwiftUIRules)
 features a minimal 
-[sample application](https://github.com/AlwaysRightInstitute/SwiftUIRules/tree/develop/Samples/RulesTestApp) 
+[sample application](https://github.com/DirectToSwift/SwiftUIRules/tree/develop/Samples/RulesTestApp) 
 in the 
-[`Samples`](https://github.com/AlwaysRightInstitute/SwiftUIRules/tree/develop/Samples/)
+[`Samples`](https://github.com/DirectToSwift/SwiftUIRules/tree/develop/Samples/)
 subfolder,
 take a look at it.<br>
 It is a non-sensical example, but demonstrates how to setup and run the
@@ -337,7 +337,7 @@ them a little.
 First, instead of declaring them as 
 [`EnvironmentKey`](https://developer.apple.com/documentation/swiftui/environmentkey)'s,
 declare them as 
-**[`DynamicEnvironmentKey`](https://github.com/AlwaysRightInstitute/SwiftUIRules/blob/develop/Sources/SwiftUIRules/DynamicEnvironment/DynamicEnvironmentKey.swift#L17)**'s.
+**[`DynamicEnvironmentKey`](https://github.com/DirectToSwift/SwiftUIRules/blob/develop/Sources/SwiftUIRules/DynamicEnvironment/DynamicEnvironmentKey.swift#L17)**'s.
 
 ```swift
 struct FancyColorEnvironmentKey: DynamicEnvironmentKey { // <==
@@ -347,7 +347,7 @@ struct FancyColorEnvironmentKey: DynamicEnvironmentKey { // <==
 
 Second, instead of declaring the property on `EnvironmentValues`,
 declare them on 
-**[DynamicEnvironmentPathes](https://github.com/AlwaysRightInstitute/SwiftUIRules/blob/develop/Sources/SwiftUIRules/DynamicEnvironment/DynamicEnvironmentPathes.swift#L19)**
+**[DynamicEnvironmentPathes](https://github.com/DirectToSwift/SwiftUIRules/blob/develop/Sources/SwiftUIRules/DynamicEnvironment/DynamicEnvironmentPathes.swift#L19)**
 and use the **`dynamic` subscript**:
 ```swift
 extension DynamicEnvironmentPathes { // <==
@@ -457,7 +457,7 @@ In any case: We are interested in any idea how to use it!
 ### Only `DynamicEnvironmentKey`s
 
 Currently rules can only evaluate 
-[`DynamicEnvironmentKey`](https://github.com/AlwaysRightInstitute/SwiftUIRules/blob/develop/Sources/SwiftUIRules/DynamicEnvironment/DynamicEnvironmentKey.swift#L17)'s,
+[`DynamicEnvironmentKey`](https://github.com/DirectToSwift/SwiftUIRules/blob/develop/Sources/SwiftUIRules/DynamicEnvironment/DynamicEnvironmentKey.swift#L17)'s,
 it doesn't take regular environment keys into account.
 That is, you can't drive for example the builtin SwiftUI `lineLimit`
 using the rulesystem.
@@ -469,7 +469,7 @@ using the rulesystem.
 ```
 **Does not work**. This is currently made explicit by requiring keys which
 are used w/ the system to have the 
-[`DynamicEnvironmentKey`](https://github.com/AlwaysRightInstitute/SwiftUIRules/blob/develop/Sources/SwiftUIRules/DynamicEnvironment/DynamicEnvironmentKey.swift#L17)
+[`DynamicEnvironmentKey`](https://github.com/DirectToSwift/SwiftUIRules/blob/develop/Sources/SwiftUIRules/DynamicEnvironment/DynamicEnvironmentKey.swift#L17)
 type.
 So you can't accidentially run into this.
 
@@ -511,6 +511,7 @@ We hope you like it!
 
 ## Links
 
+- [SwiftUI Rules](https://github.com/DirectToSwift/SwiftUIRules), 
 - [SOPE Rule System](http://sope.opengroupware.org/en/docs/snippets/rulesystem.html)
 - iOS Astronaut: [Custom @Environment keys in SwiftUI](https://sergdort.github.io/custom-environment-swift-ui/)
 - [SwiftUI](https://developer.apple.com/xcode/swiftui/)
