@@ -962,6 +962,19 @@ from the HTTP endpoints.
 Note: While ZeeQL itself is not built to be asynchronous, D2S actually wraps
 it in Combine. So the UI is indeed running asynchronously already.
 
+## Live Rule Editing
+
+Currently the rules are defined in just regular Swift code. They are statically
+typed and the program needs to be recompiled when they are changed.
+That wasn't necessary w/ Direct to Web. In Direct to Web you had the
+D2W Assistent app in which you could change the rule model on the fly.
+
+Technically this would also be possible w/ D2S. It already supports KVC
+(aka dynamic) qualifiers and there is a specific parser for rules.
+
+TBD. Once this is working, one could modify a running up and see how changes
+to the rules affect the setup.
+
 
 # Closing Notes
 
