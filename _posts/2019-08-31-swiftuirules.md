@@ -511,8 +511,8 @@ We hope you like it!
 
 ## Links
 
-- [SwiftUI Rules](https://github.com/DirectToSwift/SwiftUIRules), 
-- [SOPE Rule System](http://sope.opengroupware.org/en/docs/snippets/rulesystem.html)
+- [SwiftUI Rules](https://github.com/DirectToSwift/SwiftUIRules)
+  - [SOPE Rule System](http://sope.opengroupware.org/en/docs/snippets/rulesystem.html)
 - iOS Astronaut: [Custom @Environment keys in SwiftUI](https://sergdort.github.io/custom-environment-swift-ui/)
 - [SwiftUI](https://developer.apple.com/xcode/swiftui/)
   - [Introducing SwiftUI](https://developer.apple.com/videos/play/wwdc2019/204/) (204)
