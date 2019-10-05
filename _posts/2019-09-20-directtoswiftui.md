@@ -495,7 +495,7 @@ a component can query, including:
 
 - [`propertyKey`](https://github.com/DirectToSwift/DirectToSwiftUI/blob/master/Sources/DirectToSwiftUI/Environment/EnvironmentPathes.swift#L135) (e.g. "lastName")
 - [`displayNameForProperty`](https://github.com/DirectToSwift/DirectToSwiftUI/blob/master/Sources/DirectToSwiftUI/Environment/EnvironmentPathes.swift#L286) (e.g. "Last Name")
-- [`formatter`](https://github.com/DirectToSwift/DirectToSwiftUI/blob/master/Sources/DirectToSwiftUI/Environment/EnvironmentPathes.swift#L312) (in case own is attached, e.g. a [date](https://developer.apple.com/documentation/foundation/dateformatter) or [currency](https://github.com/DirectToSwift/DVDRental/blob/master/Shared/Formatters.swift#L13) [Formatter](https://developer.apple.com/documentation/foundation/formatter)
+- [`formatter`](https://github.com/DirectToSwift/DirectToSwiftUI/blob/master/Sources/DirectToSwiftUI/Environment/EnvironmentPathes.swift#L312) (in case one is attached, e.g. a [date](https://developer.apple.com/documentation/foundation/dateformatter) or [currency](https://github.com/DirectToSwift/DVDRental/blob/master/Shared/Formatters.swift#L13) [Formatter](https://developer.apple.com/documentation/foundation/formatter)
 - [`propertyValue`](https://github.com/DirectToSwift/DirectToSwiftUI/blob/master/Sources/DirectToSwiftUI/Environment/EnvironmentPathes.swift#L149) (e.g. "Duck")
 - [`entity`](https://github.com/DirectToSwift/DirectToSwiftUI/blob/master/Sources/DirectToSwiftUI/Environment/EnvironmentPathes.swift#L215)
 - [`attribute`](https://github.com/DirectToSwift/DirectToSwiftUI/blob/master/Sources/DirectToSwiftUI/Environment/EnvironmentPathes.swift#L226) (the Attribute object containing the DB info)
@@ -940,12 +940,17 @@ Direct to SwiftUI is connecting SwiftUI and ZeeQL.
 _CoreData to SwiftUI_ should be a low hanging fruit.
 Clone the repo, replace ZeeQL things w/ CoreData types. Done.
 
+Update: [CoreData to SwiftUI](https://github.com/DirectToSwift/CoreDataToSwiftUI),
+[DVDRental for CoreData](https://github.com/DirectToSwift/DVDRentalCoreData).
+
 ## Direct to Web Services
 
 WebObjects had a variety of "Direct to" technologies, not just Direct to Web
 ("Direct to Java Client" was a thing!)
 
-One of them was "Direct to Web Services". Instead of generating a UI, this
+One of them was 
+["Direct to Web Services"](https://developer.apple.com/library/archive/documentation/WebObjects/Web_Services/DtoWS/DtoWS.html#//apple_ref/doc/uid/TP30001019-CH208-TPXREF117). 
+Instead of generating a UI, this
 would generate a WebService API (was it SOAP/WSDL?). Rules would be used to
 select visibility of entities and properties, access control, etc.
 The same could be done for Swift, a rule driven REST API on top of a ZeeQL
@@ -967,13 +972,14 @@ it in Combine. So the UI is indeed running asynchronously already.
 Currently the rules are defined in just regular Swift code. They are statically
 typed and the program needs to be recompiled when they are changed.
 That wasn't necessary w/ Direct to Web. In Direct to Web you had the
-D2W Assistent app in which you could change the rule model on the fly.
+[D2W Assistent](https://developer.apple.com/library/archive/documentation/WebObjects/Developing_With_D2W/WalkThrough/WalkThrough.html#//apple_ref/doc/uid/TP30001015-DontLinkChapterID_5-BCIHGJBJ) 
+app in which you could change the rule model on the fly.
 
 Technically this would also be possible w/ D2S. It already supports KVC
-(aka dynamic) qualifiers and there is a specific parser for rules.
+(aka dynamic) qualifiers and a parser for KVC based rules is included.
 
-TBD. Once this is working, one could modify a running up and see how changes
-to the rules affect the setup.
+TBD. Once this is working, one could modify a running app and see how changes
+to the rules affect the setup!
 
 
 # Closing Notes
