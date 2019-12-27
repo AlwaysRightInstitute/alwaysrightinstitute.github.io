@@ -1392,6 +1392,9 @@ Rerun the server, and the TodoBackend client should now show our beautiful
 todos:<br>
 [http://todobackend.com/client/index.html?http://localhost:1337/todomvc/](http://todobackend.com/client/index.html?http://localhost:1337/todomvc/)
 
+<center><img src=
+  "{{ site.baseurl }}/images/microexpress/07-microexpress-todomvc.png" 
+  /></center>
 
 ## Summary
 
