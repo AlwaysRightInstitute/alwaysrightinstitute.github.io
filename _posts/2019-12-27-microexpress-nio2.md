@@ -1,39 +1,23 @@
 ---
 layout: post
-title: A µTutorial on Swift NIO
+title: A µTutorial on SwiftNIO 2
 tags: linux swift server side mod_swift swiftnio
 ---
-<img src="http://zeezide.com/img/MicroExpressNIOIcon1024.png"
+<img src="http://zeezide.com/img/MicroExpressIcon1024.png"
      align="right" width="86" height="86" style="padding: 0 0 0.5em 0.5em;" />
-In a surprise move, Apple released
-[swift-nio](https://github.com/apple/swift-nio)
-on March 1st.
-Today we are going to have a look on how to use that Swift package,
-and build a tiny but useful web framework along the way.
-Say hello to µExpress. *Again.*
+[SwiftNIO](https://github.com/apple/swift-nio)
+is _the_ library to build backend servers in the Swift programming
+language.
+As part of this article we are going to write our own tiny, Node like
+web framework using NIO: Say hello to 
+[µExpress](https://github.com/NozeIO/MicroExpress). *Updated for NIO2/Xcode 11.*
 
-
-> Update 2019-12-27: [A µTutorial on Swift NIO 2](/microexpress-nio/)
-> is now available. Xcode 11 now includes some SPM support and SwiftNIO
-> evolved to version 2.
-
-Hey, but didn't we just [built µExpress a month ago](/microexpress/),
-using that offical
-[HTTP API](https://github.com/swift-server/http/tree/0.1.0)
-from the Swift
-[Server APIs Work Group](https://swift.org/blog/server-api-workgroup/)?
-Well, yes, we did.
-But that API is history now,
-[Swift NIO](https://github.com/apple/swift-nio)
-fully replaces that effort:
-
-<center><blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Super excited we can finally share with all of you what we’ve been working on 🙌. <a href="https://t.co/o7Ul5RPYQB">https://t.co/o7Ul5RPYQB</a> <a href="https://twitter.com/hashtag/tryswiftconf?src=hash&amp;ref_src=twsrc%5Etfw">#tryswiftconf</a> <a href="https://twitter.com/hashtag/swiftnio?src=hash&amp;ref_src=twsrc%5Etfw">#swiftnio</a> <a href="https://twitter.com/hashtag/opensource?src=hash&amp;ref_src=twsrc%5Etfw">#opensource</a></p>&mdash; Johannes Weiß (@johannesweiss) <a href="https://twitter.com/johannesweiss/status/969094211646537728?ref_src=twsrc%5Etfw">March 1, 2018</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> </center>
-
-So lets redo our micro framework using the new Swift NIO API!
-
-> We won't go **very** deep into Swift NIO, but cover all the basics to create
-> a web framework on top of it.
-> There are a lot of things about Swift NIO which are not covered here.
+> This article is an update to last years
+> [A µTutorial on SwiftNIO](/microexpress-nio/).
+> At the time Xcode didn't support SPM packages yet (hence we used
+> [SwiftXcode](https://swiftxcode.github.io)).
+> Also SwiftNIO 2 was released in April 2019, which brings some (minor)
+> API changes.
 
 **The goal**. Instead of providing a low level [Netty](https://netty.io)-like 
 handler objects, 
@@ -59,15 +43,20 @@ app.get("/") { _, res, _ in
 app.listen(1337)
 ```
 
-We also throw in support for JSON.
+We also throw in support for [JSON](https://www.json.org/json-en.html).
 And all that with just a µscopic amount of code.
 The final package has a little more than **350 lines of code**
 (as if that would say anything).<br>
 You think you need that `[insert the latest hype]` framework?
 Quite likely it is just monolithic bloat and you don't.
 
+> We won't go **very** deep into SwiftNIO, but cover all the basics to create
+> a web framework on top of it.
+> There are a lot of things about SwiftNIO which are not covered here.
 
-## First: What is Swift NIO?
+
+
+## First: What is SwiftNIO?
 
 > [SwiftNIO](https://github.com/apple/swift-nio/blob/1.1.0/README.md)
 > is a cross-platform asynchronous event-driven network application 
@@ -87,7 +76,7 @@ It is built with a focus on very high performance and scalability.
 
 As a regular HTTP-toolkit developer, who uses stuff along the lines of
 Rails or Node, you usually do not care about directly interfacing with 
-Swift NIO.
+SwiftNIO.
 It becomes relevant if you are
 adding a completely new protocol,
 add some common network level functionality 
@@ -95,7 +84,7 @@ add some common network level functionality
 have a very performance sensitive endpoint,
 or want to **build an own web framework**. Hey, the latter is us!
 
-In other words: Swift NIO is a rather low level API, 
+In other words: SwiftNIO is a rather low level API, 
 somewhat similar to the Apache 2 module API.
 
 To implement our web framework, we are going to create those components:
@@ -115,42 +104,126 @@ you can clone the
 
 ## Step 0: Prepare the Xcode Project
 
-<a href="https://swiftxcode.github.io" target="extlink"><img src="http://zeezide.com/img/SwiftXcodePkgIcon.svg"
-     align="right" width="86" height="86" style="padding: 0 0 0.5em 0.5em;" /></a>
-Instead of fiddling around with Swift Package Manager,
-we use 
-[swift xcode](https://swiftxcode.github.io)
-to use the package directly within Xcode.
-Grab [Homebrew](https://brew.sh) if you don't have it yet, and install the 
-[Swift NIO image](https://github.com/SwiftXcode/SwiftNIO_XcodeImage)
-using:
+We are going to create an Xcode tool project which adds 
+SwiftNIO as a package dependency.
+Within [Xcode 11](https://developer.apple.com/xcode/), 
+create a new project (⌘-Shift-N), and select the "Command Line Tool" template:
 
-```shell
-brew install swiftxcode/swiftxcode/swift-xcode-nio
-swift xcode link-templates
-```
-
-Within Xcode, create a new project (⌘-Shift-N), and select the
-"Swift-NIO" template:
-
-<center><a href="{{ site.baseurl }}/images/microexpress-nio/01-new-project-template-type.png"
+<center><a href="{{ site.baseurl }}/images/microexpress-nio-2/01-new-project-template-type.png"
   ><img src=
-  "{{ site.baseurl }}/images/microexpress-nio/01-new-project-template-type-zoom.png" 
+  "{{ site.baseurl }}/images/microexpress-nio-2/01-new-project-template-type.png" 
   /></a></center>
 
-Give it a name, e.g. "MicroExpress".
-**Make sure that the "Generate Server Boilerplate" option is unchecked**,
-and the the 
-"Include SwiftNIO HTTP1 module" is option is checked
-(do not check the µExpress option, this is for including
- the finished µExpress framework, which we are about to build):
+Give it a name, e.g. "MicroExpress" and make sure the "Language" is set to
+"Swift":
 
-<center><a href="{{ site.baseurl }}/images/microexpress-nio/02-new-project-no-boilerplate-named.png"
+<center><a href="{{ site.baseurl }}/images/microexpress-nio-2/02-new-project-name.png"
   ><img src=
-  "{{ site.baseurl }}/images/microexpress-nio/02-new-project-no-boilerplate-named-zoom.png" 
+  "{{ site.baseurl }}/images/microexpress-nio-2/02-new-project-name.png" 
   /></a></center>
-  
-Build the project.
+
+Save it where you like. This just got us an empty project for building
+an executable binary. It contains a "main.swift" file which has
+the Swift code which is run when the executable tool is started.
+
+### Intermission: What is a Swift Package?
+
+The
+[SPM tutorial](https://swift.org/getting-started/#using-the-package-manager)
+says:
+
+> Swift package manager provides a convention-based system for building
+> libraries and executables, and **sharing code across different packages**.
+
+SwiftNIO is delivered as such a Swift Package Manager package. 
+It provides a set of libraries we can use in our application,
+as we'll see later.
+
+
+Let's add the 
+[SwiftNIO package](https://github.com/apple/swift-nio) 
+to our project. 
+This can be done either from the 
+"File" / "Swift Packages" / "Add Package Dependency …"
+Xcode menu,
+or by selecting the project within Xcode and then selecting the "Swift Packages"
+tab:
+
+<center><a href="{{ site.baseurl }}/images/microexpress-nio-2/03-project-swift-pkgs-zoom.png"
+  ><img src=
+  "{{ site.baseurl }}/images/microexpress-nio-2/03-project-swift-pkgs.png" 
+  /></a></center>
+
+Click the "+" button. Enter the package URL of SwiftNIO, which is just the
+same as the 
+[GitHub URL](https://github.com/apple/swift-nio) of the project:
+[`https://github.com/apple/swift-nio`](https://github.com/apple/swift-nio):
+
+<center><a href="{{ site.baseurl }}/images/microexpress-nio-2/05-add-nio-dep-zoom.png"
+  ><img src=
+  "{{ site.baseurl }}/images/microexpress-nio-2/05-add-nio-dep.png" 
+  /></a></center>
+
+After clicking "Next", Xcode will look for and offer the available package
+versions:
+
+<center><a href="{{ site.baseurl }}/images/microexpress-nio-2/06-add-nio-dep-versions-zoom.png"
+  ><img src=
+  "{{ site.baseurl }}/images/microexpress-nio-2/06-add-nio-dep-versions.png" 
+  /></a></center>
+
+The default selection is fine, it says that we want to use the latest version
+and any subsequent, API compatible version
+(anything NIO 2.xx.yy, but not NIO 3, which can break the API).<br>
+Pressing "Next" will fetch and offer all the "Products" the NIO package
+contains:
+
+<center><a href="{{ site.baseurl }}/images/microexpress-nio-2/08-add-nio-dep-product-selection-zoom.png"
+  ><img src=
+  "{{ site.baseurl }}/images/microexpress-nio-2/08-add-nio-dep-product-selection.png" 
+  /></a></center>
+
+NIO provides quite a few libraries. We are trying to build a simple web
+framework/service, hence we need "NIO" / "NIOHTTP1".
+[`NIO`](https://github.com/apple/swift-nio/tree/master/Sources/NIO) 
+is the core library required by everything, dealing with network sockets
+and providing common abstractions.
+[`NIOHTTP1`](https://github.com/apple/swift-nio/tree/master/Sources/NIOHTTP1)
+are the parts required to support the 
+[HTTP](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol) 
+protocol (v1.0/v1.1,
+[HTTP/2](https://en.wikipedia.org/wiki/HTTP/2) 
+is also supported, but shipped as a separate package:
+[swift-nio-http2](https://github.com/apple/swift-nio-http2)).
+
+> You can select as many extra libraries as you like, it won't hurt much.
+> [`NIOTLS`](https://github.com/apple/swift-nio/tree/master/Sources/NIOTLS) 
+> contains [SSL/TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) support,
+> [`_NIO1APIShims`](https://github.com/apple/swift-nio/tree/master/Sources/_NIO1APIShims) 
+> is for helping to port SwiftNIO 1.x code to NIO 2.x,
+> [`NIOConcurrencyHelpers`](https://github.com/apple/swift-nio/tree/master/Sources/NIOConcurrencyHelpers) 
+> contains some utilities to help w/ threading,
+> [`NIOFoundationCompat`](https://github.com/apple/swift-nio/tree/master/Sources/NIOFoundationCompat) 
+> helps w/ using [`Codable`](https://developer.apple.com/documentation/swift/codable) and 
+> [`Data`](https://developer.apple.com/documentation/foundation/data) 
+> alongside NIO,
+> [`NIOWebSocket`](https://github.com/apple/swift-nio/tree/master/Sources/NIOWebSocket)
+> contains support for writing [WebSocket](https://github.com/apple/swift-nio/tree/master/Sources/NIOFoundationCompat)
+> servers and clients.
+> Finally
+> [`NIOTestUtils`](https://github.com/apple/swift-nio/tree/master/Sources/NIOTestUtils)
+> contains some helpers for testing (checkout
+> [Testing SwiftNIO Systems](https://www.youtube.com/watch?v=EVhliQJuFP0) 
+> if interested).
+
+Click "Finish" and build the Xcode project (⌘-b).
+NIO is now listed in the package inspector and in the project explorer:
+<center><a href="{{ site.baseurl }}/images/microexpress-nio-2/09-added-nio-dep-zoom.png"
+  ><img src=
+  "{{ site.baseurl }}/images/microexpress-nio-2/09-added-nio-dep.png" 
+  /></a></center>
+
+<center><b><i>READY TO GO!</i></b></center>
 
 
 ## Step 1: Application Class
@@ -158,8 +231,6 @@ Build the project.
 The primary purpose of the `Express` application class is 
 starting and running the  HTTP server. This part (add it to the main.swift):
 
-<img src="/images/gh.svg" style="height: 1em; margin-bottom: -0.1em; text-align: bottom;"/>
-[main.swift](https://github.com/NozeIO/MicroExpress/blob/nio-tutorial/1-hello-world/MicroExpress/Sources/MicroExpress/main.swift)
 ```swift
 // File: main.swift - Add to existing file
 let app = Express()
@@ -167,10 +238,8 @@ let app = Express()
 app.listen(1337)
 ```
 
-<img src="/images/gh.svg" style="height: 1em; margin-bottom: -0.1em; text-align: bottom;"/>
-[Express.swift](https://github.com/NozeIO/MicroExpress/blob/nio-tutorial/1-hello-world/MicroExpress/Sources/MicroExpress/Express.swift)
 ```swift
-// File: Express.swift - create this in Sources/MicroExpress
+// File: Express.swift - create this file
 
 import Foundation
 import NIO
@@ -227,21 +296,21 @@ but it won't generate responses yet.
 ### Discussion
 
 The first thing it does is create a
-[MultiThreadedEventLoopGroup](https://github.com/apple/swift-nio/blob/1.1.0/Sources/NIO/EventLoop.swift#L641):
+[MultiThreadedEventLoopGroup](https://github.com/apple/swift-nio/blob/2.12.0/Sources/NIO/EventLoop.swift#L740):
 ```swift
 let loopGroup = 
       MultiThreadedEventLoopGroup(numberOfThreads: System.coreCount)
 ```
 
-A Swift NIO 
-[EventLoop](https://github.com/apple/swift-nio/blob/1.1.0/Sources/NIO/EventLoop.swift#L54)
+A SwiftNIO 
+[EventLoop](https://github.com/apple/swift-nio/blob/2.12.0/Sources/NIO/EventLoop.swift#L199)
 is pretty much the same like a
 [DispatchQueue](https://developer.apple.com/documentation/dispatch/dispatchqueue).
-It handles IO events,
+It handles I/O events,
 one can queue blocks to it for later execution (like `DispatchQueue.async`),
 you can schedule a timer (like `DispatchQueue.asyncAfter`).<br>
 The 
-[MultiThreadedEventLoopGroup](https://github.com/apple/swift-nio/blob/1.1.0/Sources/NIO/EventLoop.swift#L641)
+[MultiThreadedEventLoopGroup](https://github.com/apple/swift-nio/blob/2.12.0/Sources/NIO/EventLoop.swift#L740)
 is somewhat like a concurrent queue.
 It is using multiple threads to distribute workload thrown at it.
 
@@ -265,13 +334,13 @@ open func listen(_ port: Int) {
 
 
 It uses the
-[ServerBootstrap](https://github.com/apple/swift-nio/blob/1.1.0/Sources/NIO/Bootstrap.swift#L48)
+[ServerBootstrap](https://github.com/apple/swift-nio/blob/2.12.0/Sources/NIO/Bootstrap.swift#L18)
 object to setup and configure the "Server Channel".
 The Bootstrap object is just a helper to perform the setup, after it is done,
 it is done.
 
-A Swift NIO
-[Channel](https://github.com/apple/swift-nio/blob/1.1.0/Sources/NIO/Channel.swift#L88)
+A SwiftNIO
+[Channel](https://github.com/apple/swift-nio/blob/2.12.0/Sources/NIO/Channel.swift#L95)
 is similar to a Swift Foundation 
 [FileHandle](https://developer.apple.com/documentation/foundation/filehandle).
 It (usually) wraps a Unix file descriptor (socket, pipe, file, etc.),
@@ -280,12 +349,12 @@ and provides operations on top of it.
 In this case we have a "Server Channel", that is, a passive socket which
 is going to accept incoming connections.
 The latter are again represented as
-[Channel](https://github.com/apple/swift-nio/blob/1.1.0/Sources/NIO/Channel.swift#L88)
+[Channel](https://github.com/apple/swift-nio/blob/2.12.0/Sources/NIO/Channel.swift#L95)
 objects and are configured in the `childChannelInitializer` shown above.
 The `channel` argument is the freshly setup connection to the client.
 
 Channels maintain a 
-[ChannelPipeline](https://github.com/apple/swift-nio/blob/1.1.0/Sources/NIO/ChannelPipeline.swift#L15),
+[ChannelPipeline](https://github.com/apple/swift-nio/blob/2.12.0/Sources/NIO/ChannelPipeline.swift#L15),
 which is simply a set of "handler" objects
 (in a way they are not that different to Middleware).
 They get executed in sequence and can transform the incoming and outgoing data,
@@ -307,31 +376,27 @@ Our handler is going to receive HTTP request parts (because we put
 `configureHTTPServerPipeline` in the pipeline before us),
 and it is going to send back HTTP to the client:
 
-<img src="/images/gh.svg" style="height: 1em; margin-bottom: -0.1em; text-align: bottom;"/>
-[Express.swift](https://github.com/NozeIO/MicroExpress/blob/nio-tutorial/1-hello-world/MicroExpress/Sources/MicroExpress/Express.swift#L20)
 ```swift
 // File: Express.swift - change the .childChannelInitializer call as shown
 
 open class Express {
   ...
       .childChannelInitializer { channel in
-        channel.pipeline.configureHTTPServerPipeline().then {
-          channel.pipeline.add(handler: HTTPHandler())
+        channel.pipeline.configureHTTPServerPipeline().flatMap {
+          channel.pipeline.addHandler(HTTPHandler())
         }
       }
   ...
 }
 ```
 
-> If you are wondering about the `.then`, most functions in NIO return a
+> If you are wondering about the `.flatMap`, most functions in NIO return a
 > [Future](https://github.com/apple/swift-nio/blob/1.1.0/Sources/NIO/EventLoopFuture.swift#L208).
-> But lets ignore that part for now. Read it as:
+> But lets ignore that part for now. Read it as:<br>
 > once `configureHTTPServerPipeline` completed, add our own handler.
 
 We put the actual handler into the `Express` object:
 
-<img src="/images/gh.svg" style="height: 1em; margin-bottom: -0.1em; text-align: bottom;"/>
-[Express.swift](https://github.com/NozeIO/MicroExpress/blob/nio-tutorial/1-hello-world/MicroExpress/Sources/MicroExpress/Express.swift#L45)
 ```swift
 // File: Express.swift - insert at the bottom
 
@@ -341,7 +406,7 @@ open class Express {
   final class HTTPHandler : ChannelInboundHandler {
     typealias InboundIn = HTTPServerRequestPart
     
-    func channelRead(ctx: ChannelHandlerContext, data: NIOAny) {
+    func channelRead(context: ChannelHandlerContext, data: NIOAny) {
       let reqPart = unwrapInboundIn(data)
 
       switch reqPart {
@@ -361,8 +426,8 @@ You can build and run this, and target that server using
 It still won't generate a response yet, but you should see the incoming
 request in the console:
 ```
-Server running on: [IPv6]::1:1337``
-req: HTTPRequestHead(method: NIOHTTP1.HTTPMethod.GET, uri: "/", ...)
+Server running on: [IPv6]::1/::1:1337
+req: HTTPRequestHead { method: GET, uri: "/", version: HTTP/1.1, headers: [("Host", "localhost:1337"), ("Upgrade-Insecure-Requests", "1"), ("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"), ("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.4 Safari/605.1.15"), ("Accept-Language", "en-gb"), ("Accept-Encoding", "gzip, deflate"), ("Connection", "keep-alive")] }
 ```
 
 
@@ -383,16 +448,18 @@ typealias InboundIn = HTTPServerRequestPart
 This means that the data we are going to receive/read are 
 [HTTPServerRequestPart](https://github.com/apple/swift-nio/blob/1.1.0/Sources/NIOHTTP1/HTTPTypes.swift#L97)
 items,
-a Swift enum, with the cases 
+a Swift enum, which has the cases 
 `.head` (the HTTP request head),
 `.body` (some body byte data) and
 `.end`  (the request was fully read).
 
-Those items is passed into the `channelRead` function when new data becomes
-available:
+Those items are passed into the `channelRead` function when new data becomes
+available on the network socket:
 
 ```swift
-func channelRead(ctx: ChannelHandlerContext, data: NIOAny) {
+func channelRead(context: ChannelHandlerContext, 
+                 data: NIOAny) 
+{
   let reqPart : HTTPServerRequestPart = unwrapInboundIn(data)
   ...
 ```
@@ -401,7 +468,7 @@ The data is passed around as `NIOAny` objects for efficiency reasons and
 needs to be unwrapped.
 Again: The data in there are `HTTPServerRequestPart` items, because the
 `NIOHTTP1` handler sits in front of our handler in the channel pipeline.
-It converts (parses) the HTTP bytes into a sequence of the HTTP enum values.
+It converts (parses) the HTTP bytes into a sequence of those HTTP enum values.
 
 As a temporary measure, lets return some "Hello World" data to the browser,
 add this to the .head section of the switch (below the `print`):
@@ -410,19 +477,21 @@ add this to the .head section of the switch (below the `print`):
 case .head(let header):
   print("req:", header)
   
+  let channel = context.channel
+  
   let head = HTTPResponseHead(version: header.version, 
                               status: .ok)
   let part = HTTPServerResponsePart.head(head)
-  _ = ctx.channel.write(part)
+  _ = channel.write(part)
 
-  var buffer = ctx.channel.allocator.buffer(capacity: 42)
-  buffer.write(string: "Hello Schwifty World!")
+  var buffer = channel.allocator.buffer(capacity: 42)
+  buffer.writeString("Hello Schwifty World!")
   let bodypart = HTTPServerResponsePart.body(.byteBuffer(buffer))
-  _ = ctx.channel.write(bodypart)
+  _ = channel.write(bodypart)
 
   let endpart = HTTPServerResponsePart.end(nil)
-  _ = ctx.channel.writeAndFlush(endpart).then {
-    ctx.channel.close()
+  _ = channel.writeAndFlush(endpart).flatMap {
+    channel.close()
   }
 ```
 
@@ -430,7 +499,7 @@ Build and run this, and open
 [http://localhost:1337/](http://localhost:1337/)
 in your favorite web browser (IE 3.0.1).
 
-The code section is doing what Express does in a:
+The above NIO code section is doing what Express does in a:
 
 ```swift
 response.send("Hello Schwifty World!")`
@@ -446,19 +515,19 @@ A few points worth noting:
 - We call `.write` on the channel. That thing *does not actually write* data
   out to the socket. To send it to the socket, the channel must be *flushed*.
   Which is why we send the response `.end` via `writeAndFlush`.
-- When sending byte data (the content of the response), Swift NIO usually
+- When sending byte data (the content of the response), SwiftNIO usually
   expects us to use a
   [ByteBuffer](https://github.com/apple/swift-nio/blob/1.1.0/Sources/NIO/ByteBuffer-core.swift#L86).
   That thing is again very similar to a Foundation
   [Data](https://developer.apple.com/documentation/foundation/data)
   object.
 - The final detail is that we close the channel (aka connection) after the
-  last `writeAndFlush`. But we cannot just immediately close the connection,
+  last `writeAndFlush`. We cannot just immediately close the connection,
   because the writes may not have happend yet.
   Hence we attach to the 
   [Future](https://github.com/apple/swift-nio/blob/1.1.0/Sources/NIO/EventLoopFuture.swift#L208)
   returned by `writeAndFlush` and close the
-  channel after that has completed (`then`).
+  channel after that has completed (`flatMap`).
 
 ### Summary: Step 1
 
@@ -489,10 +558,8 @@ The primary enhancement of this class is the `userInfo`
 storage. The storage can later be used by middleware to pass along
 data to subsequent middleware.
 
-<img src="/images/gh.svg" style="height: 1em; margin-bottom: -0.1em; text-align: bottom;"/>
-[IncomingMessage.swift](https://github.com/NozeIO/MicroExpress/blob/nio-tutorial/2-reqres/MicroExpress/Sources/MicroExpress/IncomingMessage.swift)
 ```swift
-// File: IncomingMessage.swift - create this in Sources/MicroExpress
+// File: IncomingMessage.swift - create this
 
 import NIOHTTP1
 
@@ -544,10 +611,8 @@ Initially the primary function is an Express-like `send` method,
 which writes the HTTP header, the response body, and closes the
 response.
 
-<img src="/images/gh.svg" style="height: 1em; margin-bottom: -0.1em; text-align: bottom;"/>
-[ServerResponse.swift](https://github.com/NozeIO/MicroExpress/blob/nio-tutorial/2-reqres/MicroExpress/Sources/MicroExpress/ServerResponse.swift)
 ```swift
-// File: ServerResponse.swift - create this in Sources/MicroExpress
+// File: ServerResponse.swift - create this
 
 import NIO
 import NIOHTTP1
@@ -567,16 +632,15 @@ open class ServerResponse {
   /// An Express like `send()` function.
   open func send(_ s: String) {
     flushHeader()
-
-    let utf8   = s.utf8
-    var buffer = channel.allocator.buffer(capacity: utf8.count)
-    buffer.write(bytes: utf8)
-
+    
+    var buffer = channel.allocator.buffer(capacity: s.count)
+    buffer.writeString(s)
+    
     let part = HTTPServerResponsePart.body(.byteBuffer(buffer))
     
     _ = channel.writeAndFlush(part)
-               .mapIfError(handleError)
-               .map { self.end() }
+               .recover(handleError)
+               .map(end)
   }
   
   /// Check whether we already wrote the response header.
@@ -588,7 +652,7 @@ open class ServerResponse {
     let head = HTTPResponseHead(version: .init(major:1, minor:1),
                                 status: status, headers: headers)
     let part = HTTPServerResponsePart.head(head)
-    _ = channel.writeAndFlush(part).mapIfError(handleError)
+    _ = channel.writeAndFlush(part).recover(handleError)
   }
   
   func handleError(_ error: Error) {
@@ -620,14 +684,12 @@ response.send("Hello World!")
 Lets hook up our new `IncomingMessage` and `ServerResponse` objects to the
 `Express.HTTPHandler`.
 
-<img src="/images/gh.svg" style="height: 1em; margin-bottom: -0.1em; text-align: bottom;"/>
-[Express.swift](https://github.com/NozeIO/MicroExpress/blob/nio-tutorial/2-reqres/MicroExpress/Sources/MicroExpress/Express.swift#L52)
 ```swift
 // File: Express.swift - replace the hello stuff w/ this code
 
 case .head(let header):
   let request  = IncomingMessage(header: header)
-  let response = ServerResponse(channel: ctx.channel)
+  let response = ServerResponse(channel: context.channel)
   
   print("req:", header.method, header.uri, request)
   response.send("Way easier to send data!!!")
@@ -640,36 +702,36 @@ We don't use the request yet, but we can send data w/ much less effort.
 
 The ServerResponse uses the `HTTPHeaders` struct and `HTTPResponseStatus` enum
 from 
-[NIOHTTP1](https://github.com/apple/swift-nio/tree/1.1.0/Sources/NIOHTTP1).
+[NIOHTTP1](https://github.com/apple/swift-nio/tree/2.12.0/Sources/NIOHTTP1).
 They do what their name says...
 
 As mentioned we `init` the object with the 
-[Channel](https://github.com/apple/swift-nio/blob/1.1.0/Sources/NIO/Channel.swift#L88),
+[Channel](https://github.com/apple/swift-nio/blob/2.12.0/Sources/NIO/Channel.swift#L95),
 this is where we are going to perform our writes on.
 We discussed writes already, but lets review it again, this is what we do:
 
 ```swift
 _ = channel.writeAndFlush(part)
-           .mapIfError(handleError)
-           .map { self.end() }
+           .recover(handleError)
+           .map(end)
 ```
 
 We pass the data into the `writeAndFlush` as `HTTPPart` items - 
 a `.head` (status + headers), `.body` (response body) and `.end` (response end).
-[NIOHTTP1](https://github.com/apple/swift-nio/blob/1.1.0/Sources/NIOHTTP1/HTTPEncoder.swift#L111)
+[NIOHTTP1](https://github.com/apple/swift-nio/blob/2.12.0/Sources/NIOHTTP1/HTTPEncoder.swift#L160)
 will convert that to the actual HTTP/1.x protocol on the socket.
 
 The `writeAndFlush` method works *asynchronously*, 
 it just *enqueues* the part to be written,
 and returns a so called
-[Future](https://github.com/apple/swift-nio/blob/1.1.0/Sources/NIO/EventLoopFuture.swift#L208)
+[Future](https://github.com/apple/swift-nio/blob/2.12.0/Sources/NIO/EventLoopFuture.swift#L246)
 item.
 To that `Future` you can attach a handler for the case 
-[when errors happen](https://github.com/apple/swift-nio/blob/1.1.0/Sources/NIO/EventLoopFuture.swift#L514)
-(`mapIfError(handleError`)
+[when errors happen](https://github.com/apple/swift-nio/blob/2.12.0/Sources/NIO/EventLoopFuture.swift#L648)
+(`recover(handleError`)
 and for the case 
-[when the operation was successful](https://github.com/apple/swift-nio/blob/1.1.0/Sources/NIO/EventLoopFuture.swift#L449)
-(`map({ self.end())}`).<br />
+[when the operation was successful](https://github.com/apple/swift-nio/blob/2.12.0/Sources/NIO/EventLoopFuture.swift#L538)
+(`map(end)`).<br />
 Either one will be invoked when the write has completed or error'ed.
 In µExpress, like in Express, we tunnel the errors through a single error
 handler. Which in our case just logs the error, and closes the connection. µ.
@@ -677,7 +739,7 @@ handler. Which in our case just logs the error, and closes the connection. µ.
 
 ### Summary: Step 2
 
-We encapsulated the rather complicated Swift NIO operations in neat,
+We encapsulated the rather complicated SwiftNIO operations in neat,
 Express like `IncomingMessage` and `ServerResponse` classes.
 Which we hooked up the the Setty HTTP handler object.
 
@@ -711,8 +773,9 @@ func moo(req  : IncomingRequest,
 ```
 
 Usually you don't write the middleware as a regular function,
-but you pass it over as a trailing closure when adding it to
-a router:
+but you pass it over as a 
+[trailing closure](https://docs.swift.org/swift-book/LanguageGuide/Closures.html#ID102)
+when adding it to a "router" (here: the `app`):
 ```swift
 app.use { req, res, next in
   print("We got a request:", req)
@@ -722,10 +785,8 @@ app.use { req, res, next in
 
 In Swift a middleware can be expressed by a simple `typealias`:
 
-<img src="/images/gh.svg" style="height: 1em; margin-bottom: -0.1em; text-align: bottom;"/>
-[Middleware.swift](https://github.com/NozeIO/MicroExpress/blob/nio-tutorial/3-middleware/MicroExpress/Sources/MicroExpress/Middleware.swift)
 ```swift
-// File: Middleware.swift - create this in Sources/MicroExpress
+// File: Middleware.swift - create this
 
 public typealias Next = ( Any... ) -> Void
 
@@ -753,10 +814,8 @@ When handling a request, the router just steps through its list
 of middleware until one of them **doesn't** call `next`.
 And by that, finishes the request handling process.
 
-<img src="/images/gh.svg" style="height: 1em; margin-bottom: -0.1em; text-align: bottom;"/>
-[Router.swift](https://github.com/NozeIO/MicroExpress/blob/nio-tutorial/3-middleware/MicroExpress/Sources/MicroExpress/Router.swift)
 ```swift
-// File: Router.swift - create this in Sources/MicroExpress
+// File: Router.swift - create this
 
 open class Router {
   
@@ -818,9 +877,7 @@ router.use { _, _, _ in
 ### Discussion
 
 The one non-obvious thing here is the `handle` method of the Router.
-Why not just loop through the array and call the middleware directly,
-like we did in the HTTP-API version of
-[µExpress](/microexpress/#step-3-router)?
+Why not just loop through the array and call the middleware directly?
 What is that `next` closure thing?
 
 Our µExpress implementation of a Router can run completely asynchronously.
@@ -857,7 +914,7 @@ When it gets called, it advances the index attached to it, and thereby moves
 forward in the middleware stack.
 
 **Important**: Never do this in any asynchronous Express implementation
-(or Swift NIO handler for that matter):
+(or SwiftNIO handler for that matter):
 
 ```swift
 app.use { _, res, next in
@@ -883,10 +940,8 @@ which will all block.
 This one is easy. In Express the application object itself is also a Router,
 that is, you can call `app.use { ... }` on it.
 The only thing we have to do here, is make `Router` a superclass of our
-existing `Express` app object.
+existing `Express` app object:
 
-<img src="/images/gh.svg" style="height: 1em; margin-bottom: -0.1em; text-align: bottom;"/>
-[Express.swift](https://github.com/NozeIO/MicroExpress/blob/nio-tutorial/3-middleware/MicroExpress/Sources/MicroExpress/Express.swift#L7)
 ```swift
 // File: Express.swift - adjust
 
@@ -905,8 +960,6 @@ We are going to change it so, that we:
 2. store it in a property
 3. invoke it with our request/response objects
 
-<img src="/images/gh.svg" style="height: 1em; margin-bottom: -0.1em; text-align: bottom;"/>
-[Express.swift](https://github.com/NozeIO/MicroExpress/blob/nio-tutorial/3-middleware/MicroExpress/Sources/MicroExpress/Express.swift#L49)
 ```swift
 // File: Express.swift - adjust HTTPHandler
 
@@ -919,18 +972,18 @@ We are going to change it so, that we:
       self.router = router
     }
     
-    func channelRead(ctx: ChannelHandlerContext, data: NIOAny) {
+    func channelRead(context: ChannelHandlerContext, data: NIOAny) {
       let reqPart = unwrapInboundIn(data)
       
       switch reqPart {
         case .head(let header):
           let request  = IncomingMessage(header: header)
-          let response = ServerResponse(channel: ctx.channel)
+          let response = ServerResponse(channel: context.channel)
           
           // trigger Router
           router.handle(request: request, response: response) {
             (items : Any...) in // the final handler
-            response.status = .notFound
+            response.status = .notFound // 404 error
             response.send("No middleware handled the request!")
           }
 
@@ -954,23 +1007,15 @@ Bootstrap.
 And since the `Express` app object is a router itself now,
 we just pass in `self`:
 
-<img src="/images/gh.svg" style="height: 1em; margin-bottom: -0.1em; text-align: bottom;"/>
-[Express.swift](https://github.com/NozeIO/MicroExpress/blob/nio-tutorial/3-middleware/MicroExpress/Sources/MicroExpress/Express.swift#L23)
 ```swift
 // File: Express.swift - adjust
 
   .childChannelInitializer { channel in
-    channel.pipeline.configureHTTPServerPipeline().then {
-      channel.pipeline.add(
-        handler: HTTPHandler(router: self))
+    channel.pipeline.configureHTTPServerPipeline().flatMap {
+      channel.pipeline.addHandler(HTTPHandler(router: self))
     }
   }
 ```
-
-<img src="/images/gh.svg" style="height: 1em; margin-bottom: -0.1em; text-align: bottom;"/>
-You can find this setup in the
-[nio-tutorial/3-middleware](https://github.com/NozeIO/MicroExpress/tree/nio-tutorial/3-middleware)
-branch.
 
 
 ### Finally! MicroExpress "Hello World"
@@ -987,8 +1032,6 @@ app.listen(1337)
 
 Let's add some routes to that!
 
-<img src="/images/gh.svg" style="height: 1em; margin-bottom: -0.1em; text-align: bottom;"/>
-[main.swift](https://github.com/NozeIO/MicroExpress/blob/nio-tutorial/3-middleware/MicroExpress/Sources/MicroExpress/main.swift)
 ```swift
 // File: main.swift - update existing file
 
@@ -1012,16 +1055,16 @@ Compile it, run it, access it using:
 [http://localhost:1337/](http://localhost:1337)
 
 Note how the logging middleware logs our request using Swift `print`,
-and then the execution continues with the actual handler middleware.
+and then (by calling `next`) the execution continues with the actual handler
+middleware.
 
 
 ### Step 3.4: Have: `use()`. Want: `get(path)`!
 
 Above we use `use()` to register our middleware.
 This is not what we usually do in Express,
-we usually use `get()`, `post()`, `delete()` etc. w/ a path 
-to register middleware,
-for example:
+we usually register using `get()`, `post()`, `delete()` and so on, w/ a path.
+For example:
 
 ```swift
 app.get("/moo") { req, res, next in
@@ -1033,16 +1076,14 @@ This is only triggered if the HTTP method is `GET` and the URL path
 starts with `/moo`.
 Suprisingly trivial to add to `Router.swift`:
 
-<img src="/images/gh.svg" style="height: 1em; margin-bottom: -0.1em; text-align: bottom;"/>
-[Router.swift](https://github.com/NozeIO/MicroExpress/blob/nio-tutorial/3-middleware/MicroExpress/Sources/MicroExpress/Router.swift#L37)
 ```swift
 // File: Router.swift - add this to Router.swift
 public extension Router {
   
   /// Register a middleware which triggers on a `GET`
   /// with a specific path prefix.
-  public func get(_ path: String = "", 
-                  middleware: @escaping Middleware)
+  func get(_ path: String = "", 
+           middleware: @escaping Middleware)
   {
     use { req, res, next in
       guard req.header.method == .GET,
@@ -1082,10 +1123,8 @@ It could be some form of Auth, or JSON body parsing, or:<br>
 One thing you often want to do: parse query parameters.
 Let's do a reusable middleware for that!
 
-<img src="/images/gh.svg" style="height: 1em; margin-bottom: -0.1em; text-align: bottom;"/>
-[QueryString.swift](https://github.com/NozeIO/MicroExpress/blob/nio-tutorial/4-reusable-middleware/MicroExpress/Sources/MicroExpress/QueryString.swift)
 ```swift
-// File: QueryString.swift - create this in Sources/MicroExpress
+// File: QueryString.swift - create this
 
 import Foundation
 
@@ -1108,7 +1147,7 @@ func querystring(req  : IncomingMessage,
   if let queryItems = URLComponents(string: req.header.uri)?.queryItems {
     req.userInfo[paramDictKey] =
       Dictionary(grouping: queryItems, by: { $0.name })
-        .mapValues { $0.flatMap({ $0.value })
+        .mapValues { $0.compactMap({ $0.value })
 	               .joined(separator: ",") }
   }
   
@@ -1163,8 +1202,6 @@ and implement the read part of the famous
 Before we begin, we add a more convenient way to set HTTP headers in the
 response (feel free to adjust this for `IncomingMessage`, hint: use a protocol).
 
-<img src="/images/gh.svg" style="height: 1em; margin-bottom: -0.1em; text-align: bottom;"/>
-[ServerResponse.swift](https://github.com/NozeIO/MicroExpress/blob/nio-tutorial/5-json/MicroExpress/Sources/MicroExpress/ServerResponse.swift#L58)
 ```swift
 // File: ServerResponse.swift - add this to the end
 
@@ -1172,7 +1209,7 @@ public extension ServerResponse {
     
   /// A more convenient header accessor. Not correct for
   /// any header.
-  public subscript(name: String) -> String? {
+  subscript(name: String) -> String? {
     set {
       assert(!didWriteHeader, "header is out!")
       if let v = newValue {
@@ -1199,10 +1236,8 @@ API client.
 In this case a list of todos (the real API has more fields, but it is enough
 to get going):
 
-<img src="/images/gh.svg" style="height: 1em; margin-bottom: -0.1em; text-align: bottom;"/>
-[TodoModel.swift](https://github.com/NozeIO/MicroExpress/blob/nio-tutorial/5-json/MicroExpress/Sources/TodoBackend/TodoModel.swift)
 ```swift
-// File: TodoModel.swift - create this in Sources/MicroExpress
+// File: TodoModel.swift - create this
 
 struct Todo : Codable {
   var id        : Int
@@ -1211,8 +1246,7 @@ struct Todo : Codable {
 }
 
 // Our fancy todo "database". Since it is
-// immutable it is webscale and lock free, 
-// if not useless.
+// immutable it is webscale and lock free.
 let todos = [
   Todo(id: 42,   title: "Buy beer",
        completed: false),
@@ -1230,12 +1264,11 @@ To deliver the JSON to the client, we enhance our `ServerResponse` object
 with a `json()` function (similar to what Express does).
 It can deliver any `Codable` object as JSON:
 
-<img src="/images/gh.svg" style="height: 1em; margin-bottom: -0.1em; text-align: bottom;"/>
-[ServerResponse.swift](https://github.com/NozeIO/MicroExpress/blob/nio-tutorial/5-json/MicroExpress/Sources/MicroExpress/ServerResponse.swift#L80)
 ```swift
 // File: ServerResponse.swift - add this to ServerResponse.swift
 
-import Foundation
+import struct Foundation.Data
+import class  Foundation.JSONEncoder
 
 public extension ServerResponse {
   
@@ -1258,20 +1291,19 @@ public extension ServerResponse {
     flushHeader()
     
     var buffer = channel.allocator.buffer(capacity: data.count)
-    buffer.write(bytes: data)
+    buffer.writeBytes(data)
     let part = HTTPServerResponsePart.body(.byteBuffer(buffer))
 
     _ = channel.writeAndFlush(part)
-               .mapIfError(handleError)
-               .map { self.end() }
+               .recover(handleError)
+               .map(end)
   }
 }
 ```
 
-Finally, lets create a middleware which sends our todos to the client:
+Finally, lets create a middleware which sends our todos to the client
+(place it above the catch-all "Hello" `use`!):
 
-<img src="/images/gh.svg" style="height: 1em; margin-bottom: -0.1em; text-align: bottom;"/>
-[main.swift](https://github.com/NozeIO/MicroExpress/blob/nio-tutorial/5-json/MicroExpress/Sources/TodoBackend/main.swift#L14)
 ```swift
 // File: main.swift - add this to main.swift
 
@@ -1315,11 +1347,9 @@ the browser denies access to our API.
 To make this work we need to implement
 [Cross-Origin Resource Sharing](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
 aka CORS.
-Lets quickly make a reusable middleware function which sets up the proper
+Let's quickly make a reusable middleware function which sets up the proper
 CORS headers, it is just a few lines of code:
 
-<img src="/images/gh.svg" style="height: 1em; margin-bottom: -0.1em; text-align: bottom;"/>
-[CORS.swift](https://github.com/NozeIO/MicroExpress/blob/nio-tutorial/5-json/MicroExpress/Sources/MicroExpress/CORS.swift)
 ```swift
 // File: CORS.swift - create this in Sources/MicroExpress
 
@@ -1347,8 +1377,6 @@ To use it, add the `cors` middleware above your TodoMVC middleware in
 `main.swift`,
 e.g. like this:
 
-<img src="/images/gh.svg" style="height: 1em; margin-bottom: -0.1em; text-align: bottom;"/>
-[main.swift](https://github.com/NozeIO/MicroExpress/blob/nio-tutorial/5-json/MicroExpress/Sources/TodoBackend/main.swift#L4)
 ```swift
 // File: main.swift - change this in main.swift
 
@@ -1368,7 +1396,7 @@ todos:<br>
 ## Summary
 
 That's it for now.
-On top of Swift NIO
+On top of SwiftNIO 2
 we built an asynchronous micro-framework featuring
 middleware, routing, JSON and CORS support
 in about **350 lines of code**.
@@ -1389,10 +1417,10 @@ tutorial.
 Stuff which breaks the scope of the post but which you can add easily:
 
 - POST processing (consuming) input, ~50 LOC
-- Template handling. Make use of the Swift NIO FileIOHelper,
-  and you favorite templating library.
-  New: "[µExpress/NIO - Adding Templates](/microexpress-nio-templates/)"
-  tutorial!
+- Template handling. Make use of the SwiftNIO FileIOHelper,
+  and your favorite templating library.
+  ("[µExpress/NIO - Adding Templates](/microexpress-nio-templates/)"
+  tutorial!)
 - Add support for error middleware: ~50 LOC
 - Matching pathes w/ inline arguments (`/users/:id`), ~100 LOC
 - Database access using your favorite library,
@@ -1404,28 +1432,36 @@ Stuff which breaks the scope of the post but which you can add easily:
 ### Links
 
 - [MicroExpress](https://github.com/NozeIO/MicroExpress)
-  package on GitHub (contains branches of all steps above!)
-- Other cool ARI projects:
-  - [ExExpress](https://github.com/modswift/ExExpress)
-  - [Swift NIO IRC](https://github.com/NozeIO/swift-nio-irc-server/blob/develop/README.md) 
-    (an IRC server, web client, Eliza chatbot written in Swift NIO)
-  - [Swift NIO Redis](https://github.com/NozeIO/swift-nio-redis/blob/develop/README.md)
-    (a Redis in-memory database server, written in Swift NIO)
-  - [SwiftObjects](http://SwiftObjects.org) (WebObjects API in Swift,
-    [WebObjects intro](http://www.alwaysrightinstitute.com/wo-intro/))
-  - [SwiftXcode](https://swiftxcode.github.io) (use Swift Package Manager 
-    projects directly within Xcode)
-  - [ZeeQL](http://zeeql.io) (an EOF/CoreData like framework for Swift)
-  - [mod_swift](http://mod-swift.org) (write Apache modules in Swift!)
-  - [Noze.io](http://noze.io) (Node.js like, but typesafe, async-IO streams)
-  - [Swiftmon/S](https://github.com/NozeIO/swiftmons)
+  package on GitHub ★ Ready to use!
 - [swift-nio](https://github.com/apple/swift-nio)
-- Swift Server Working Group
-  - [Homepage](https://swift.org/server-apis/)
-  - [HTTP API on GitHub](https://github.com/swift-server/http)
 - JavaScript Originals
   - [Connect](https://github.com/senchalabs/connect)
   - [Express.js](http://expressjs.com/en/starter/hello-world.html)
+- Other cool ARI projects:
+  - [SwiftPM Catalog](https://zeezide.com/en/products/swiftpmcatalog/index.html) 
+    (browse and search for Swift Packages)
+  - [SwiftWebUI](http://www.alwaysrightinstitute.com/swiftwebui/) 
+    (A demo implementation of
+    [SwiftUI](https://developer.apple.com/documentation/swiftui) for the Web)
+  - [SwiftWebResources](https://github.com/SwiftWebResources)
+    ([jQuery](https://jquery.com) and [SemanticUI](https://semantic-ui.com)
+    bundled up as Swift packages)
+  - [SwiftNIO IRC](https://github.com/NozeIO/swift-nio-irc-server/blob/develop/README.md) 
+    (an IRC server, web client, Eliza chatbot written in SwiftNIO)
+  - [SwiftNIO Redis](https://github.com/NozeIO/swift-nio-redis/blob/develop/README.md)
+    (a Redis in-memory database server, written in SwiftNIO)
+  - [SwiftObjects](http://SwiftObjects.org) (WebObjects API in Swift,
+    [WebObjects intro](http://www.alwaysrightinstitute.com/wo-intro/))
+  - [ZeeQL](http://zeeql.io) (an EOF/CoreData like framework for Swift)
+  - [mod_swift](http://mod-swift.org) (write Apache modules in Swift!)
+  - [Noze.io](http://noze.io) (Node.js like, but typesafe, async-IO streams)
+  - [SwiftMon/S](https://github.com/NozeIO/swiftmons)
+  - [Direct2Swift](http://www.alwaysrightinstitute.com/directtoswiftui/) 
+    (Rule based CRUD Database Frontends for
+    [SwiftUI](https://developer.apple.com/documentation/swiftui))
+  - [SwiftyLinkerKit](http://www.alwaysrightinstitute.com/linkerkit/) 
+    (control [LinkerKit](http://www.linkerkit.de/index.php?title=Hauptseite)
+    components attached to your RaspberryPi)
 - [SPM](https://swift.org/blog/swift-package-manager-manifest-api-redesign/)
 
 ## Contact
@@ -1435,10 +1471,6 @@ Twitter, any of those:
 [@helje5](https://twitter.com/helje5),
 [@ar_institute](https://twitter.com/ar_institute).<br>
 Email: [wrong@alwaysrightinstitute.com](mailto:wrong@alwaysrightinstitute.com).
-
-## No tutorial w/o Cows
-
-<img src="http://zeezide.com/img/swift-nio-cows.gif" />
 
 
 #### P.S.
