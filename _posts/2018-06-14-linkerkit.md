@@ -55,7 +55,7 @@ Want to skip all the text and [jump right to the video](#video)?
 
 ## SwiftyGPIO
 
-<img src="https://github.com/uraimo/SwiftyGPIO/blob/master/logo.png?raw=true"
+<img src="https://raw.githubusercontent.com/uraimo/SwiftyGPIO/master/logo.svg"
      align="right" width="172" style="padding: 0 0 0.5em 0.5em;" />
 
 LinkerKit usually includes examples on how to drive the respective accessories,
