@@ -1480,5 +1480,5 @@ Email: [wrong@alwaysrightinstitute.com](mailto:wrong@alwaysrightinstitute.com).
 
 <div style="font-size: 8pt; margin-bottom: 2em;">
 The attentive reader may have noticed that the `next` closure features
-a retain cycle 😎.
+a retain cycle 😎 (proper implementation is on GitHub).
 </div>
