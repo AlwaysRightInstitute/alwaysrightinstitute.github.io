@@ -13,7 +13,7 @@ and build a tiny but useful web framework along the way.
 Say hello to µExpress. *Again.*
 
 
-> Update 2019-12-27: [A µTutorial on Swift NIO 2](/microexpress-nio/)
+> Update 2019-12-27: [A µTutorial on Swift NIO 2](/microexpress-nio2/)
 > is now available. Xcode 11 now includes some SPM support and SwiftNIO
 > evolved to version 2.
 
