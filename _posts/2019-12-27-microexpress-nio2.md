@@ -9,7 +9,7 @@ tags: linux swift server side mod_swift swiftnio
 is _the_ library to build backend servers in the Swift programming
 language.
 As part of this article we are going to write our own tiny, Node like
-web framework using NIO: Say hello to 
+web framework using NIO:
 [µExpress](https://github.com/NozeIO/MicroExpress). *Updated for NIO2/Xcode 11.*
 
 > This article is an update to last years
