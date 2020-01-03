@@ -446,8 +446,12 @@ struct TaskView: View {
 }
 ```
 
-Since SwiftUI Views are also just lightweight structs,
-you can build dynamic properties which carry them!
+Since SwiftUI Views themselves are also just lightweight structs,
+you can build dynamic properties which carry them (i.e. yield a view)!
+This is a part which powers
+[Direct to SwiftUI](http://www.alwaysrightinstitute.com/directtoswiftui/),
+which automagically builds SwiftUI view hierarchies based on a rule model 
+(in combination with a database model).
 
 In any case: We are interested in any idea how to use it!
 
