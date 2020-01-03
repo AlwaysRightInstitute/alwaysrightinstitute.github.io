@@ -508,11 +508,20 @@ struct MyNavLink<Destination, Content>: View {
 
 We hope you like it!
 
+Update: Also checkout our new 
+[Direct to SwiftUI](http://www.alwaysrightinstitute.com/directtoswiftui/),
+which uses 
+[SwiftUI Rules](https://github.com/DirectToSwift/SwiftUIRules)
+do build fancy database frontends in no time.
+
 
 ## Links
 
 - [SwiftUI Rules](https://github.com/DirectToSwift/SwiftUIRules)
-  - [SOPE Rule System](http://sope.opengroupware.org/en/docs/snippets/rulesystem.html)
+  - [Direct to SwiftUI](http://www.alwaysrightinstitute.com/directtoswiftui/)
+    (instant CRUD SwiftUI apps)
+  - [SOPE Rule System](http://sope.opengroupware.org/en/docs/snippets/rulesystem.html) 
+    (rule system for Objective-C)
 - iOS Astronaut: [Custom @Environment keys in SwiftUI](https://sergdort.github.io/custom-environment-swift-ui/)
 - [SwiftUI](https://developer.apple.com/xcode/swiftui/)
   - [Introducing SwiftUI](https://developer.apple.com/videos/play/wwdc2019/204/) (204)
