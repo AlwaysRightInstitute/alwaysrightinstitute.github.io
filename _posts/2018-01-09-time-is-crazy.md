@@ -69,9 +69,9 @@ which is why most software fixes the semantics of such.
 An example for a non-floating all day event is a vacation day.
 So I'm an employee in Germany and I take a small vacation, lets say 21 days:
 
-            2018-04-01  0:00 CET till 2018-25-01 23:59:59 CET
-    in UTC: 2018-03-31 23:00 UTC till 2018-25-01 22:59:59 UTC
-    in PST: 2018-03-31 15:00 UTC till 2018-25-01 14:59:59 UTC
+            2018-04-01  0:00 CET till 2018-05-21 23:59:59 CET
+    in UTC: 2018-03-31 23:00 UTC till 2018-05-21 22:59:59 UTC
+    in PST: 2018-03-31 15:00 UTC till 2018-05-21 14:59:59 PST
     
 What that means is that my collegue in CA can call me at say 8pm PST
 on the 25th, because I'm going to be back from vacation.
