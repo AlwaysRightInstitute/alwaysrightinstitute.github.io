@@ -132,8 +132,9 @@ may be a viable choice.
 
 SQL databases usually have a datatype that can store floating times/dates,
 e.g. the
-[PostgreSQL Date](https://www.postgresql.org/docs/current/static/datatype-datetime.html)
-or stuff like `TIMESTAMP WITHOUT TIME ZONE` (yes, that is an actual SQL type).
+[PostgreSQL Date](https://www.postgresql.org/docs/12/datatype-datetime.html)
+or stuff like 
+[`TIMESTAMP WITHOUT TIME ZONE`](https://www.postgresql.org/docs/12/datatype-datetime.html) (yes, that is an actual SQL type).
 
 
 ## Times w/ Timezones are kinda Floating
