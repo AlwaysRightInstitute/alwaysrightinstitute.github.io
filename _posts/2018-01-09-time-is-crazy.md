@@ -147,7 +147,7 @@ the future.
 
 Lets say we want to meet in 2030-01-10 10:00 CET.
 We can't know yet what this is going to be in UTC.
-No, that is no joke even for CET. It is quite possible that the EU
+No, that is no joke even for CET. It is quite possible that the 🇪🇺
 drops DST till then.
 
 This is why the recommendation: "store a UTC timestamp plus the timezone id"
@@ -161,7 +161,7 @@ So again, when transferring data in a protocol, do not transfer as UTC but
 as the actual date components, e.g. `1976-04-01T10:00:00 PST`.
 
 When persisting the stuff use a proper type. E.g. in PostgreSQL
-`TIMESTAMP WITH TIME ZONE`
+[`TIMESTAMP WITH TIME ZONE`](https://www.postgresql.org/docs/12/datatype-datetime.html)
 is the proper thing (yeah, I know ;-))
 
 Be careful when dealing w/ date/time data in memory.
@@ -176,7 +176,8 @@ while the program is running. Be aware of that restriction.
 Common practice is to store date-times together with a timezone.
 That too is actually not quite correct.
 
-For example we could organize a meeting in Tallinn, at `2030-07-10 10:00`.
+For example we could organize a meeting in 
+[Tallinn](https://en.wikipedia.org/wiki/Tallinn), at `2030-07-10 10:00`.
 Today, we would store that as `2030-07-10 10:00 EET`.
 
 Yet Estonia could very well decide to drop EET to easen trade with central 
