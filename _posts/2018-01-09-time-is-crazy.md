@@ -145,7 +145,7 @@ It cannot be represented in UTC.
 It cannot be represented in UTC + timezone, because timezones can change in
 the future.
 
-Lets say we want to meet in 2020-01-10 10:00 CET.
+Lets say we want to meet in 2030-01-10 10:00 CET.
 We can't know yet what this is going to be in UTC.
 No, that is no joke even for CET. It is quite possible that the EU
 drops DST till then.
@@ -176,13 +176,13 @@ while the program is running. Be aware of that restriction.
 Common practice is to store date-times together with a timezone.
 That too is actually not quite correct.
 
-For example we could organize a meeting in Tallinn, at `2020-07-10 10:00`.
-Today, we would store that as `2020-07-10 10:00 EET`.
+For example we could organize a meeting in Tallinn, at `2030-07-10 10:00`.
+Today, we would store that as `2030-07-10 10:00 EET`.
 
 Yet Estonia could very well decide to drop EET to easen trade with central 
 Europe and just switch to CET.
-In other words Tallinn, at `2020-07-10 10:00` could very well mean 
-`2020-07-10 10:00 CET` in the future.
+In other words Tallinn, at `2030-07-10 10:00` could very well mean 
+`2030-07-10 10:00 CET` in the future.
 (And I'm not suggesting that they do that ;-)
 
 So if you want to do it really proper: Store the date components plus the
