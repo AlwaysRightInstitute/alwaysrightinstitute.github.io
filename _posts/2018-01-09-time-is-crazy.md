@@ -74,7 +74,7 @@ So I'm an employee in Germany and I take a small vacation, lets say 21 days:
     in PST: 2018-03-31 15:00 UTC till 2018-05-21 14:59:59 PST
     
 What that means is that my collegue in CA can call me at say 8pm PST
-on the 25th, because I'm going to be back from vacation.
+on the 21st, because I'm going to be back from vacation.
 
 Or in other words, the vacation event is pinned to a specific location
 (hence timezone).
