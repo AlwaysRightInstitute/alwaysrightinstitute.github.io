@@ -665,6 +665,6 @@ so let's at least have this one: 🐄
 ### Links
 
 - [@dynamicCallable: Unix Tools as Swift Functions](http://www.alwaysrightinstitute.com/swift-dynamic-callable/)
-- [@dynamicCallable Part 3: Mustacheable](http://www.alwaysrightinstitute.com/mustachable/),
+- [@dynamicCallable Part 3: Mustacheable](http://www.alwaysrightinstitute.com/mustacheable/),
 - [SE-0195 Dynamic Member Lookup](https://github.com/apple/swift-evolution/blob/master/proposals/0195-dynamic-member-lookup.md)
 - [SE-0216 Dynamic Callable](https://github.com/apple/swift-evolution/blob/master/proposals/0216-dynamic-callable.md)
