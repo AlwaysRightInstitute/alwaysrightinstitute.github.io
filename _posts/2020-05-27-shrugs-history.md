@@ -3,7 +3,8 @@ layout: post
 title: Shrugs.app, A Long Journey
 tags: slack shrugs macos client
 ---
-<img src="https://shrugs.app/images/MikadoSiteLogo.png" align="right" style="margin-left: 0.5em; width: 64px; height: 64px;">
+<img src="https://shrugs.app/images/MikadoSiteLogo.png" 
+     align="right" width="86" height="86" style="padding: 0 0 0.5em 0.5em;" />
 How did [Shrugs.app](https://shrugs.app) happen?
 Almost **two years ago** (Aug 2018) the Interwebs held their recurring
 discussion of the gigantanormous amounts of resources the Slack Electron
