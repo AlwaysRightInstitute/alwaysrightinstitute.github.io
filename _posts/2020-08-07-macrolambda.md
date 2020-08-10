@@ -733,7 +733,7 @@ necessary.
 Once the basics are setup it's a snap to add and deploy new Swift Lambda's
 using `swift lambda deploy`.
 
-Using Macro's Express only a single function is reallyed needed for a whole
+Using Macro's Express only a single function is really needed for a whole
 application backend,
 as it allows the configuration of the actual endpoints and routing within
 the Express app itself. 
