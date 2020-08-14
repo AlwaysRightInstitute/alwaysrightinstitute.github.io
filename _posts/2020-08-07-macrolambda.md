@@ -2,6 +2,7 @@
 layout: post
 title: Deploying Swift on AWS Lambda
 tags: aws lambda amazon linux swift server side swiftnio
+hidden: true
 ---
 <img src="https://zeezide.com/img/lambda/lambda-logo-86x86.png"
      align="right" width="86" height="86" style="padding: 0 0 0.5em 0.5em;" />

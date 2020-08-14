@@ -2,6 +2,7 @@
 layout: post
 title: Shrugs.app, A Long Journey
 tags: slack shrugs macos client
+hidden: true
 ---
 <img src="https://shrugs.app/images/MikadoSiteLogo.png" 
      align="right" width="86" height="86" style="padding: 0 0 0.5em 0.5em;" />
