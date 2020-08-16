@@ -284,7 +284,7 @@ The scripts take care of three tasks:
 3. Deploying that "zip" to Lambda.
 
 Feel free to skip the description of what the steps do in detail,
-invoking `swift lambda deploy -d 5.2` is all you need to build & deploy to AWS:
+invoking `swift lambda deploy` is all you need to build & deploy to AWS:
 [skip](#building-a-small-express-lambda).
 
 > Fabian Fett did a great job documenting all the required steps to get started 
@@ -368,9 +368,9 @@ also includes a Swift 5.2 toolchain for
 [Amazon Linux](https://aws.amazon.com/amazon-linux-2/).
 Swift packages can be compiled for that target using: 
 ```bash
-$ brew install spm-dest-5.2-x86_64-amazonlinux2
+$ brew install spm-dest-5.3-x86_64-amazonlinux2
 $ swift build --destination \
-     /usr/local..../swift-5.2-amazonlinux2.xtoolchain/destination.json
+     /usr/local..../swift-5.3-amazonlinux2.xtoolchain/destination.json
 ```
 
 Very well, this allows the production of Amazon Linux binaries right on macOS,
@@ -389,13 +389,10 @@ will execute if a request arrives.
 Those two steps - building the Swift package for Amazon Linux and bundling it as
 a proper zip - are done by the `swift lambda build` script:
 ```bash
-$ swift lambda build -d 5.2
+$ swift lambda build
 ```
 It triggers `swift build` with the right destination and flags, and
 bundles the result into a Lambda .zip, ready for deployment.
-The `-d 5.2` is necessary (and a shortcut) to use the Swift 5.2 xtoolchain,
-a 5.3 one is not yet available
-(due to Amazon Linux dev branch builds not being available on swift.org).
 
 ### 3. Deployment: `swift lambda deploy`
 
@@ -421,7 +418,7 @@ tool or `sam deploy`.<br>
 It also runs `swift lambda build` (unless requested otherwise),
 so if you have a simple Lambda:
 ```bash
-$ swift lambda deploy -d 5.2
+$ swift lambda deploy
 ```
 ... is all that is needed to build and deploy a function 
 (whether the Swift project is a simple function or a complex Express app).
@@ -705,7 +702,7 @@ else {
 
 Finally:
 ```bash
-swift lambda deploy -d 5.2
+swift lambda deploy
 ```
 
 And invoke it using the URL from the API Gateway configuration, for example:
@@ -788,7 +785,6 @@ There are also a few disadvantages, but we won't mention them over here …
   but it doesn't fully work yet. To be fixed.
   (static linking reduces the size of the zip and further improves Lambda
    startup time).
-- There is no Swift 5.3 toolchain for Amazon Linux yet (just 5.2).
 - The X toolchains only have the packages that seemed necessary. If someone
   needs additionals ones please file an issue (the toolchains can carry lots
   of dev packages, that's perfectly fine).
