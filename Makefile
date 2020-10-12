@@ -6,8 +6,11 @@ DOCKER_JEKYLL_PORT=4000
 EXPOSED_JEKYLL_PORT=$(DOCKER_JEKYLL_PORT)
 
 all :
+	@echo "Use 'make run' to start locally"
 	@echo "Use 'make docker' to build"
 	@echo "Use 'make docker-run' to run in docker"
+	@echo "Use 'make install-jekyll' to install the bundler and jekyll in rbenv"
+	@echo "Use 'make clean' to delete the '_site' folder"
 
 docker :
 	docker build -t $(LOCAL_DOCKER_IMAGE_NAME) "$(PWD)"
@@ -24,6 +27,7 @@ run :
 install-jekyll: # https://jekyllrb.com/docs/installation/macos/
 	rbenv install 2.7.1
 	gem install jekyll bundler
+	bundler install
 
 clean :
 	rm -rf _site
