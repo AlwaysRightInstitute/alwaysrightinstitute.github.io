@@ -675,7 +675,7 @@ func handleOutput(framer        : NWProtocolFramer.Instance,
                   messageLength : Int,
                   isComplete    : Bool)
 {
-  try! framer.writeOutputNoCopy(length: messageLength)
+    try! framer.writeOutputNoCopy(length: messageLength)
 }
 ```
 This restores the `echo` functionality.
@@ -958,9 +958,9 @@ Delivering a "just metadata" message
 func emit(_ message: NWProtocolFramer.Message,
           to framer: NWProtocolFramer.Instance)
 {
-  _ = framer.deliverInputNoCopy(length     : 0,
-                                message    : message,
-                                isComplete : true)
+    _ = framer.deliverInputNoCopy(length     : 0,
+                                  message    : message,
+                                  isComplete : true)
 }
 ```
 Delivering HTTP body data, i.e. 
@@ -969,9 +969,9 @@ Delivering HTTP body data, i.e.
 func emit(_    data : Data,
           to framer : NWProtocolFramer.Instance)
 {
-  framer.deliverInput(data       : data,
-                      message    : .httpMessage, 
-                      isComplete : true)
+    framer.deliverInput(data       : data,
+                        message    : .httpMessage, 
+                        isComplete : true)
 }
 ```
 The `isComplete` must be set to true to get the message delivered to the app
@@ -1041,13 +1041,13 @@ connection.receiveMessage { data, context, isComplete, error in
     
     /* HTTP Request HEAD */
     if let method = message.method, let path = message.path {
-       ...
-       let req = IncomingMessage(...)
-       let res = ServerResponse(...)
-       ...
-       try self.handler(req, res) // CALL OUT TO APP
+        ...
+        let req = IncomingMessage(...)
+        let res = ServerResponse(...)
+        ...
+        try self.handler(req, res) // CALL OUT TO APP
        
-       return self.readNextMessage(from: connection)
+        return self.readNextMessage(from: connection)
     }
     ...
 }
