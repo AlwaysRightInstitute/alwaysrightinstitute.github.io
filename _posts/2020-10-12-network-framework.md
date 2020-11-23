@@ -106,7 +106,7 @@ It'll listen on a port and tell us about incoming connections:
 
 ```swift
 let listener = try NWListener(
-    using: NWParameters(tls: nil, tcp: .init()), 
+    using: .tcp,
     on: 8000
 )
 ```
@@ -259,7 +259,7 @@ Here is the full echo daemon source:
 import Network
 
 let listener = try NWListener(
-    using : NWParameters(tls: nil, tcp: .init()),
+    using : .tcp,
     on    : 8000
 )
 
@@ -591,7 +591,7 @@ The protocol is added to our stack using the parameters we pass to our
 In case you forgot, we had this before:
 ```swift
 let listener = try NWListener(
-    using : NWParameters(tls: nil, tcp: .init()),
+    using : .tpc,
     on    : 8000
 )
 ```
