@@ -554,12 +554,11 @@ func parseMessage(from buffer: UnsafeMutableRawBufferPointer?)
     guard let lastLineBreakIndex = buffer.lastIndex(of: LINEFEED) else {
         return nil // need more data
     }
-    
-    let data = Data(buffer[buffer.startIndex...lastLineBreakIndex])
-    guard let string = String(data: data, encoding: .utf8) else {
+    let slice = buffer[...lastLineBreakIndex]
+    guard let string = String(decoding: slice, as: UTF8.self) else {
         return ( [], 1 ) // fishy
     }
-  
+    
     return ( 
         lines : string.components(separatedBy: "\n"), 
         size  : lastLineBreakIndex + 1 
