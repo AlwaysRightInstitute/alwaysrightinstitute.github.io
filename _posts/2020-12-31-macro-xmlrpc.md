@@ -308,7 +308,7 @@ extension RouteKeeper {
   {
     rpc(methodName) { call in
       guard call.parameters.count == 1,
-            let a1 = A1(xmlRpcValue: call.parameters[0]) else
+            let a1 = A1(xmlRpcValue: call.parameters[0])
        else { throw XmlRpc.Fault(code: 400, reason: "Invalid parameters") }
       return try execute(a1)
     }
