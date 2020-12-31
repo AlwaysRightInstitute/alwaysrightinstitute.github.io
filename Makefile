@@ -24,6 +24,7 @@ docker-run :
 run :
 	bundle exec jekyll serve
 
+# https://jekyllrb.com/docs/installation/macos/
 install-jekyll: # https://jekyllrb.com/docs/installation/macos/
 	rbenv install 2.7.1
 	gem install jekyll bundler
@@ -32,3 +33,9 @@ install-jekyll: # https://jekyllrb.com/docs/installation/macos/
 clean :
 	rm -rf _site
 
+
+# bundler: failed to load command: jekyll
+# https://github.com/jekyll/jekyll/issues/5423
+check-jekyll-install:
+	jekyll --version
+	bundle exec jekyll --version
