@@ -557,6 +557,7 @@ We hope we could show how easy it is to provide APIs using XML-RPC.
 ## Links
 
 - [Swift XML-RPC](https://github.com/AlwaysRightInstitute/SwiftXmlRpc)
+  - [Macro XML-RPC](https://github.com/Macro-swift/MacroXmlRpc)
   - [Macro](https://github.com/Macro-swift/Macro)
   - [MacroExpress](https://github.com/Macro-swift/MacroExpress)
 - [XML-RPC Homepage](http://xmlrpc.com)
