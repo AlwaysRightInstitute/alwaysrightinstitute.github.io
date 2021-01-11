@@ -494,7 +494,7 @@ Yet still giving the user the choice what language to write the functions in.
 
 ## Compiling Swift to Wasm
 
-The original article didn't talk about this, but I just gave it a try
+The original article didn't talk about this, but we just gave it a try
 and it worked nicely:
 Compiling Swift itself to Wasm. And then running that Wasm Swift binary
 from within Swift ∞
