@@ -492,6 +492,75 @@ kernel.
 Yet still giving the user the choice what language to write the functions in.
 
 
+## Compiling Swift to Wasm
+
+The original article didn't talk about this, but I just gave it a try
+and it worked nicely:
+Compiling Swift itself to Wasm. And then running that Wasm Swift binary
+from within Swift ∞
+
+To get going, one needs to download a Swift toolchain from the 
+[SwiftWasm](https://swiftwasm.org) project,
+for example:
+[Swift Wasm 5.3.1](https://github.com/swiftwasm/swift/releases/download/swift-wasm-5.3.1-RELEASE/swift-wasm-5.3.1-RELEASE-macos_x86_64.pkg).
+Install the package, and you'll find the Swift Wasm toolchain in:
+`/Library/Developer/Toolchains/`.
+
+Add it to your path when playing w/ SwiftWasm:
+```sh
+$ export PATH=/Library/Developer/Toolchains/swift-wasm-5.3.1-RELEASE.xctoolchain/usr/bin:$PATH
+```
+
+Let's pull down a great Swift package,
+[`cows`](https://github.com/AlwaysRightInstitute/cows),
+and build it for Wasm:
+```sh
+$ git clone https://github.com/AlwaysRightInstitute/cows
+$ cd cows
+$ swift build --triple wasm32-unknown-wasi
+[9/9] Linking vaca.wasm
+$ du -sh .build/debug/vaca.wasm 
+ 25M	.build/debug/vaca.wasm
+```
+
+And yay, you can then run this in Wasmer:
+```swift
+$ wasmer .build/debug/vaca.wasm compiler
+          (__)
+        /  .\/.     ______
+       |  /\_|     |      \
+       |  |___     |       |
+       |   ---@    |_______|
+    *  |  |   ----   |    |
+     \ |  |_____
+      \|________|
+CompuCow Discovers Bug in Compiler
+```
+
+Or in Swift (e.g. using the `swasi-run` tool included in SwiftyWasmer):
+```sh
+$ swift run swasi-run vaca.wasm 
+        o
+        | [---]
+        |   |
+        |   |                              |------========|
+   /----|---|\                             | **** |=======|
+  /___/___\___\                         o  | **** |=======|
+  |            |                     ___|  |==============|
+  |           |                ___  {(__)} |==============|
+  \-----------/             [](   )={(oo)} |==============|
+   \  \   /  /             /---===--{ \/ } |
+-----------------         / | NASA  |====  |
+|               |        *  ||------||-----^
+-----------------           ||      |      |
+  /    /  \   \             ^^      ^      |
+ /     ----    \
+  ^^         ^^           This cow jumped over the Moon
+```
+
+Wasm Swift running within a Swift host.
+
+
 ## Closing Notes
 
 All that technology, while in development for years, still seems very early.
