@@ -10,7 +10,7 @@ Let's have a look on how to use it from within Swift!
 In another [episode](https://forums.swift.org/t/will-swift-concurrency-deploy-back-to-older-oss/49370) 
 of “forums are awful”, people go at length to complain about
 [Swift Concurrency](https://docs.swift.org/swift-book/LanguageGuide/Concurrency.html)
-not being available on iOS 14 / macOS 12 and before.
+not being available on iOS 14 / macOS 11 and before.
 Yes, that is right, the new `async/await` requires iOS 15 or later.
 
 > [Damn, I guess that means I and many others won't be using it for a few years 😞](https://forums.swift.org/t/will-swift-concurrency-deploy-back-to-older-oss/49370/7)
