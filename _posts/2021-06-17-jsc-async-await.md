@@ -112,7 +112,8 @@ That is a bit of boilerplate but nothing overly complicated:
       resolve, reject in
       
       guard let url = URL(string: url) else {
-        reject?.call(withArguments: [ "invalidURL" ]); return
+        reject?.call(withArguments: [ "invalidURL" ])
+        return
       }
       
       self.dataTask(with: URLRequest(url: url)) { data, response, error in
@@ -154,13 +155,13 @@ runtime.evaluateScript(#"""
 
   async function mainActor() {
     let [ data, res ] =
-      await URLSession.shared.data("https://zeezide.com/");
+      await URLSession.shared.data("https://zeezide.com/")
     
-    print(data);
-    print(res);
+    print(data)
+    print(res)
   }
   
-  mainActor();
+  mainActor()
 """#)
 ```
 
