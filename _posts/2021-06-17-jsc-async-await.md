@@ -31,7 +31,7 @@ This is what we are going to run from our Swift program, almost identical code:
 ```javascript
 async function mainActor() {
   let [ data, res ] =
-    await URLSession.shared.data("https://zeezide.com/#dontTrackMe")
+    await URLSession.shared.data("https://zeezide.com/")
   print("Data: " + data)
 }
 
@@ -95,7 +95,7 @@ The `URLSession.data()` function is the asynchronous function we are going
 to call with `await` like this:
 ```javascript
 let [ data, res ] =
-  await URLSession.shared.data("https://zeezide.com/#dontTrackMe")
+  await URLSession.shared.data("https://zeezide.com/")
 ```
 
 With the protocol we just declare our intention to the runtime.
@@ -154,7 +154,7 @@ runtime.evaluateScript(#"""
 
   async function mainActor() {
     let [ data, res ] =
-      await URLSession.shared.data("https://zeezide.com/#dontTrackMe");
+      await URLSession.shared.data("https://zeezide.com/");
     
     print(data);
     print(res);
