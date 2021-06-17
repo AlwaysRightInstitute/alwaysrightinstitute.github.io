@@ -30,7 +30,7 @@ around 9:31.
 This is what we are going to run from our Swift program, almost identical code:
 ```javascript
 async function mainActor() {
-  const [ data, res ] =
+  let [ data, res ] =
     await URLSession.shared.data("https://zeezide.com/#dontTrackMe")
   print("Data: " + data)
 }
@@ -94,7 +94,7 @@ going to add to URLSession:
 The `URLSession.data()` function is the asynchronous function we are going
 to call with `await` like this:
 ```javascript
-const [ data, res ] =
+let [ data, res ] =
   await URLSession.shared.data("https://zeezide.com/#dontTrackMe")
 ```
 
@@ -153,7 +153,7 @@ It requires the special `#"""` syntax, but you'll get used to it in no time!
 runtime.evaluateScript(#"""
 
   async function mainActor() {
-    const [ data, res ] =
+    let [ data, res ] =
       await URLSession.shared.data("https://zeezide.com/#dontTrackMe");
     
     print(data);
