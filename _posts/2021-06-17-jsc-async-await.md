@@ -173,7 +173,7 @@ you need to make sure the tool keeps running until your async functions are
 done.
 This does the trick:
 ```swift
-RunLoop.main.run()
+RunnLoop.main.run()
 ```
 
 The full example is available in this GiST:
