@@ -22,7 +22,7 @@ docker-run :
 		   $(LOCAL_DOCKER_IMAGE_NAME)
 
 run :
-	arch -x86_64 bundle exec jekyll serve
+	arch -x86_64 bundle exec jekyll serve --host 0.0.0.0
 
 # https://jekyllrb.com/docs/installation/macos/
 install-jekyll: # https://jekyllrb.com/docs/installation/macos/

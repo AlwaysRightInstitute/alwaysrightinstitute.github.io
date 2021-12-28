@@ -611,3 +611,6 @@ Quite a few things, an imcomplete list:
 Feedback is warmly welcome:
 [@helje5](https://twitter.com/helje5),
 [wrong@alwaysrightinstitute.com](mailto:wrong@alwaysrightinstitute.com).
+
+Want to support my work? Buy an [app](https://zeezide.de/en/products/products.html)! 
+You don't have to use it! 😀

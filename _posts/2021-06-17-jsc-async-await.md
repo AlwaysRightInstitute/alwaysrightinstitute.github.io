@@ -215,3 +215,6 @@ on servers using [SwiftNIO](https://github.com/apple/swift-nio). Thanks!
 Feedback is warmly welcome:
 [@helje5](https://twitter.com/helje5),
 [wrong@alwaysrightinstitute.com](mailto:wrong@alwaysrightinstitute.com).
+
+Want to support my work? Buy an [app](https://zeezide.de/en/products/products.html)! 
+You don't have to use it! 😀

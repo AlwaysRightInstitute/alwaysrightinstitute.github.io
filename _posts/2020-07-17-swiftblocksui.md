@@ -1540,3 +1540,6 @@ Twitter: [@helje5](https://twitter.com/helje5),
 email: [wrong@alwaysrightinstitute.com](mailto:wrong@alwaysrightinstitute.com),
 [AvocadoToast](https://join.slack.com/t/avocadotoastworkspace/shared_invite/zt-fw31ok9f-8fpubMFP5R5KYRFYo9J_mw)
 Slack.
+
+Want to support my work? Buy an [app](https://zeezide.de/en/products/products.html)! 
+You don't have to use it! 😀

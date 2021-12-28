@@ -1028,3 +1028,6 @@ Twitter, any of those:
 [@ar_institute](https://twitter.com/ar_institute).<br>
 Email: [wrong@alwaysrightinstitute.com](mailto:wrong@alwaysrightinstitute.com).<br>
 Slack: Find us on SwiftDE, swift-server, noze, ios-developers.
+
+Want to support my work? Buy an [app](https://zeezide.de/en/products/products.html)! 
+You don't have to use it! 😀

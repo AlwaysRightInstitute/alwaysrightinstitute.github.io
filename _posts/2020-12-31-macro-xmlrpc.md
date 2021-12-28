@@ -583,3 +583,6 @@ We hope we could show how easy it is to provide APIs using XML-RPC.
 Feedback is warmly welcome:
 [@helje5](https://twitter.com/helje5),
 [wrong@alwaysrightinstitute.com](mailto:wrong@alwaysrightinstitute.com).
+
+Want to support my work? Buy an [app](https://zeezide.de/en/products/products.html)! 
+You don't have to use it! 😀
