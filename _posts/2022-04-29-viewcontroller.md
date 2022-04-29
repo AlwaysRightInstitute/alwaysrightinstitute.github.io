@@ -502,7 +502,7 @@ class CowDetail: ViewController {
 }
 ```
 Pretty similar to a SwiftUI
-[`View`](https://developer.apple.com/documentation/swiftui/view)'s,
+[`View`](https://developer.apple.com/documentation/swiftui/view),
 but with an important distinction:
 It has a proper object identity and can track (and own!) the presentation of
 other `ViewController`'s.
