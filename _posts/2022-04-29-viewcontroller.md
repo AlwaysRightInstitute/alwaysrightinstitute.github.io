@@ -688,6 +688,7 @@ Tell us why you hate it and why this is wrong!<br>
 
 Feedback is warmly welcome:
 [@helje5](https://twitter.com/helje5),
+[@helge@mastodon.social](https://mastodon.social/web/@helge),
 [wrong@alwaysrightinstitute.com](mailto:wrong@alwaysrightinstitute.com).
 [GitHub](https://github.com/helje5).
 
