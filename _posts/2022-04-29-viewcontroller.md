@@ -648,6 +648,21 @@ func showDetail(_ cow: String) {
 ```
 
 
+## Notes
+
+- The approach also solves issues people have with `onAppear`,
+  when it fires and how it fires. Because navigation / component
+  activation is explicitly encoded in the view controller presentation
+  stack (instead of being a side effect).
+- Massive View Controller can still become a thing, same measures as with
+  UIKit apply. Use ViewController containment and the likes
+  (`ViewController` does support child controllers).
+- This doesn't fix programmatic SwiftUI navigation
+  (aka "deep linking"),
+  which still happens to be a buggy mess in SwiftUI.
+  There are hacks around it, but nothing really reasonable.
+
+
 ## Closing Notes
 
 We meant to write about this, and formalize it in a small package,
@@ -659,10 +674,6 @@ of our apps in the AppStore.
 yet, 
 but was created for a more complex application w/ multiple, stacked
 presentations going on. We quite like it.
-
-Note that this doesn't fix programmatic SwiftUI navigation
-(aka "deep linking"),
-which still happens to be a mess today.
 
 As usual all feedback is welcome. 
 Tell us why you hate it and why this is wrong!<br>
@@ -682,6 +693,7 @@ Tell us why you hate it and why this is wrong!<br>
   - [CodeCows](https://zeezide.de/en/products/codecows/) ([AppStore](https://itunes.apple.com/us/app/codecows/id1176112058))
   - [ASCII Cows](https://zeezide.de/en/products/asciicows/) ([AppStore](https://itunes.apple.com/de/app/ascii-cows/id1176152684))
 - [SwiftUI](https://developer.apple.com/xcode/swiftui/)
+- [A Better MVC](https://davedelong.com/articles/a-better-mvc/) by Dave DeLong
 
 ## Contact
 
