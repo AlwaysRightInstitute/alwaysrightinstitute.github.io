@@ -277,7 +277,7 @@ struct CowDetail: View {
 }
 ```
 That actually works.
-- This introduces a copy of the cow as in instance variable in the View itself.
+- Introduces a copy of the cow as an instance variable in the View itself.
 - If the `View` is refreshed, the value of `cow` will update using the `init`
   (the VM closure will still get created and dropped w/o being used).
 - And if the `View`'s `cow` ivar changed, 
