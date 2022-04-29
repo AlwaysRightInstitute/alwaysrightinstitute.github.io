@@ -661,6 +661,16 @@ func showDetail(_ cow: String) {
   (aka "deep linking"),
   which still happens to be a buggy mess in SwiftUI.
   There are hacks around it, but nothing really reasonable.
+- `ViewController` features support for
+  [`representedObject`](https://developer.apple.com/documentation/appkit/nsviewcontroller/1434453-representedobject),
+  i.e. associating another, usually "model", object with the VC
+  (also along the lines of MWC).
+  Often helpful (e.g. the datasource of contacts being listed, or the individual
+  contact being shown).
+- Along those lines, since the `ViewController` is often the main redraw driver
+  for a View, it has a
+  [`willChange(with:)`](https://github.com/ZeeZide/ViewController/blob/ef4e85a3e8a827d542288c25a1355440852cbb52/Sources/ViewController/ViewController/Subscriptions.swift#L13)
+  hook, to republish changes in other objects, e.g. models.
 
 
 ## Closing Notes
