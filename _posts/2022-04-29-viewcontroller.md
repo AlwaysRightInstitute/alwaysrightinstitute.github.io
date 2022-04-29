@@ -443,7 +443,7 @@ intermingle:
 > to decide on the actual presentation flow 
 > (i.e. what ViewControllers are going to be presented when).
 
-The is one minor thing missing. The "Root ViewController" needs to be setup.
+There is one minor thing missing. The "Root ViewController" needs to be setup.
 That is the sole place where we still use a
 [`@StateObject`](https://developer.apple.com/documentation/swiftui/stateobject):
 ```swift
