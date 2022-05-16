@@ -540,7 +540,7 @@ on a different one.<br>
 With SwiftBlocksUI you can use the same URL for all endpoints, it'll figure out
 what is being requested and do the right thing.
 
-Lets configure two things:
+Let's configure two things:
 1. Shortcuts
 2. Slash Commands
 
@@ -600,7 +600,7 @@ Dont' forget to press "**Save Changes**" on the bottom.
 
 #### Slash commands
 
-To play with the cows, lets also configure a Slash command.
+To play with the cows, let's also configure a Slash command.
 Click "Slash Commands" in the sidebar of your Slack app page, then
 "Create New Command":
 
@@ -807,7 +807,7 @@ To summarize:
       
 ### Reusable Cow Blocks
 
-Before adding more functionality, lets move the blocks out of the endpoint.
+Before adding more functionality, let's move the blocks out of the endpoint.
 Into an own reusable `CowMessage` blocks.
 ```swift
 struct CowMessage: Blocks {

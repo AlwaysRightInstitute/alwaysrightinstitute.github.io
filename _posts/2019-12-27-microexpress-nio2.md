@@ -681,7 +681,7 @@ response.send("Hello World!")
 
 ### 2.3 Hook them up to the HTTPHandler
 
-Lets hook up our new `IncomingMessage` and `ServerResponse` objects to the
+Let's hook up our new `IncomingMessage` and `ServerResponse` objects to the
 `Express.HTTPHandler`.
 
 ```swift
@@ -708,7 +708,7 @@ They do what their name says...
 As mentioned we `init` the object with the 
 [Channel](https://github.com/apple/swift-nio/blob/2.12.0/Sources/NIO/Channel.swift#L95),
 this is where we are going to perform our writes on.
-We discussed writes already, but lets review it again, this is what we do:
+We discussed writes already, but let's review it again, this is what we do:
 
 ```swift
 _ = channel.writeAndFlush(part)
@@ -1191,7 +1191,7 @@ Then call it like this:
 ## Step 5: JSON API using Codable
 
 So far we just sent plain texts to the browser.
-Lets enhance our microframework to support a JSON API,
+Let's enhance our microframework to support a JSON API,
 and implement the read part of the famous
 [Todo-Backend](http://todobackend.com) API:
 
@@ -1301,7 +1301,7 @@ public extension ServerResponse {
 }
 ```
 
-Finally, lets create a middleware which sends our todos to the client
+Finally, let's create a middleware which sends our todos to the client
 (place it above the catch-all "Hello" `use`!):
 
 ```swift
@@ -1325,7 +1325,7 @@ in the browser. You should see the proper JSON:
     "completed": true  } ]
 ```
 
-Lets try our API with the actual TodoBackend client:<br>
+Let's try our API with the actual TodoBackend client:<br>
 [http://todobackend.com/client/index.html?http://localhost:1337/todomvc/](http://todobackend.com/client/index.html?http://localhost:1337/todomvc/)
 
 If we do this, the todo list in the client shows up empty! 🤔

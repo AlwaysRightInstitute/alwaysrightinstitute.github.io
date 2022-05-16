@@ -310,7 +310,7 @@ a ViewController
 hierarchy is formed. It is just "drawn" by the `View`'s.
 The `View`'s sole two purposes: rendering and event handling.
 
-Lets see what we mean using our cows example app. Again, this doesn't require
+Let's see what we mean using our cows example app. Again, this doesn't require
 any library or framework and all apps we deploy today just use the concept,
 not even
 [ViewController](https://github.com/ZeeZide/ViewController)

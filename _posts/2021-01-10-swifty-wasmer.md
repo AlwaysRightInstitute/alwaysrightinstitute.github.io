@@ -56,7 +56,7 @@ but it does run within a web browser, or: using embeddable runtimes like
 > The [`wasi`](https://wasi.dev) is more like the operating system, 
 > what would be `win32` or `linux` in other targets.
 
-But lets setup a first basic project to get a feel for the technology.
+But let's setup a first basic project to get a feel for the technology.
 
 
 ## Installing Wasmer
@@ -406,7 +406,7 @@ Or some S/390 machine code on an Intel machine using
 [QEmu](https://www.qemu.org).
 
 How low level is it? Very, very low level.
-For example, lets assume you want to 
+For example, let's assume you want to 
 [pass a String](https://stackoverflow.com/questions/41353389/how-can-i-return-a-javascript-string-from-a-webassembly-function) 
 from the host to the Wasm program.
 What you essentially have to do is:
