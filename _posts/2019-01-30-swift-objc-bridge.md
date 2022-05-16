@@ -358,7 +358,7 @@ Works!
 
 ## 4. Sending Messages with Arguments
 
-All this lets us invoke unary methods, that is, methods w/o any arguments.
+All this let's us invoke unary methods, that is, methods w/o any arguments.
 Next thing to fix. We want to do this:
 ```swift
 let ma  = ObjC.NSArray.alloc().`init`()
@@ -391,7 +391,7 @@ let stringSelector = arguments.reduce(baseName) {
 ```
 
 In addition we need to add additional C function signatures for methods
-with arguments. Lets do it for the variant with one argument, here is the
+with arguments. Let's do it for the variant with one argument, here is the
 whole thing:
 
 ```swift

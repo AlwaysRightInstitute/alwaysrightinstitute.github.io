@@ -8,7 +8,7 @@ Swifter is the complete opposite of Swift. Instead of focusing on making
 everything C++-like vtably static, Swifter goes back to the rootz of Objective-C
 and makes everything dynamic.
 
-Lets assume the ARI is implementing Swifter, how does that look like?
+Let's assume the ARI is implementing Swifter, how does that look like?
 
 ### Introduction
 

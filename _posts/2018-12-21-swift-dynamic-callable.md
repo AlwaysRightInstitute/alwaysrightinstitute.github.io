@@ -243,7 +243,7 @@ shell[dynamicMember: "python"]
 
 ## SE-0216: Dynamic Callable
 
-So lets approach 
+So let's approach 
 [Dynamic Callable](https://github.com/apple/swift-evolution/blob/master/proposals/0216-dynamic-callable.md).
 Again, there is actually very little magic involved.
 Let us assume our `shell.swift` returns us a `ShellPathTrampoline` struct.

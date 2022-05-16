@@ -113,7 +113,7 @@ And make MicroExpress depend on it:
 ```
 
 You don't have to
-but most people are going to use Xcode, so lets create an Xcode
+but most people are going to use Xcode, so let's create an Xcode
 project for the package:
 
 ```shell
@@ -667,7 +667,7 @@ Then call it like this:
 ## Step 7: JSON API using Codable
 
 So far we just sent plain texts to the browser.
-Lets enhance our microframework to support a JSON API,
+Let's enhance our microframework to support a JSON API,
 and implement the read part of the famous
 [Todo-Backend](http://todobackend.com) API:
 
@@ -739,7 +739,7 @@ public extension ServerResponse {
 }
 ```
 
-Finally, lets create a middleware which sends our todos to the client:
+Finally, let's create a middleware which sends our todos to the client:
 
 GitHub: [main.swift](https://github.com/AlwaysRightInstitute/MicroExpress/blob/tutorial/3-json-support/Sources/MicroExpress/main.swift#L11)
 ```swift
@@ -763,7 +763,7 @@ in the browser. You should see the proper JSON:
     "completed": true  } ]
 ```
 
-Lets try our API with the actual TodoBackend client:<br>
+Let's try our API with the actual TodoBackend client:<br>
 [http://todobackend.com/client/index.html?http://localhost:1337/todomvc/](http://todobackend.com/client/index.html?http://localhost:1337/todomvc/)
 
 If we do this, the todo list in the client shows up empty! 🤔
@@ -784,7 +784,7 @@ the browser denies access to our API.
 To make this work we need to implement
 [Cross-Origin Resource Sharing](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
 aka CORS.
-Lets quickly make a reusable middleware function which sets up the proper
+Let's quickly make a reusable middleware function which sets up the proper
 CORS headers, it is just a few lines of code:
 
 GitHub: [CORS.swift](https://github.com/AlwaysRightInstitute/MicroExpress/blob/tutorial/3-json-support/Sources/MicroExpress/CORS.swift)

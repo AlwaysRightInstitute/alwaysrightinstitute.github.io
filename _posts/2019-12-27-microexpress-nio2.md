@@ -392,7 +392,7 @@ open class Express {
 
 > If you are wondering about the `.flatMap`, most functions in NIO return a
 > [Future](https://github.com/apple/swift-nio/blob/1.1.0/Sources/NIO/EventLoopFuture.swift#L208).
-> But lets ignore that part for now. Read it as:<br>
+> But let's ignore that part for now. Read it as:<br>
 > once `configureHTTPServerPipeline` completed, add our own handler.
 
 We put the actual handler into the `Express` object:
@@ -470,7 +470,7 @@ Again: The data in there are `HTTPServerRequestPart` items, because the
 `NIOHTTP1` handler sits in front of our handler in the channel pipeline.
 It converts (parses) the HTTP bytes into a sequence of those HTTP enum values.
 
-As a temporary measure, lets return some "Hello World" data to the browser,
+As a temporary measure, let's return some "Hello World" data to the browser,
 add this to the .head section of the switch (below the `print`):
 
 ```swift

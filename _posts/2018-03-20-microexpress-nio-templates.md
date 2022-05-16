@@ -659,7 +659,7 @@ and the {% raw %}{{title}}{% endraw %}
 within grabs the title of the todo.
 
 This is all great, but poooh, a little on the ugly side ...
-And now lets experience the power of templates!
+And now let's experience the power of templates!
 We don't have to recompile and restart our server, we can just
 adjust our Mustache template, reload in the browser and boom: Nice!
 

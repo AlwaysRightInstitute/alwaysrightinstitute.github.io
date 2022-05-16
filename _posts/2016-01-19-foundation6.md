@@ -90,7 +90,7 @@ If you want faster loads in exchange for BB watching U:
 Adjusted the CSS/JS includes, now including just `jQuery`, `foundation.min.js`
 and `what-input.min.js`.
 After doing that the websites was completely b0rked.
-Lets work through a few things we did to fix (some of) it.
+Let's work through a few things we did to fix (some of) it.
 
 ## Changes
 

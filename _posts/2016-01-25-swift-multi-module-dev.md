@@ -111,7 +111,7 @@ Hm, well, still doesn't work. Turns out `swift build` caches the package in the
     Compiling Swift Module 'Dispatch' (1 sources)
     Linking Library:  .build/debug/Dispatch.a
 
-Now we are good. Lets do the same for `Dispatch`, as this is also going to be
+Now we are good. Let's do the same for `Dispatch`, as this is also going to be
 used as a module by TestDispatch:
 
     pushd ~/crazy/Dispatch
@@ -150,7 +150,7 @@ Nice! All this works. We have setup our project structure using submodules.
 
 ### Working with the Package Structure
 
-Now lets work with our packages. We'll add a simple function to
+Now let's work with our packages. We'll add a simple function to
 `Dispatch/Dispatch.swift`:
 
     public func printIt() {

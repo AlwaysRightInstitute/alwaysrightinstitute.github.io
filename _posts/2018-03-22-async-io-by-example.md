@@ -123,10 +123,10 @@ is run when the return value becomes available.
 
 Now that we have seen how this affects the way you (are now supposed to) write 
 your source code,
-lets talk about why people want us to do this weirdness instead of just staying
+let's talk about why people want us to do this weirdness instead of just staying
 old-school synchronous.
 
-Lets go back to our sequential function:
+Let's go back to our sequential function:
 
 ```swift
 func handle(request: HTTPRequest, response: HTTPResponse) {
@@ -173,7 +173,7 @@ allowing for *concurrency*.
 Using that feature todays HTTP servers can easily handle thousands of
 concurrent connections.
 Your code blocks while waiting for data, but the system takes care of this
-and lets run other instances of your endpoint in the meantime.
+and let's run other instances of your endpoint in the meantime.
 
 
 ### Scaling
@@ -249,7 +249,7 @@ You may not want to block a thread waiting for this.
 ### Streaming
 
 A related but distinct concept to async-I/O is **streaming**.
-Lets say a user wants to upload a CSV file containing 10,000 addresses into
+Let's say a user wants to upload a CSV file containing 10,000 addresses into
 your PostgreSQL database.
 
 The naive approach would be to load the CSV with all the data into the

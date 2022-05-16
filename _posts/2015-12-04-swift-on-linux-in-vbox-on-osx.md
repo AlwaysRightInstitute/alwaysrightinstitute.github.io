@@ -89,7 +89,7 @@ Installing the Swift package provided by Apple is pretty simple. It is just a
 dull binary tarball containing a `usr` directory with most of the required
 stuff in it.
 
-Lets do this:
+Let's do this:
 
     cd ~
     mkdir swift-not-so-much
@@ -101,7 +101,7 @@ Lets do this:
     export PATH="${HOME}/swift-not-so-much/swift-2.2-RELEASE-ubuntu15.10/usr/bin:$PATH"
     popd
 
-Apple says we also need to install clang, so lets do this as well:
+Apple says we also need to install clang, so let's do this as well:
 
     sudo apt-get install clang
 
@@ -129,7 +129,7 @@ Including the package you love most:
 As part of the Swift OpenSource release Apple also happens to provide the 
 [code of libdispatch on GitHub](https://github.com/apple/swift-corelibs-libdispatch).
 
-Lets compile that as well. First we need to install a few build tools and some
+Let's compile that as well. First we need to install a few build tools and some
 kqueue stuff:
 
     sudo apt-get install autoconf libtool pkg-config \
@@ -155,7 +155,7 @@ This installs GCD into the Swift release directory, including a
 
     /usr/lib/swift/linux/x86_64/Dispatch.swiftmodule
 
-Lets try it:
+Let's try it:
 
     $ swift
     Welcome to Swift version 2.2 (swift-2.2-RELEASE). Type :help for assistance.
@@ -182,7 +182,7 @@ Very well, that seems to work!
 ## Emacs
 
 But wait, we are not quite done yet. What about Emacs? Everyone needs Emacs!
-Lets install Emacs, and IAmLeeg's Swift mode.
+Let's install Emacs, and IAmLeeg's Swift mode.
 
     sudo apt-get install emacs
     

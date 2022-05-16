@@ -29,7 +29,7 @@ fully replaces that effort:
 
 <center><blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Super excited we can finally share with all of you what we’ve been working on 🙌. <a href="https://t.co/o7Ul5RPYQB">https://t.co/o7Ul5RPYQB</a> <a href="https://twitter.com/hashtag/tryswiftconf?src=hash&amp;ref_src=twsrc%5Etfw">#tryswiftconf</a> <a href="https://twitter.com/hashtag/swiftnio?src=hash&amp;ref_src=twsrc%5Etfw">#swiftnio</a> <a href="https://twitter.com/hashtag/opensource?src=hash&amp;ref_src=twsrc%5Etfw">#opensource</a></p>&mdash; Johannes Weiß (@johannesweiss) <a href="https://twitter.com/johannesweiss/status/969094211646537728?ref_src=twsrc%5Etfw">March 1, 2018</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> </center>
 
-So lets redo our micro framework using the new Swift NIO API!
+So let's redo our micro framework using the new Swift NIO API!
 
 > We won't go **very** deep into Swift NIO, but cover all the basics to create
 > a web framework on top of it.
@@ -325,7 +325,7 @@ open class Express {
 
 > If you are wondering about the `.then`, most functions in NIO return a
 > [Future](https://github.com/apple/swift-nio/blob/1.1.0/Sources/NIO/EventLoopFuture.swift#L208).
-> But lets ignore that part for now. Read it as:
+> But let's ignore that part for now. Read it as:
 > once `configureHTTPServerPipeline` completed, add our own handler.
 
 We put the actual handler into the `Express` object:
@@ -403,7 +403,7 @@ Again: The data in there are `HTTPServerRequestPart` items, because the
 `NIOHTTP1` handler sits in front of our handler in the channel pipeline.
 It converts (parses) the HTTP bytes into a sequence of the HTTP enum values.
 
-As a temporary measure, lets return some "Hello World" data to the browser,
+As a temporary measure, let's return some "Hello World" data to the browser,
 add this to the .head section of the switch (below the `print`):
 
 ```swift
@@ -617,7 +617,7 @@ response.send("Hello World!")
 
 ### 2.3 Hook them up to the HTTPHandler
 
-Lets hook up our new `IncomingMessage` and `ServerResponse` objects to the
+Let's hook up our new `IncomingMessage` and `ServerResponse` objects to the
 `Express.HTTPHandler`.
 
 <img src="/images/gh.svg" style="height: 1em; margin-bottom: -0.1em; text-align: bottom;"/>
@@ -646,7 +646,7 @@ They do what their name says...
 As mentioned we `init` the object with the 
 [Channel](https://github.com/apple/swift-nio/blob/1.1.0/Sources/NIO/Channel.swift#L88),
 this is where we are going to perform our writes on.
-We discussed writes already, but lets review it again, this is what we do:
+We discussed writes already, but let's review it again, this is what we do:
 
 ```swift
 _ = channel.writeAndFlush(part)
@@ -1152,7 +1152,7 @@ Then call it like this:
 ## Step 5: JSON API using Codable
 
 So far we just sent plain texts to the browser.
-Lets enhance our microframework to support a JSON API,
+Let's enhance our microframework to support a JSON API,
 and implement the read part of the famous
 [Todo-Backend](http://todobackend.com) API:
 
@@ -1268,7 +1268,7 @@ public extension ServerResponse {
 }
 ```
 
-Finally, lets create a middleware which sends our todos to the client:
+Finally, let's create a middleware which sends our todos to the client:
 
 <img src="/images/gh.svg" style="height: 1em; margin-bottom: -0.1em; text-align: bottom;"/>
 [main.swift](https://github.com/NozeIO/MicroExpress/blob/nio-tutorial/5-json/MicroExpress/Sources/TodoBackend/main.swift#L14)
@@ -1293,7 +1293,7 @@ in the browser. You should see the proper JSON:
     "completed": true  } ]
 ```
 
-Lets try our API with the actual TodoBackend client:<br>
+Let's try our API with the actual TodoBackend client:<br>
 [http://todobackend.com/client/index.html?http://localhost:1337/todomvc/](http://todobackend.com/client/index.html?http://localhost:1337/todomvc/)
 
 If we do this, the todo list in the client shows up empty! 🤔
@@ -1315,7 +1315,7 @@ the browser denies access to our API.
 To make this work we need to implement
 [Cross-Origin Resource Sharing](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
 aka CORS.
-Lets quickly make a reusable middleware function which sets up the proper
+Let's quickly make a reusable middleware function which sets up the proper
 CORS headers, it is just a few lines of code:
 
 <img src="/images/gh.svg" style="height: 1em; margin-bottom: -0.1em; text-align: bottom;"/>

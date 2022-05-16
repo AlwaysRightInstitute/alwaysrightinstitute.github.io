@@ -29,7 +29,7 @@ and you know `strtok`, etc.
 
 ## CString Search Functions
 
-Lets say we just want to get the extension of a filename
+Let's say we just want to get the extension of a filename
 (one of the annoying things in Swift is the missing ability to use
  character literals as integers):
 ```

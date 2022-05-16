@@ -88,7 +88,7 @@ The point is to be able to reuse the
 and share it between different platforms.
 In this case, the Web ✔️
 
-But lets get down to the nitty gritty and write a simple SwiftWebUI application.
+But let's get down to the nitty gritty and write a simple SwiftWebUI application.
 In the spirit of
 “Learn once, use anywhere”
 watch those two WWDC sessions first:
@@ -253,7 +253,7 @@ stored in the session.
 
 ### Adding some Interaction
 
-As a first step, lets organize the code a little better.
+As a first step, let's organize the code a little better.
 Create a new Swift file in the project and call that
 `MainPage.swift`.
 And add a simple SwiftUI View definition to it:

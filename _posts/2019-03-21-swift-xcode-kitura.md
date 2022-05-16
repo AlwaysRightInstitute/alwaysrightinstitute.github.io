@@ -201,7 +201,7 @@ module as a target dependency as well!
 #### Adding a "cows" Route
 
 We could just add the necessary code to the existing files, 
-but lets go the "Create Kitura Route", well, route. For demonstration
+but let's go the "Create Kitura Route", well, route. For demonstration
 purposes.<br>
 Select the "Routes" group in Xcode and press ⌘-n or do it using the menu:
   

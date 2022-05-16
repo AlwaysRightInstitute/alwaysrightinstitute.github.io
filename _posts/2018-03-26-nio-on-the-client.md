@@ -192,7 +192,7 @@ directly running on an iOS device!
 ## Let the App have a UI
 
 On the go, we don't want to open our ChromeBook to access our server.
-So lets add a UI to our app, which can target the server.
+So let's add a UI to our app, which can target the server.
 We keep it very simple and use a 
 [WKWebView](https://developer.apple.com/documentation/webkit/wkwebview)
 as our main driver.

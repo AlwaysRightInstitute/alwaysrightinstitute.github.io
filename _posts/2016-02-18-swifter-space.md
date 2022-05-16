@@ -15,7 +15,7 @@ gone there before.
 But those who did should follow our lines in being honest and admit that they 
 *got it all wrong*!
 
-Lets take a step back and look at what others are doing. 
+Let's take a step back and look at what others are doing. 
 One language which is famous for its indentation handling is Python.
 Though we are very pleased with many decisions in Python -
 what do we see in the very first paragraph looking at

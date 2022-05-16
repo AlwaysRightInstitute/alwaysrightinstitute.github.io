@@ -17,7 +17,7 @@ pattern blindly.
 ## Floating Dates
 
 A good example for a floating date is a birthday.
-Lets say your name is Apple Inc and your birthday is 1976-04-01.
+Let's say your name is Apple Inc and your birthday is 1976-04-01.
 Now consider it is 2018-04-01 - your birthday!
 
 If you are currently in Germany, you are going to celebrate your birthday at:
@@ -67,7 +67,7 @@ which is why most software fixes the semantics of such.
 ### Non-Floating All Day
 
 An example for a non-floating all day event is a vacation day.
-So I'm an employee in Germany and I take a small vacation, lets say 21 days:
+So I'm an employee in Germany and I take a small vacation, let's say 21 days:
 
             2018-04-01  0:00 CET till 2018-05-21 23:59:59 CET
     in UTC: 2018-03-31 23:00 UTC till 2018-05-21 22:59:59 UTC
@@ -146,7 +146,7 @@ It cannot be represented in UTC.
 It cannot be represented in UTC + timezone, because timezones can change in
 the future.
 
-Lets say we want to meet in 2030-01-10 10:00 CET.
+Let's say we want to meet in 2030-01-10 10:00 CET.
 We can't know yet what this is going to be in UTC.
 No, that is no joke even for CET. It is quite possible that the 🇪🇺
 drops DST till then.
