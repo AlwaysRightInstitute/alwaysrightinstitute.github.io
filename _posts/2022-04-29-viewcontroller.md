@@ -671,7 +671,8 @@ func showDetail(_ cow: String) {
   for a View, it has a
   [`willChange(with:)`](https://github.com/ZeeZide/ViewController/blob/ef4e85a3e8a827d542288c25a1355440852cbb52/Sources/ViewController/ViewController/Subscriptions.swift#L13)
   hook, to republish changes in other objects, e.g. models.
-
+- Flutter also seems to do explicit navigation, i.e. "push a route", instead
+  of deriving the navigation position from state.
 
 ## Closing Notes
 
