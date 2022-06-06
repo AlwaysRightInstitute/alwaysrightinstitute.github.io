@@ -714,7 +714,7 @@ Feedback is warmly welcome:
 [wrong@alwaysrightinstitute.com](mailto:wrong@alwaysrightinstitute.com).
 [GitHub](https://github.com/helje5).
 
-**Want to support my work**?
+**Want to support our work**?
 Buy an app:
 [Past for iChat](https://apps.apple.com/us/app/past-for-ichat/id1554897185),
 [SVG Shaper](https://apps.apple.com/us/app/svg-shaper-for-swiftui/id1566140414),
