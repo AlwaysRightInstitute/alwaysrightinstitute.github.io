@@ -22,13 +22,36 @@ docker-run :
 		   $(LOCAL_DOCKER_IMAGE_NAME)
 
 run :
-	arch -x86_64 bundle exec jekyll serve --host 0.0.0.0
+	bundle exec jekyll serve --host 0.0.0.0
+	#arch -x86_64 bundle exec jekyll serve --host 0.0.0.0
 
 # https://jekyllrb.com/docs/installation/macos/
-install-jekyll: # https://jekyllrb.com/docs/installation/macos/
+# 2022-06-02 new:
+# brew install chruby ruby-install
+# ruby-install ruby
+# echo "source $(brew --prefix)/opt/chruby/share/chruby/chruby.sh" >> ~/.zshrc
+# echo "source $(brew --prefix)/opt/chruby/share/chruby/auto.sh" >> ~/.zshrc
+# echo "chruby ruby-3.1.1" >> ~/.zshrc
+# echo "source $(brew --prefix)/opt/chruby/share/chruby/chruby.sh" >> ~/.bash_profile
+# echo "source $(brew --prefix)/opt/chruby/share/chruby/auto.sh" >> ~/.bash_profile
+# echo "chruby ruby-3.1.2" >> ~/.bash_profile
+# relaunch terminal
+# ruby -v # show 3.1.2p20
+# gem install jekyll
+#
+# Also:
+# bundle add webrick
+
+
+install-jekyll-x86: # https://jekyllrb.com/docs/installation/macos/
 	arch -x86_64 rbenv install 2.7.1
 	arch -x86_64 gem install jekyll bundler
 	arch -x86_64 bundler install
+
+install-jekyll: # https://jekyllrb.com/docs/installation/macos/
+	rbenv install 2.7.1
+	gem install jekyll bundler
+	bundler install
 
 clean :
 	rm -rf _site
@@ -36,6 +59,6 @@ clean :
 
 # bundler: failed to load command: jekyll
 # https://github.com/jekyll/jekyll/issues/5423
-check-jekyll-install:
+check-jekyll-install-x86:
 	arch -x86_64 jekyll --version
 	arch -x86_64 bundle exec jekyll --version
