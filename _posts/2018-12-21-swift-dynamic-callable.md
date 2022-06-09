@@ -42,7 +42,7 @@ essentially allows you to turn any type into a regular Swift "function".
 Let's see how this works!
 
 You can follow along, or you can go ahead and 
-[grab `Shell` from GitHub](https://github.com/AlwaysRightInstitute/Shell).
+[grab `Shell` from GitHub](https://github.com/helje5/Shell).
 
 **Important**: Remember that you need to have Swift 5 via 
 [Xcode 10.2](https://developer.apple.com/xcode/).
@@ -286,7 +286,7 @@ print(shell.swift("--version"))
 > The code also omits a helper extension on
 > [`Process`](https://developer.apple.com/documentation/foundation/process),
 > which you can find in the
-> [GitHub repo](https://github.com/AlwaysRightInstitute/Shell/blob/master/Sources/Shell/ProcessHelper.swift).
+> [GitHub repo](https://github.com/helje5/Shell/blob/master/Sources/Shell/ProcessHelper.swift).
 
 When the Swift compiler sees this:
 ```swift
@@ -364,7 +364,7 @@ import PackageDescription
 let package = Package(
     name: "ShellConsumerTest",
     dependencies: [
-        .package(url: "https://github.com/AlwaysRightInstitute/Shell.git",
+        .package(url: "https://github.com/helje5/Shell.git",
                  from: "0.1.0"),
     ],
     targets: [
@@ -489,7 +489,7 @@ so let's at least have this one: 🐄
 
 - [@dynamicCallable Part 2: Swift/ObjC Bridge](http://www.alwaysrightinstitute.com/swift-objc-bridge/),
 - [@dynamicCallable Part 3: Mustacheable](http://www.alwaysrightinstitute.com/mustacheable/),
-- [Shell module](https://github.com/AlwaysRightInstitute/Shell) on GitHub
+- [Shell module](https://github.com/helje5/Shell) on GitHub
 - [SE-0195 Dynamic Member Lookup](https://github.com/apple/swift-evolution/blob/master/proposals/0195-dynamic-member-lookup.md)
 - [SE-0216 Dynamic Callable](https://github.com/apple/swift-evolution/blob/master/proposals/0216-dynamic-callable.md)
 - Python [sh module](https://amoffat.github.io/sh/)

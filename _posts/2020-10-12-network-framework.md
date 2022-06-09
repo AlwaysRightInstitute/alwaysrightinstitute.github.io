@@ -921,11 +921,11 @@ does all the framing already, there are two ways to accomplish the goal:
 
 We've chosen to do the latter and the
 result is available as
-[NWHTTPProtocol](https://github.com/AlwaysRightInstitute/NWHTTPProtocol).
+[NWHTTPProtocol](https://github.com/helje5/NWHTTPProtocol).
 It contains the 
-[HTTP NWProtocolFramer](https://github.com/AlwaysRightInstitute/NWHTTPProtocol/blob/develop/Sources/NWHTTPProtocol/HTTPProtocol.swift#L18) 
+[HTTP NWProtocolFramer](https://github.com/helje5/NWHTTPProtocol/blob/develop/Sources/NWHTTPProtocol/HTTPProtocol.swift#L18) 
 and a 
-[tiny server](https://github.com/AlwaysRightInstitute/NWHTTPProtocol/blob/develop/Sources/NWHTTPServer/README.md) 
+[tiny server](https://github.com/helje5/NWHTTPProtocol/blob/develop/Sources/NWHTTPServer/README.md) 
 implementation:
 ```swift
 let server = HTTPServer { request, response in
@@ -939,7 +939,7 @@ It was surprisingly hard to get right, doing the parsing at the top level
 almost seems like the better choice in retrospective.
 
 We won't discuss the 
-[full source](https://github.com/AlwaysRightInstitute/NWHTTPProtocol/blob/develop/Sources/NWHTTPProtocol/HTTPProtocol.swift#L18) 
+[full source](https://github.com/helje5/NWHTTPProtocol/blob/develop/Sources/NWHTTPProtocol/HTTPProtocol.swift#L18) 
 of the framer. 
 Just a few implementation notes.
 
@@ -952,7 +952,7 @@ It took some time to figure out how to deliver either or both, but we ended up
 with two main delivery methods:
 
 Delivering a "just metadata" message 
-[without byte data](https://github.com/AlwaysRightInstitute/NWHTTPProtocol/blob/develop/Sources/NWHTTPProtocol/HTTPProtocol.swift#L105)
+[without byte data](https://github.com/helje5/NWHTTPProtocol/blob/develop/Sources/NWHTTPProtocol/HTTPProtocol.swift#L105)
 (e.g. HTTP header data and errors):
 ```swift
 func emit(_ message: NWProtocolFramer.Message,
@@ -964,7 +964,7 @@ func emit(_ message: NWProtocolFramer.Message,
 }
 ```
 Delivering HTTP body data, i.e. 
-[with byte data](https://github.com/AlwaysRightInstitute/NWHTTPProtocol/blob/develop/Sources/NWHTTPProtocol/HTTPProtocol.swift#L113):
+[with byte data](https://github.com/helje5/NWHTTPProtocol/blob/develop/Sources/NWHTTPProtocol/HTTPProtocol.swift#L113):
 ```swift
 func emit(_    data : Data,
           to framer : NWProtocolFramer.Instance)
@@ -981,7 +981,7 @@ HTTP message, but no).
 Also note that even for plain data delivery, you apparently need a message.
 
 We've chosen to use 
-[multiple frames](https://github.com/AlwaysRightInstitute/NWHTTPProtocol/blob/develop/Sources/NWHTTPProtocol/HTTPMessage.swift#L19) 
+[multiple frames](https://github.com/helje5/NWHTTPProtocol/blob/develop/Sources/NWHTTPProtocol/HTTPMessage.swift#L19) 
 (Messages) for different HTTP parsing 
 stages:
 1. One frame once all the header data has been accumulated (request or response
@@ -990,7 +990,7 @@ stages:
 3. An HTTP-end-of-message frame (EOF).
 
 I.e. one message emitted by the 
-[`NWHTTPProtocol`](https://github.com/AlwaysRightInstitute/NWHTTPProtocol/blob/develop/Sources/NWHTTPProtocol/HTTPProtocol.swift#L18)
+[`NWHTTPProtocol`](https://github.com/helje5/NWHTTPProtocol/blob/develop/Sources/NWHTTPProtocol/HTTPProtocol.swift#L18)
 doesn't correspond to a full HTTP message (header plus body), 
 but to a part of the larger message.
 
@@ -1001,13 +1001,13 @@ It just gets carried in the metadata dictionary as key/values, e.g.:
 message["http.method"] = "GET"
 ```
 … for the request method. Those accessors are wrapped in an
-[extension](https://github.com/AlwaysRightInstitute/NWHTTPProtocol/blob/develop/Sources/NWHTTPProtocol/HTTPMessage.swift#L50)
+[extension](https://github.com/helje5/NWHTTPProtocol/blob/develop/Sources/NWHTTPProtocol/HTTPMessage.swift#L50)
 on the `NWProtocolFramer.Message`.
 
 ### HTTP Server
 
 The 
-[NWHTTPServer](https://github.com/AlwaysRightInstitute/NWHTTPProtocol/blob/develop/Sources/NWHTTPServer/HTTPServer.swift#L30) 
+[NWHTTPServer](https://github.com/helje5/NWHTTPProtocol/blob/develop/Sources/NWHTTPServer/HTTPServer.swift#L30) 
 module provides a wrapper around all the NWListener things discussed at the top.
 
 It adds some lightweight Swift wrappers and can then invoke a handler closure:
@@ -1020,7 +1020,7 @@ server.run()
 ```
 
 Like in the line framer example, this 
-[injects our HTTPProtocol](https://github.com/AlwaysRightInstitute/NWHTTPProtocol/blob/develop/Sources/NWHTTPServer/HTTPServer.swift#L75):
+[injects our HTTPProtocol](https://github.com/helje5/NWHTTPProtocol/blob/develop/Sources/NWHTTPServer/HTTPServer.swift#L75):
 ```swift
 let httpProtocol =
     NWProtocolFramer.Options(definition: HTTPProtocol.definition)
@@ -1053,7 +1053,7 @@ connection.receiveMessage { data, context, isComplete, error in
 }
 ```
 The server also tracks
-[some basic state](https://github.com/AlwaysRightInstitute/NWHTTPProtocol/blob/develop/Sources/NWHTTPServer/HTTPServer.swift#L157)
+[some basic state](https://github.com/helje5/NWHTTPProtocol/blob/develop/Sources/NWHTTPServer/HTTPServer.swift#L157)
 about the connection.
 
 Speaking of which, is a little tricky as well.
@@ -1066,13 +1066,13 @@ Originally we though the framer might be able to close the connection
 (e.g. after sending a full response w/ keep-alive off).
 That doesn't seem to be the case, the _server_ needs to deal with that.
 Which meant 
-[more metadata](https://github.com/AlwaysRightInstitute/NWHTTPProtocol/blob/develop/Sources/NWHTTPProtocol/HTTPMessage.swift#L70) 
+[more metadata](https://github.com/helje5/NWHTTPProtocol/blob/develop/Sources/NWHTTPProtocol/HTTPMessage.swift#L70) 
 to be exposed in the messages.
 
 ### Summary
 
 In very limited testing the 
-[HTTPServer](https://github.com/AlwaysRightInstitute/NWHTTPProtocol)
+[HTTPServer](https://github.com/helje5/NWHTTPProtocol)
 finally seems to work right.
 If someone finds any bugs, issues and PRs are warmly welcome.
 PRs w/ tests would be cool too!
@@ -1150,7 +1150,7 @@ Comparing concepts (very very rough):
 ## Closing Notes
 
 For very small embedded HTTP servers the
-[NWHTTPProtocol](https://github.com/AlwaysRightInstitute/NWHTTPProtocol)
+[NWHTTPProtocol](https://github.com/helje5/NWHTTPProtocol)
 approach should work OK. Doesn't require any extra.
 Though it was really painful to get there.
 As soon as it gets more complex (e.g. HTTP/2) 

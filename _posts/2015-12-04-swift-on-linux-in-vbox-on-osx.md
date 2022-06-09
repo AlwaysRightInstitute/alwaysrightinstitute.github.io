@@ -126,7 +126,7 @@ can be right :-)
 
 A lot of Swift code requires GCD (Grand Central Dispatch) aka libdispatch.
 Including the package you love most:
-[SwiftSockets](https://github.com/AlwaysRightInstitute/SwiftSockets).
+[SwiftSockets](https://github.com/helje5/SwiftSockets).
 As part of the Swift OpenSource release Apple also happens to provide the 
 [code of libdispatch on GitHub](https://github.com/apple/swift-corelibs-libdispatch).
 

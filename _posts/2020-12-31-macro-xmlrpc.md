@@ -47,14 +47,14 @@ Or it can return an error, called a `Fault` in XML-RPC slang.
 So we've seen a Python example. Unlike Python Swift doesn't come with
 ~~batteries~~ XML-RPC included.
 Fortunately someone was kind enough to build the
-[Swift XML-RPC](https://github.com/AlwaysRightInstitute/SwiftXmlRpc)
+[Swift XML-RPC](https://github.com/helje5/SwiftXmlRpc)
 package.
 In combination with [swift-sh](https://github.com/mxcl/swift-sh) we can quickly
 replicate the Python example:
 
 ```swift
 #!/usr/bin/swift sh
-import XmlRpc // AlwaysRightInstitute/SwiftXmlRpc
+import XmlRpc // helje5/SwiftXmlRpc
 
 let server = XmlRpc.createClient("http://ccuw:2001/RPC2")
 let values = try server.getParamset("LEQ0123456:1", "VALUES")
@@ -67,7 +67,7 @@ print(values)
 > Then just put the code in a file and make it executable 
 > (`chmod +x script.swift`).<br>
 > Alternatively create a macOS tool project in Xcode and add the Swift XML-RPC
-> dependency: `https://github.com/AlwaysRightInstitute/SwiftXmlRpc.git`.
+> dependency: `https://github.com/helje5/SwiftXmlRpc.git`.
 
 ## A simple Macro `http` based server
 
@@ -81,7 +81,7 @@ a tiny wrapper around the excellent
 Let's go with a simple version using just the `http` module first:
 ```swift
 #!/usr/bin/swift sh
-import XmlRpc // AlwaysRightInstitute/SwiftXmlRpc
+import XmlRpc // helje5/SwiftXmlRpc
 import Macro  // @Macro-swift
 
 http.createServer { req, res in
@@ -557,7 +557,7 @@ We hope we could show how easy it is to provide APIs using XML-RPC.
 
 ## Links
 
-- [Swift XML-RPC](https://github.com/AlwaysRightInstitute/SwiftXmlRpc)
+- [Swift XML-RPC](https://github.com/helje5/SwiftXmlRpc)
   - [Macro XML-RPC](https://github.com/Macro-swift/MacroXmlRpc)
   - [Macro](https://github.com/Macro-swift/Macro)
   - [MacroExpress](https://github.com/Macro-swift/MacroExpress)

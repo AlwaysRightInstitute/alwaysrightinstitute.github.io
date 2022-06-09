@@ -13,7 +13,7 @@ Using
 [Wasmer](https://wasmer.io),
 an embeddable runtime for Wasm,
 wrapped in a simple
-[Swift API](https://github.com/AlwaysRightInstitute/SwiftyWasmer).
+[Swift API](https://github.com/helje5/SwiftyWasmer).
 
 While it isn't used that much in production just yet, 
 you likely have heard about 
@@ -170,7 +170,7 @@ other programming languages. There is one for Go, one for C/C++,
 one for JavaScript and one for Rust. Bot none for Swift.
 
 Thanks to Swift's excellent C integration, we used that and produced:
-[SwiftyWasmer](https://github.com/AlwaysRightInstitute/SwiftyWasmer).
+[SwiftyWasmer](https://github.com/helje5/SwiftyWasmer).
 
 To work, the 
 [Swift Package Manager](https://github.com/apple/swift-package-manager)
@@ -211,7 +211,7 @@ The easiest way to get going it to use
 but feel free to setup an Xcode or SPM tool project:
 ```swift
 #!/usr/bin/swift sh
-import Wasmer // AlwaysRightInstitute/SwiftyWasmer
+import Wasmer // helje5/SwiftyWasmer
 
 let path     = URL(fileURLWithPath: CommandLine.arguments[1])
 let module   = try WebAssembly.Module(contentsOf: path)
@@ -333,7 +333,7 @@ Here is a small Swift tool which can load that module written in Rust and
 invoke the function:
 ```swift
 #!/usr/bin/swift sh
-import Wasmer // AlwaysRightInstitute/SwiftyWasmer
+import Wasmer // helje5/SwiftyWasmer
 
 let path     = URL(fileURLWithPath: CommandLine.arguments[1])
 let module   = try WebAssembly.Module(contentsOf: path)
@@ -357,7 +357,7 @@ the very same from Swift.
 
 > Above we show running things using `swift sh`. Xcode can be used as well.
 > Just create a new macOS "Tool" project and add
-> this package `https://github.com/AlwaysRightInstitute/SwiftyWasmer`
+> this package `https://github.com/helje5/SwiftyWasmer`
 > as a SwiftPM dependency (e.g. via "File / Swift Packages / Add Dependency").
 > When compiling in Xcode, make sure you compile for "Your Mac" is the target
 > device (i.e. not an iOS device).
@@ -596,7 +596,7 @@ Quite a few things, an imcomplete list:
 
 ### Links
 
-- [SwiftyWasmer](https://github.com/AlwaysRightInstitute/SwiftyWasmer)
+- [SwiftyWasmer](https://github.com/helje5/SwiftyWasmer)
 - [Wasmer](https://wasmer.io)
   - [Documentation](https://docs.wasmer.io)
   - [Wasmer C API](https://github.com/wasmerio/wasmer-c-api)

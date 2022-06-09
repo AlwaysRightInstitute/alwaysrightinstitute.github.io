@@ -24,7 +24,7 @@ and we want to show you how that would look like.
 > Swift also runs on Linux, but it doesn't come with the
 > Objective-C runtime and bridging features.
 > Using the approach shown here with either
-> [libFoundation](https://github.com/AlwaysRightInstitute/libFoundation)
+> [libFoundation](https://github.com/helje5/libFoundation)
 > or
 > [GNUstep](http://gnustep.org)
 > you could also combine Swift and Objective-C on Linux.
@@ -48,7 +48,7 @@ nothing more!
 (*we also cheat a few times and silently rely on builtin bridging.*)
 
 You can follow along, or you can go ahead and grab 
-[`SwiftObjCBridge`](https://github.com/AlwaysRightInstitute/SwiftObjCBridge)
+[`SwiftObjCBridge`](https://github.com/helje5/SwiftObjCBridge)
 from GitHub.
 We recommend to read Part 1 first:
 [Unix Tools as Swift Functions](http://www.alwaysrightinstitute.com/swift-dynamic-callable/)
@@ -652,7 +652,7 @@ print("★★★:", ms)
 ## Summary
 
 You can find the "finished" bridge over here:
-[SwiftObjCBridge.swift](https://github.com/AlwaysRightInstitute/SwiftObjCBridge/blob/master/Sources/SwiftObjCBridge/SwiftObjCBridge.swift).
+[SwiftObjCBridge.swift](https://github.com/helje5/SwiftObjCBridge/blob/master/Sources/SwiftObjCBridge/SwiftObjCBridge.swift).
 It even comes with tests! ⛑
 
 **Again**:
