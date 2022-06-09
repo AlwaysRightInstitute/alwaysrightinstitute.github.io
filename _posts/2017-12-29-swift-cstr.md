@@ -2,6 +2,7 @@
 layout: post
 title: C String Functions in Swift - a malloc'y story
 tags: swift
+hidden: true
 ---
 
 One of the features I like most about Swift is its pretty great integration

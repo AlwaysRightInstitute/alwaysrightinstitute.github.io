@@ -2,6 +2,7 @@
 layout: post
 title: Intro to Network.framework Servers
 tags: swift server side swiftnio networkframework
+hidden: true
 ---
 <img src="https://www.ietf.org/lib/dt/7.19.0/ietf/images/ietflogo-small-transparent.png"
      align="right" width="86" height="86" style="padding: 0 0 0.5em 0.5em;" />
@@ -1194,7 +1195,7 @@ it.
 
 Feedback is warmly welcome:
 [@helje5](https://twitter.com/helje5),
-[wrong@alwaysrightinstitute.com](mailto:wrong@alwaysrightinstitute.com).
+[me@helgehess.eu](mailto:me@helgehess.eu).
 
 Want to support my work? Buy an [app](https://zeezide.de/en/products/products.html)! 
 You don't have to use it! 😀

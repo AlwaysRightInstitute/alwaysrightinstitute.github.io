@@ -739,7 +739,7 @@ Or split it up into many, whatever suits your needs!
 
 Does something not work?
 Please [file issues](https://github.com/Macro-swift/MacroLambda).
-Need help? Feel free to [contact us](mailto:wrong@alwaysrightinstitute.com)!
+Need help? Feel free to [contact me](mailto:me@helgehess.eu)!
 
 ### Why use Swift for this?
 
@@ -826,7 +826,7 @@ And all the other people involved, of course!
 
 Feedback is warmly welcome:
 [@helje5](https://twitter.com/helje5),
-[wrong@alwaysrightinstitute.com](mailto:wrong@alwaysrightinstitute.com).
+[me@helgehess.eu](mailto:me@helgehess.eu).
 
 Want to support my work? Buy an [app](https://zeezide.de/en/products/products.html)! 
 You don't have to use it! 😀

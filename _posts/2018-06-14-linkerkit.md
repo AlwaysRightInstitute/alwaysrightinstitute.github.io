@@ -2,6 +2,7 @@
 layout: post
 title: Chat with your Raspi - SwiftyLinkerKit+NIO
 tags: linux swift server side raspberry raspi swiftnio swiftygpio linkerkit
+hidden: true
 ---
 <img src="http://zeezide.com/img/LKDigi128.png"
      align="right" width="86" height="86" style="padding: 0 0 0.5em 0.5em;" />
@@ -542,4 +543,4 @@ Hey, we hope you liked the article and we love feedback!
 Twitter, any of those:
 [@helje5](https://twitter.com/helje5),
 [@ar_institute](https://twitter.com/ar_institute).<br>
-Email: [wrong@alwaysrightinstitute.com](mailto:wrong@alwaysrightinstitute.com).
+Email: [me@helgehess.eu](mailto:me@helgehess.eu).

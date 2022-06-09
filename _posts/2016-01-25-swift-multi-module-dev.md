@@ -2,6 +2,7 @@
 layout: post
 title: HACK - Swift Module Development
 tags: Linux Swift SPM Package Manager GCD Dispatch
+hidden: true
 ---
 Let's say you want to develop a [Swift](https://swift.org/) thing on Linux.
 Instead of throwing everything in one big package, you would like to organize 

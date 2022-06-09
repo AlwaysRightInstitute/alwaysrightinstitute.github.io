@@ -2,6 +2,7 @@
 layout: post
 title: Hosting WebAssembly in Swift
 tags: webassembly wasm wasmer swift server side
+hidden: true
 ---
 <img src="https://avatars3.githubusercontent.com/u/44205449?s=86&v=4"
      align="right" width="86" height="86" style="padding: 0 0 0.5em 0.5em;" />
@@ -610,7 +611,7 @@ Quite a few things, an imcomplete list:
 
 Feedback is warmly welcome:
 [@helje5](https://twitter.com/helje5),
-[wrong@alwaysrightinstitute.com](mailto:wrong@alwaysrightinstitute.com).
+[me@helgehess.eu](mailto:me@helgehess.eu).
 
 Want to support my work? Buy an [app](https://zeezide.de/en/products/products.html)! 
 You don't have to use it! 😀

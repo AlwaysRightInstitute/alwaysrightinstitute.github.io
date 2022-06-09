@@ -2,6 +2,7 @@
 layout: post
 title: Async I/O for Dummies
 tags: linux swift server side swiftnio
+hidden: true
 ---
 You are a backend developer and are told to rewrite
 everything because your framework is switching to something mysterious
@@ -350,4 +351,4 @@ But maybe that changes in the future, enter:
 Twitter, any of those:
 [@helje5](https://twitter.com/helje5),
 [@ar_institute](https://twitter.com/ar_institute).<br>
-Email: [wrong@alwaysrightinstitute.com](mailto:wrong@alwaysrightinstitute.com).
+Email: [me@helgehess.eu](mailto:me@helgehess.eu).

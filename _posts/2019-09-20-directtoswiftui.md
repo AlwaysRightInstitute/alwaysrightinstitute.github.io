@@ -2,6 +2,7 @@
 layout: post
 title: Introducing Direct to SwiftUI
 tags: swiftui swift webobjects rules declarative directtoweb
+hidden: true
 ---
 <img src=
   "{{ site.baseurl }}/images/d2s/D2SIcon128.png" 
@@ -1026,7 +1027,7 @@ Hey, we hope you liked the article and we love feedback!<br>
 Twitter, any of those:
 [@helje5](https://twitter.com/helje5),
 [@ar_institute](https://twitter.com/ar_institute).<br>
-Email: [wrong@alwaysrightinstitute.com](mailto:wrong@alwaysrightinstitute.com).<br>
+Email: [me@helgehess.eu](mailto:me@helgehess.eu).<br>
 Slack: Find us on SwiftDE, swift-server, noze, ios-developers.
 
 Want to support my work? Buy an [app](https://zeezide.de/en/products/products.html)! 

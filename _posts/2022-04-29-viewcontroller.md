@@ -2,6 +2,7 @@
 layout: post
 title: Model View Controller for SwiftUI
 tags: swift swiftui model view controller mvc architecture pattern ios
+hidden: true
 ---
 <a href="https://github.com/ZeeZide/ViewController" target="zz"><img src="{{ site.baseurl }}/images/vc/ViewControllerIcon256.png"
      align="right" width="86" height="86" style="padding: 0 0 0.5em 0.5em;" /></a>
@@ -54,7 +55,7 @@ class HomePage: ViewController {
 > no matter how many times you shoot it […], or douse it in 
 > gasoline and light it on fire, or anything.
 
-We at the ARI think that SwiftUI is just another iteration of 
+I think that SwiftUI is just another iteration of 
 [WebObjects](/wo-intro/).
 And hence structure SwiftUI apps in a similar way we used to.
 After bringing a 
@@ -76,6 +77,17 @@ Direct access:
 - [The Problem](#the-problem)
 - [A Solution: Model View Controller](#a-solution-model-view-controller)
 - Optional Micro Framework: [ViewController](#viewcontroller)
+
+
+**News 2022-06-05**:
+SwiftUI 4 (iOS 16+) has a new navigation API that fixes a lot of things.
+Learn about it [over here](https://developer.apple.com/videos/play/wwdc2022/10054/).
+Looks like that will make SwiftUI navigation much more reliable.
+Not quite sure yet how I'm going to fit it into ViewController.
+The new approach fixes some things. But it isn't a "presentation stack"
+either, i.e. it only addresses navigation (not sheets etc).
+We'll see.
+
 
 ## The Problem
 
@@ -689,7 +701,7 @@ presentations going on. We quite like it.
 As usual all feedback is welcome. 
 Tell us why you hate it and why this is wrong!<br>
 [@helje5](https://twitter.com/helje5) or
-[wrong@alwaysrightinstitute.com](mailto:wrong@alwaysrightinstitute.com).
+[me@helgehess.eu](mailto:me@helgehess.eu).
 
 
 ### Links
@@ -711,7 +723,7 @@ Tell us why you hate it and why this is wrong!<br>
 Feedback is warmly welcome:
 [@helje5](https://twitter.com/helje5),
 [@helge@mastodon.social](https://mastodon.social/web/@helge),
-[wrong@alwaysrightinstitute.com](mailto:wrong@alwaysrightinstitute.com).
+[me@helgehess.eu](mailto:me@helgehess.eu).
 [GitHub](https://github.com/helje5).
 
 **Want to support our work**?

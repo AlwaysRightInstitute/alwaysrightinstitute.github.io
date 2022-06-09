@@ -2,6 +2,7 @@
 layout: post
 title: Instant Kitura with SwiftXcode
 tags: linux swift server side kitura swiftxcode
+hidden: true
 ---
 <img src="https://pbs.twimg.com/profile_images/817553315336552449/d1aab-Wo_400x400.jpg"
      align="right" width="86" height="86" style="padding: 0 0 0.5em 0.5em;" />
@@ -316,4 +317,4 @@ Hey, we love feedback!
 Twitter, any of those:
 [@helje5](https://twitter.com/helje5),
 [@ar_institute](https://twitter.com/ar_institute).<br>
-Email: [wrong@alwaysrightinstitute.com](mailto:wrong@alwaysrightinstitute.com).
+Email: [me@helgehess.eu](mailto:me@helgehess.eu).

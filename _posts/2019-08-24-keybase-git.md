@@ -2,6 +2,7 @@
 layout: post
 title: Migrate Private GIT Repositories to Keybase
 tags: git gcrypt github
+hidden: true
 ---
 <a href="https://git-scm.com/downloads/logos">
   <img src="https://git-scm.com/images/logos/downloads/Git-Icon-1788C.png"

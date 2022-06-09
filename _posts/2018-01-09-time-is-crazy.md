@@ -2,6 +2,7 @@
 layout: post
 title: Date and Time - "Das Haus das Verrückte macht"
 tags: date time calendar
+hidden: true
 ---
 
 Properly handling date and time is a really complicated manner.

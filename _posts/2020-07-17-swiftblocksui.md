@@ -2,6 +2,7 @@
 layout: post
 title: Instant “SwiftUI” Flavoured Slack Apps
 tags: slack slackapps linux swift server side swiftnio
+hidden: true
 ---
 <img src="https://zeezide.com/img/blocksui/SwiftBlocksUIIcon256.png"     
      align="right" width="86" height="86" style="padding: 0 0 0.5em 0.5em;" />
@@ -1537,7 +1538,7 @@ It's a little different and more a 1:1 mapping to the actual blocks though.
 Feedback is warmly welcome:
 
 Twitter: [@helje5](https://twitter.com/helje5),
-email: [wrong@alwaysrightinstitute.com](mailto:wrong@alwaysrightinstitute.com),
+email: [me@helgehess.eu](mailto:me@helgehess.eu),
 [AvocadoToast](https://join.slack.com/t/avocadotoastworkspace/shared_invite/zt-fw31ok9f-8fpubMFP5R5KYRFYo9J_mw)
 Slack.
 

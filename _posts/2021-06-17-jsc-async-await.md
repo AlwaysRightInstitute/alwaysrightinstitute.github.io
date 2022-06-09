@@ -2,6 +2,7 @@
 layout: post
 title: Async/Await for iOS 14 and before
 tags: swift concurrency async await javascript javascriptcore
+hidden: true
 ---
 The secret Apple doesn't want you to know about:
 It has been shipping an async/await runtime for years.
@@ -214,7 +215,7 @@ on servers using [SwiftNIO](https://github.com/apple/swift-nio). Thanks!
 
 Feedback is warmly welcome:
 [@helje5](https://twitter.com/helje5),
-[wrong@alwaysrightinstitute.com](mailto:wrong@alwaysrightinstitute.com).
+[me@helgehess.eu](mailto:me@helgehess.eu).
 
 Want to support my work? Buy an [app](https://zeezide.de/en/products/products.html)! 
 You don't have to use it! 😀

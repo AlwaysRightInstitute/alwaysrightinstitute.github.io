@@ -2,6 +2,7 @@
 layout: post
 title: A µTutorial on SwiftNIO 2
 tags: linux swift server side mod_swift swiftnio
+hidden: true
 ---
 <img src="http://zeezide.com/img/MicroExpressIcon1024.png"
      align="right" width="86" height="86" style="padding: 0 0 0.5em 0.5em;" />
@@ -1473,7 +1474,7 @@ Hey, we love feedback!
 Twitter, any of those:
 [@helje5](https://twitter.com/helje5),
 [@ar_institute](https://twitter.com/ar_institute).<br>
-Email: [wrong@alwaysrightinstitute.com](mailto:wrong@alwaysrightinstitute.com).
+Email: [me@helgehess.eu](mailto:me@helgehess.eu).
 
 Want to support my work? Buy an [app](https://zeezide.de/en/products/products.html)! 
 You don't have to use it! 😀

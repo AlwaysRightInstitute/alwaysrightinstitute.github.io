@@ -2,6 +2,7 @@
 layout: post
 title: Bringing Swift NIO to the iPhone
 tags: linux swift server side mod_swift swiftnio
+hidden: true
 ---
 
 Friday, time for a fun project!
@@ -458,7 +459,7 @@ Hey, we love feedback!
 Twitter, any of those:
 [@helje5](https://twitter.com/helje5),
 [@ar_institute](https://twitter.com/ar_institute).<br>
-Email: [wrong@alwaysrightinstitute.com](mailto:wrong@alwaysrightinstitute.com).
+Email: [me@helgehess.eu](mailto:me@helgehess.eu).
 
 ## Video
 

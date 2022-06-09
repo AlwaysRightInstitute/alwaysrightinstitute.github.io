@@ -2,6 +2,7 @@
 layout: post
 title: µExpress - Using the Swift Server API 0.1.0
 tags: linux swift server side mod_swift
+hidden: true
 ---
 
 <img src="http://zeezide.com/img/MicroExpressIcon1024.png"
@@ -66,7 +67,7 @@ There is a little setup overhead before we can actually see something,
 but not *that* much - a few files, it is µ - so stick with us.
 And if you are really lazy and just want to follow along,
 you can clone the 
-[finished project at GitHub](https://github.com/AlwaysRightInstitute/MicroExpress)
+[finished project at GitHub](https://github.com/helje5/MicroExpress)
 🤓
 
 ## Step 0: Prepare the package
@@ -94,7 +95,7 @@ we are going to use the
 [0.1.0 version of the API](http://www.alwaysrightinstitute.com/http-010/)
 (the first and only release so far),
 so add this to the dependencies section of the 
-[`Package.swift`](https://github.com/AlwaysRightInstitute/MicroExpress/blob/tutorial/1-hello-world/Package.swift) 
+[`Package.swift`](https://github.com/helje5/MicroExpress/blob/tutorial/1-hello-world/Package.swift) 
 file:
 
 ```swift
@@ -153,7 +154,7 @@ data to subsequent middleware.
 > the proper target: `MicroExpress`
 > (again Xcode defaults to the wrong one).
 
-GitHub: [IncomingMessage.swift](https://github.com/AlwaysRightInstitute/MicroExpress/blob/tutorial/1-hello-world/Sources/MicroExpress/IncomingMessage.swift)
+GitHub: [IncomingMessage.swift](https://github.com/helje5/MicroExpress/blob/tutorial/1-hello-world/Sources/MicroExpress/IncomingMessage.swift)
 ```swift
 // File: IncomingMessage.swift - create this in Sources/MicroExpress
 
@@ -211,7 +212,7 @@ which is used to send data back to the client.
 Our class just adds a slightly more convenient `send` function. Right now it
 can only send text back to the browser.
 
-GitHub: [ServerResponse.swift](https://github.com/AlwaysRightInstitute/MicroExpress/blob/tutorial/1-hello-world/Sources/MicroExpress/ServerResponse.swift)
+GitHub: [ServerResponse.swift](https://github.com/helje5/MicroExpress/blob/tutorial/1-hello-world/Sources/MicroExpress/ServerResponse.swift)
 ```swift
 // File: ServerResponse.swift - create this in Sources/MicroExpress
 
@@ -306,7 +307,7 @@ app.use { req, res, next in
 
 In Swift a middleware can be expressed by a simple `typealias`:
 
-GitHub: [Middleware.swift](https://github.com/AlwaysRightInstitute/MicroExpress/blob/tutorial/1-hello-world/Sources/MicroExpress/Middleware.swift)
+GitHub: [Middleware.swift](https://github.com/helje5/MicroExpress/blob/tutorial/1-hello-world/Sources/MicroExpress/Middleware.swift)
 ```swift
 // File: Middleware.swift - create this in Sources/MicroExpress
 
@@ -335,7 +336,7 @@ When handling a request, the router just steps through its list
 of middleware until one of them **doesn't** call `next`.
 And by that, finishes the request handling process.
 
-GitHub: [Router.swift](https://github.com/AlwaysRightInstitute/MicroExpress/blob/tutorial/1-hello-world/Sources/MicroExpress/Router.swift)
+GitHub: [Router.swift](https://github.com/helje5/MicroExpress/blob/tutorial/1-hello-world/Sources/MicroExpress/Router.swift)
 ```swift
 // File: Router.swift - create this in Sources/MicroExpress
 
@@ -419,7 +420,7 @@ The actual HTTP server using the API,
 and it is itself a router.
 It hooks up the Swift Server API w/ our infrastructure.
 
-GitHub: [Express.swift](https://github.com/AlwaysRightInstitute/MicroExpress/blob/tutorial/1-hello-world/Sources/MicroExpress/Express.swift)
+GitHub: [Express.swift](https://github.com/helje5/MicroExpress/blob/tutorial/1-hello-world/Sources/MicroExpress/Express.swift)
 ```swift
 // File: Express.swift - create this in Sources/MicroExpress
 
@@ -478,7 +479,7 @@ like this:
   /></center>
 
 GitHub: You can find this setup in the
-[tutorial/1-hello-world](https://github.com/AlwaysRightInstitute/MicroExpress/tree/tutorial/1-hello-world)
+[tutorial/1-hello-world](https://github.com/helje5/MicroExpress/tree/tutorial/1-hello-world)
 branch.
 
 
@@ -490,7 +491,7 @@ Open the `main.swift` file, which currently just has
 a `print("Hello, world!")`.
 Let's make that server side!
 
-GitHub: [main.swift](https://github.com/AlwaysRightInstitute/MicroExpress/blob/tutorial/1-hello-world/Sources/MicroExpress/main.swift)
+GitHub: [main.swift](https://github.com/helje5/MicroExpress/blob/tutorial/1-hello-world/Sources/MicroExpress/main.swift)
 ```swift
 // File: main.swift - update existing file
 
@@ -551,7 +552,7 @@ This is only triggered if the HTTP method is `GET` and the URL path
 starts with `/moo`.
 Suprisingly trivial to add to `Router.swift`:
 
-GitHub: [Router.swift](https://github.com/AlwaysRightInstitute/MicroExpress/blob/tutorial/2-api-sugar/Sources/MicroExpress/Router.swift#L46)
+GitHub: [Router.swift](https://github.com/helje5/MicroExpress/blob/tutorial/2-api-sugar/Sources/MicroExpress/Router.swift#L46)
 ```swift
 // File: Router.swift - add this to Router.swift
 public extension Router {
@@ -598,7 +599,7 @@ It could be some form of Auth, or JSON body parsing, or:<br>
 One thing you often want to do: parse query parameters.
 Let's do a reusable middleware for that!
 
-GitHub: [QueryString.swift](https://github.com/AlwaysRightInstitute/MicroExpress/blob/tutorial/2-api-sugar/Sources/MicroExpress/QueryString.swift)
+GitHub: [QueryString.swift](https://github.com/helje5/MicroExpress/blob/tutorial/2-api-sugar/Sources/MicroExpress/QueryString.swift)
 ```swift
 // File: QueryString.swift - create this in Sources/MicroExpress
 
@@ -680,7 +681,7 @@ API client.
 In this case a list of todos (the real API has more fields, but it is enough
 to get going):
 
-GitHub: [TodoModel.swift](https://github.com/AlwaysRightInstitute/MicroExpress/blob/tutorial/3-json-support/Sources/MicroExpress/TodoModel.swift)
+GitHub: [TodoModel.swift](https://github.com/helje5/MicroExpress/blob/tutorial/3-json-support/Sources/MicroExpress/TodoModel.swift)
 ```swift
 // File: TodoModel.swift - create this in Sources/MicroExpress
 
@@ -710,7 +711,7 @@ To deliver the JSON to the client, we enhance our `ServerResponse` object
 with a `json()` function (similar to what Express does).
 It can deliver any `Codable` object as JSON:
 
-GitHub: [ServerResponse.swift](https://github.com/AlwaysRightInstitute/MicroExpress/blob/tutorial/3-json-support/Sources/MicroExpress/ServerResponse.swift#L43)
+GitHub: [ServerResponse.swift](https://github.com/helje5/MicroExpress/blob/tutorial/3-json-support/Sources/MicroExpress/ServerResponse.swift#L43)
 ```swift
 // File: ServerResponse.swift - add this to ServerResponse.swift
 
@@ -741,7 +742,7 @@ public extension ServerResponse {
 
 Finally, let's create a middleware which sends our todos to the client:
 
-GitHub: [main.swift](https://github.com/AlwaysRightInstitute/MicroExpress/blob/tutorial/3-json-support/Sources/MicroExpress/main.swift#L11)
+GitHub: [main.swift](https://github.com/helje5/MicroExpress/blob/tutorial/3-json-support/Sources/MicroExpress/main.swift#L11)
 ```swift
 // File: main.swift - add this to main.swift
 
@@ -787,7 +788,7 @@ aka CORS.
 Let's quickly make a reusable middleware function which sets up the proper
 CORS headers, it is just a few lines of code:
 
-GitHub: [CORS.swift](https://github.com/AlwaysRightInstitute/MicroExpress/blob/tutorial/3-json-support/Sources/MicroExpress/CORS.swift)
+GitHub: [CORS.swift](https://github.com/helje5/MicroExpress/blob/tutorial/3-json-support/Sources/MicroExpress/CORS.swift)
 ```swift
 // File: CORS.swift - create this in Sources/MicroExpress
 
@@ -815,7 +816,7 @@ To use it, add the `cors` middleware above your TodoMVC middleware in
 `main.swift`,
 e.g. like this:
 
-GitHub: [main.swift](https://github.com/AlwaysRightInstitute/MicroExpress/blob/tutorial/3-json-support/Sources/MicroExpress/main.swift#L4)
+GitHub: [main.swift](https://github.com/helje5/MicroExpress/blob/tutorial/3-json-support/Sources/MicroExpress/main.swift#L4)
 ```swift
 // File: main.swift - change this in main.swift
 
@@ -858,7 +859,7 @@ We also need to export our library to external packages using the
 [products](https://github.com/apple/swift-package-manager/blob/master/Documentation/PackageDescriptionV4.md#products)
 declaration.
 
-GitHub: [Package.swift](https://github.com/AlwaysRightInstitute/MicroExpress/blob/tutorial/4-package-up/Package.swift#L8)
+GitHub: [Package.swift](https://github.com/helje5/MicroExpress/blob/tutorial/4-package-up/Package.swift#L8)
 ```swift
 // File: Package.swift - update existing file
     
@@ -902,7 +903,7 @@ import MicroExpress
 You can rebuild the tool and it should work the same as before.
 
 GitHub: You can find this setup in the
-[tutorial/4-package-up](https://github.com/AlwaysRightInstitute/MicroExpress/tree/tutorial/4-package-up)
+[tutorial/4-package-up](https://github.com/helje5/MicroExpress/tree/tutorial/4-package-up)
 branch.
 
 ### Publish Package using GIT
@@ -914,7 +915,7 @@ as an own package dependency:
 ```swift
 dependencies: [
   .package(url: 
-    "https://github.com/AlwaysRightInstitute/MicroExpress.git", 
+    "https://github.com/helje5/MicroExpress.git", 
     .branch("master")
   )
 ],
@@ -937,7 +938,7 @@ import PackageDescription
 let package = Package(
   name: "MicroHelloWorld",
   dependencies: [
-    .package(url: "https://github.com/AlwaysRightInstitute/MicroExpress.git", 
+    .package(url: "https://github.com/helje5/MicroExpress.git", 
              branch: "master")
   ],
   targets: [
@@ -998,7 +999,7 @@ for a more complete version of a synchronous Express-like Swift API.
 
 ### Links
 
-- Finished [MicroExpress](https://github.com/AlwaysRightInstitute/MicroExpress)
+- Finished [MicroExpress](https://github.com/helje5/MicroExpress)
   package on GitHub (contains branches of all stages)
 - Swift Server Working Group
   - [Homepage](https://swift.org/server-apis/)
@@ -1016,4 +1017,4 @@ Hey, we love feedback!
 Twitter, any of those:
 [@helje5](https://twitter.com/helje5),
 [@ar_institute](https://twitter.com/ar_institute).<br>
-Email: [wrong@alwaysrightinstitute.com](mailto:wrong@alwaysrightinstitute.com).
+Email: [me@helgehess.eu](mailto:me@helgehess.eu).

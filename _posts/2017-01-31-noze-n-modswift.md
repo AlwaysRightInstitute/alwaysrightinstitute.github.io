@@ -2,6 +2,7 @@
 layout: post
 title: Server Side Swift - Rightful Updates
 tags: nozeio linux swift server side apache mod_swift
+hidden: true
 ---
 
 At [Noze.io](http://noze.io/) we added a small 
@@ -119,7 +120,7 @@ of being rock solid.
 Some people suggested that **mod_swift** may be cool,
 but that they rather wait for **mod_swifter**.
 Ignoring the fact the
-[mod_swifter](https://github.com/AlwaysRightInstitute/mod_objc1)
+[mod_swifter](https://github.com/helje5/mod_objc1)
 has been around for like 16? years.
 
 Looking for a job?
