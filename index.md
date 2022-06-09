@@ -1,7 +1,7 @@
 ---
 layout: default
-title: The Always Right Institute
-tags: swift orm database server postgresql swifter
+title: Helge Heß
+redirect_to: https://helgehess.eu/
 ---
 
 <div class="posts">
