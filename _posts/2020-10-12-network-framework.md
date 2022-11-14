@@ -4,8 +4,6 @@ title: Intro to Network.framework Servers
 tags: swift server side swiftnio networkframework
 hidden: true
 ---
-<img src="https://www.ietf.org/lib/dt/7.19.0/ietf/images/ietflogo-small-transparent.png"
-     align="right" width="86" height="86" style="padding: 0 0 0.5em 0.5em;" />
 The 
 [IETF](https://www.ietf.org) 
 is working on the
