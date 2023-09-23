@@ -2,7 +2,7 @@
 layout: post
 title: µExpress - Using the Swift Server API 0.1.0
 tags: linux swift server side mod_swift
-hidden: true
+hidden: false
 ---
 
 <img src="http://zeezide.com/img/MicroExpressIcon1024.png"

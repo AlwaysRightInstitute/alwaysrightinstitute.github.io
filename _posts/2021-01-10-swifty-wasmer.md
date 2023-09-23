@@ -2,7 +2,7 @@
 layout: post
 title: Hosting WebAssembly in Swift
 tags: webassembly wasm wasmer swift server side
-hidden: true
+hidden: false
 ---
 <img src="https://avatars3.githubusercontent.com/u/44205449?s=86&v=4"
      align="right" width="86" height="86" style="padding: 0 0 0.5em 0.5em;" />
@@ -14,6 +14,8 @@ Using
 an embeddable runtime for Wasm,
 wrapped in a simple
 [Swift API](https://github.com/helje5/SwiftyWasmer).
+
+> Note: 2023-09-23: This is probably outdated by now. API changes in Wasmer.
 
 While it isn't used that much in production just yet, 
 you likely have heard about 

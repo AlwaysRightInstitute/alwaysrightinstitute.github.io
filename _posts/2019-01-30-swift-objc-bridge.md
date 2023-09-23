@@ -2,7 +2,7 @@
 layout: post
 title: "@dynamicCallable Part 2: Swift/ObjC Bridge"
 tags: swift objectivec objc bridge runtime dynamicCallable
-hidden: true
+hidden: false
 ---
 
 In December we demonstrated how to use the new Swift 5

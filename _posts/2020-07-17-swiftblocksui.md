@@ -2,7 +2,7 @@
 layout: post
 title: Instant “SwiftUI” Flavoured Slack Apps
 tags: slack slackapps linux swift server side swiftnio
-hidden: true
+hidden: false
 ---
 <img src="https://zeezide.com/img/blocksui/SwiftBlocksUIIcon256.png"     
      align="right" width="86" height="86" style="padding: 0 0 0.5em 0.5em;" />

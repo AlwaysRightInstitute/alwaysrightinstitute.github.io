@@ -2,7 +2,7 @@
 layout: post
 title: Model View Controller for SwiftUI
 tags: swift swiftui model view controller mvc architecture pattern ios
-hidden: true
+hidden: false
 ---
 <a href="https://github.com/ZeeZide/ViewController" target="zz"><img src="{{ site.baseurl }}/images/vc/ViewControllerIcon256.png"
      align="right" width="86" height="86" style="padding: 0 0 0.5em 0.5em;" /></a>

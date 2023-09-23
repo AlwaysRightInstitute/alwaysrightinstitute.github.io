@@ -2,7 +2,7 @@
 layout: post
 title: "@dynamicCallable: Unix Tools as Swift Functions"
 tags: swift process dynamicCallable
-hidden: true
+hidden: false
 ---
 
 A new feature in Swift 5 are

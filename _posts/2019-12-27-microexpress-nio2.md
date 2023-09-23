@@ -2,7 +2,7 @@
 layout: post
 title: A µTutorial on SwiftNIO 2
 tags: linux swift server side mod_swift swiftnio
-hidden: true
+hidden: false
 ---
 <img src="http://zeezide.com/img/MicroExpressIcon1024.png"
      align="right" width="86" height="86" style="padding: 0 0 0.5em 0.5em;" />

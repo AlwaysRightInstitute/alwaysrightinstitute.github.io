@@ -2,7 +2,7 @@
 layout: post
 title: "@dynamicCallable Part 3: Mustacheable"
 tags: swift dynamicCallable mustache
-hidden: true
+hidden: false
 ---
 <img src="{{ site.baseurl }}/images/mustache-logo.png" 
      align="right" width="86" height="42" style="padding: 0 0 0.5em 0.5em;" />

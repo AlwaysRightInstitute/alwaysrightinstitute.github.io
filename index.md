@@ -1,7 +1,6 @@
 ---
 layout: default
 title: Helge Heß
-redirect_to: https://helgehess.eu/
 ---
 
 <div class="posts">

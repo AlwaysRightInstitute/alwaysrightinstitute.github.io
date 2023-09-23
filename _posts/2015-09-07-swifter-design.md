@@ -2,7 +2,7 @@
 layout: post
 title: Swifter Design
 tags: Swifter SwifterLang
-hidden: true
+hidden: false
 ---
 **TL;DR**:
 Swifter is the complete opposite of Swift. Instead of focusing on making 

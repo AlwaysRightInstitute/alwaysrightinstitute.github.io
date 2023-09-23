@@ -2,7 +2,7 @@
 layout: post
 title: The missing ☑️&#58; SwiftWebUI
 tags: swiftui swift server side swiftnio webobjects
-hidden: true
+hidden: false
 ---
 <img src=
   "{{ site.baseurl }}/images/swiftwebui/TinkerIcon128.png" 

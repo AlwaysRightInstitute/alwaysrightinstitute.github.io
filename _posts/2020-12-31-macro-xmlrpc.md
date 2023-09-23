@@ -2,7 +2,7 @@
 layout: post
 title: Writing an Swift XML-RPC Server
 tags: swift server side swiftnio xmlrpc
-hidden: true
+hidden: false
 ---
 [XML-RPC](http://xmlrpc.com) is a funny little protocol from 1998 to call HTTP 
 endpoints.

@@ -2,7 +2,7 @@
 layout: post
 title: Swifter tvOS sample code
 tags: Swifter SwifterLang
-hidden: true
+hidden: false
 ---
 A few more examples of tvOS Swifter code. Again, focus is on keeping selectors
 but removing static types as well as noize.

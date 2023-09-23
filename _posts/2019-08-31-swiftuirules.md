@@ -2,7 +2,7 @@
 layout: post
 title: Dynamic Environments ¶ SwiftUI Rules
 tags: swiftui swift webobjects rules declarative
-hidden: true
+hidden: false
 ---
 <img src=
   "{{ site.baseurl }}/images/swiftuirules/SwiftUIRulesIcon128.png" 

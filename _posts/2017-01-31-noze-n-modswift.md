@@ -2,7 +2,7 @@
 layout: post
 title: Server Side Swift - Rightful Updates
 tags: nozeio linux swift server side apache mod_swift
-hidden: true
+hidden: false
 ---
 
 At [Noze.io](http://noze.io/) we added a small 

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: SwiftSockets
-hidden: true
+hidden: false
 ---
 Finally - The ARI made available the results of six months of hard work -
 right on GitHub:

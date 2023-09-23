@@ -2,7 +2,7 @@
 layout: post
 title: Introducing Direct to SwiftUI
 tags: swiftui swift webobjects rules declarative directtoweb
-hidden: true
+hidden: false
 ---
 <img src=
   "{{ site.baseurl }}/images/d2s/D2SIcon128.png" 

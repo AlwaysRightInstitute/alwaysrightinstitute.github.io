@@ -2,7 +2,7 @@
 layout: post
 title: Async I/O for Dummies
 tags: linux swift server side swiftnio
-hidden: true
+hidden: false
 ---
 You are a backend developer and are told to rewrite
 everything because your framework is switching to something mysterious
