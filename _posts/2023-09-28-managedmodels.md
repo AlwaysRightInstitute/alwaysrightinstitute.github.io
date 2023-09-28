@@ -257,7 +257,6 @@ While it looks very similar, there are some notable differences.
 It might be possible to fix some of them going forward, if someone has ideas,
 there is a [list of things](https://github.com/Data-swift/ManagedModels/issues).
 
-
 ##### Explicit Superclass
 
 First of all, the classes must explicitly inherit from
@@ -295,6 +294,12 @@ ManagedModels:
 ##### Properties
 
 The properties work quite differently in many details.
+
+2023-09-28 14:48:33Zulu: 
+That what fast, [Aleksandar Vacić](https://mastodon.social/@aleck)
+already provided some info that will likely fix many of the things below.
+Thanks! 😍
+
 
 What is the same:
 ManagedModels also provides implementations of the
@@ -561,6 +566,10 @@ Either way, I hope you like it!
 P.S.: I can see why Apple didn't do it _this way_. 
       While SwiftData still seems to have quite a few problems,
       property behaviour in particular integrates much better.
+
+Uh, and with the infos from [Aleksandar Vacić](https://mastodon.social/@aleck),
+it looks like I can already improve many of the issues.
+Stay tuned for v2.
 
 
 ### Links
