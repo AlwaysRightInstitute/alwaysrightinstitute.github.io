@@ -21,7 +21,7 @@ Article Sections:
 - [ManagedModels](#managedmodels)
   - [Differences to SwiftData](#differences-to-swiftdata)
 - [Example App](#example-app)
-- [Internals](internals)
+- [Internals](#internals)
 - [Closing Notes](#closing-notes)
 
 #### TL;DR
@@ -44,28 +44,28 @@ Example model class:
 ```swift
 @Model
 class ToDo: NSManagedObject {
-  var title: String
-  var isDone: Bool
-  var attachments: [ Attachment ]
+    var title: String
+    var isDone: Bool
+    var attachments: [ Attachment ]
 }
 ```
 setting up a store in SwiftUI:
 ```swift
 ContentView()
-  .modelContainer(for: ToDo.self)
+    .modelContainer(for: ToDo.self)
 ```
 Performing a query:
 ```swift
 struct ToDoListView: View {
-  @FetchRequest(sort: \.isDone)
-  private var toDos: FetchedResults<ToDo>
+    @FetchRequest(sort: \.isDone)
+    private var toDos: FetchedResults<ToDo>
 
-  var body: some View {
-    ForEach(toDos) { todo in
-      Text("\(todo.title)")
-        .foregroundColor(todo.isDone ? .green : .red)
+    var body: some View {
+        ForEach(toDos) { todo in
+            Text("\(todo.title)")
+                .foregroundColor(todo.isDone ? .green : .red)
+        }
     }
-  }
 }
 ```
 
@@ -168,20 +168,13 @@ import SwiftUI
 import SwiftData
 
 @Model class Contact {
-    var name: String
-    var addresses: [ Address ]
-    init() {
-      name = ""
-      addresses = []
-    }
+    var name = ""
+    var addresses = [ Address ]()
 }
 
 @Model class Address {
-    var street: String
+    var street: String = ""
     var contact: Contact?
-    init() {
-      street = ""
-    }
 }
 
 struct ContentView: View {
@@ -221,12 +214,12 @@ import SwiftUI
 import ManagedModels
 
 @Model class Contact: NSManagedObject {
-    var name: String 
-    var addresses: [ Address ]
+    var name = ""
+    var addresses = [ Address ]()
 }
 
 @Model class Address: NSManagedObject {
-    var street: String
+    var street = ""
     var contact: Contact?
 }
 
@@ -344,7 +337,7 @@ live in the same
 
 <br>
 Those should be the most important differences ✔︎
-Quite a few, but workable.
+Still a few, but workable.
 
 
 ### Example App
@@ -385,23 +378,23 @@ class Contact: NSManagedObject {
     // @_PersistedProperty
     var name: String
     {
-        set {
-            setValue(forKey: "name", to: newValue)
-        }
-        get {
-            getValue(forKey: "name")
-        }
+      set {
+        setValue(forKey: "name", to: newValue)
+      }
+      get {
+        getValue(forKey: "name")
+      }
     }    
 
     // @_PersistedProperty
     var age: Int
     {
-        set {
-            setValue(forKey: "age", to: newValue)
-        }
-        get {
-            getValue(forKey: "age")
-        }
+      set {
+        setValue(forKey: "age", to: newValue)
+      }
+      get {
+        getValue(forKey: "age")
+      }
     }    
     
     /// Initialize a `Contact` object, optionally providing an
@@ -463,7 +456,8 @@ extension Contact: ManagedModels.PersistentModel {}
 ```
 
 Essentially:
-- Attaches the `@NSManaged` to properties, as required by CoreData.
+- Attaches setters and getters to properties, which hit the actual CoreData
+  storage.
 - Generates the `_$entity` static variable, which holds the
   [`NSEntityDescription`](https://developer.apple.com/documentation/coredata/nsentitydescription)
   related to the model.
@@ -500,10 +494,6 @@ So I'm happy about any feedback on things I might be doing incorrectly.
 Though it **does** seem to work quite well.
 
 Either way, I hope you like it!
-
-P.S.: I can see why Apple didn't do it _this way_. 
-      While SwiftData still seems to have quite a few problems,
-      property behaviour in particular integrates much better.
 
 
 ### Links
