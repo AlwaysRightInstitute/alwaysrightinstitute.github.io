@@ -246,9 +246,7 @@ dependency to get this up and running.
 
 #### Differences to SwiftData
 
-While it looks very similar, there are some notable differences.
-It might be possible to fix some of them going forward, if someone has ideas,
-there is a [list of things](https://github.com/Data-swift/ManagedModels/issues).
+It looks similar, and kinda is similar, but there are some differences.
 
 ##### Explicit Superclass
 
@@ -262,7 +260,7 @@ Instead of just this in SwiftData:
 ```swift
 @Model class Contact {}
 ```
-the superclass has to be specified ManagedModels:
+the superclass has to be specified w/ ManagedModels:
 ```swift
 @Model class Contact: NSManagedObject {}
 ```
@@ -299,8 +297,9 @@ More complex Swift types are always stored as JSON by ManagedModels.
 RawRepresentable's w/ a base types (like `enum Color: String {...}` or 
 `enum Priority: Int {...}`) are stored as the base type.
 
-Codable's attributes should now work, untested. It works a little different
-from SwiftData, which decomposes some Codables.
+Codable attributes should now work, untested. It works a little different
+to SwiftData, which decomposes some Codables (splits nested properties into
+own attributes / database columns).
 
 
 ##### Initializers
