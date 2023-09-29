@@ -46,10 +46,10 @@ Example model class:
 class ToDo: NSManagedObject {
   var title: String
   var isDone: Bool
-  var attachments: Set<Attachment>
+  var attachments: [ Attachment ]
 }
 ```
-Setting up a store in SwiftUI:
+setting up a store in SwiftUI:
 ```swift
 ContentView()
   .modelContainer(for: ToDo.self)
@@ -222,7 +222,7 @@ import ManagedModels
 
 @Model class Contact: NSManagedObject {
     var name: String 
-    var addresses: Set<Address>
+    var addresses: [ Address ]
 }
 
 @Model class Address: NSManagedObject {
@@ -293,101 +293,22 @@ ManagedModels:
 
 ##### Properties
 
-The properties work quite differently in many details.
+The properties now work quite similar, thanks to some hints by
+[Aleksandar Vacić](https://mastodon.social/@aleck).
 
-2023-09-28 14:48:33Zulu: 
-That what fast, [Aleksandar Vacić](https://mastodon.social/@aleck)
-already provided some info that will likely fix many of the things below.
-Thanks! 😍
-
-
-What is the same:
 ManagedModels also provides implementations of the
 [`@Attribute`](https://developer.apple.com/documentation/swiftdata/attribute(_:originalname:hashmodifier:)),
 `@Relationship` and
 [`@Transient`](https://developer.apple.com/documentation/swiftdata/transient())
 macros.
 
-Those persistent properties:
-```swift
-var name: String 
-var addresses: Set<Address> // vs [ Address ] in SwiftData
-```
+More complex Swift types are always stored as JSON by ManagedModels.
+RawRepresentable's w/ a base types (like `enum Color: String {...}` or 
+`enum Priority: Int {...}`) are stored as the base type.
 
-The first one is a plain attribute of type `String`. In SwiftData those can
-be initialized in-place, like so:
-```swift
-var name: String = "New Name"
-```
-That is 
-[not possible](https://github.com/Data-swift/ManagedModels/issues/14)
-in ManagedModels (which marks the properties as
-[`@NSManaged`](https://docs.swift.org/swift-book/documentation/the-swift-programming-language/attributes/#NSManaged)), 
-they have to be set in an initializer, e.g. like so:
-```swift
-convenience init(name: String) {
-  self.init()
-  self.name = name
-}
-```
-or, alternatively as a default value:
-```swift
-@Attribute(defaultValue: "New Name")
-var name: String
-```
+Codable's attributes should now work, untested. It works a little different
+from SwiftData, which decomposes some Codables.
 
-The second property is a "toMany" relationship. CoreData uses
-[`Set`](https://docs.swift.org/swift-book/documentation/the-swift-programming-language/collectiontypes/#Sets)
-and
-[`NSOrderedSet`](https://developer.apple.com/documentation/foundation/nsorderedset)
-to represent such:
-```swift
-var addresses: Set<Address>
-```
-while SwiftData uses `Array`s:
-```swift
-var addresses: [ Address ]
-```
-
-> Despite being an Array, the SwiftData toMany relationships are 
-> **not ordered**, but apparently backed by regular sets!
-> I.e. the order can change between fetches.<br>
-> Neither SwiftData nor ManagedModels 
-> supports[ordered](https://github.com/Data-swift/ManagedModels/issues/1)
-> relationships just yet.
-
-Another difference is that CoreData attributes are limited to types that
-Objective-C can represent.
-This has subtle consequences, e.g. this doesn't work in ManagedModels:
-```swift
-var age : Int?
-```
-Because an `Optional<Int>` cannot be represented in Objective-C and hence not
-be used in an 
-[`@NSManaged`](https://docs.swift.org/swift-book/documentation/the-swift-programming-language/attributes/#NSManaged) 
-property. Though this _does_ work:
-```swift
-var title : String?
-```
-Because it'll end up as an `NSString` on the CoreData side (and the point can
-be `nil`).
-
-Something nice SwiftData allows is using `Codable` values for attributes 
-(which also covers `Int?`), that doesn't work in ManagedObjects yet:
-```swift
-enum Priority: Int { case low = 1, medium = 3, high = 5 }
-var priority: Priority
-```
-It can be replicated in ManagedObjects by wrapping the property manually:
-```swift
-enum Priority: Int { case low = 1, medium = 3, high = 5 }
-
-var priority: Priority {
-    set { storedPriority = newValue.rawValue }
-    get { Priority(rawValue: storedPriority) ?? .medium }
-}
-var storedPriority : Int
-```
 
 ##### Initializers
 
@@ -460,11 +381,28 @@ Interested how this Swift code:
 is expanded by `@Model`? Buckle up:
 ```swift
 class Contact: NSManagedObject {
-    @NSManaged
+
+    // @_PersistedProperty
     var name: String
-    
-    @NSManaged
+    {
+        set {
+            setValue(forKey: "name", to: newValue)
+        }
+        get {
+            getValue(forKey: "name")
+        }
+    }    
+
+    // @_PersistedProperty
     var age: Int
+    {
+        set {
+            setValue(forKey: "age", to: newValue)
+        }
+        get {
+            getValue(forKey: "age")
+        }
+    }    
     
     /// Initialize a `Contact` object, optionally providing an
     /// `NSManagedObjectContext` it should be inserted into.
@@ -566,10 +504,6 @@ Either way, I hope you like it!
 P.S.: I can see why Apple didn't do it _this way_. 
       While SwiftData still seems to have quite a few problems,
       property behaviour in particular integrates much better.
-
-Uh, and with the infos from [Aleksandar Vacić](https://mastodon.social/@aleck),
-it looks like I can already improve many of the issues.
-Stay tuned for v2.
 
 
 ### Links
