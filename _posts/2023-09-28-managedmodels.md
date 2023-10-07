@@ -417,7 +417,7 @@ class Contact: NSManagedObject {
     /// Initialize a `Contact` object w/o inserting it into a
     /// context.
     init() {
-        super.init(entity: Self._$entity, insertInto: nil)
+        super.init(entity: Self.entity(), insertInto: nil)
     }
 
     static let schemaMetadata : [ CoreData.NSManagedObjectModel.PropertyMetadata ] = [
