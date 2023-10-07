@@ -377,23 +377,23 @@ class Contact: NSManagedObject {
     // @_PersistedProperty
     var name: String
     {
-      set {
-        setValue(forKey: "name", to: newValue)
-      }
-      get {
-        getValue(forKey: "name")
-      }
+        set {
+            setValue(forKey: "name", to: newValue)
+        }
+        get {
+            getValue(forKey: "name")
+        }
     }    
 
     // @_PersistedProperty
     var age: Int
     {
-      set {
-        setValue(forKey: "age", to: newValue)
-      }
-      get {
-        getValue(forKey: "age")
-      }
+        set {
+            setValue(forKey: "age", to: newValue)
+        }
+        get {
+            getValue(forKey: "age")
+        }
     }    
     
     /// Initialize a `Contact` object, optionally providing an
@@ -401,12 +401,9 @@ class Contact: NSManagedObject {
     /// - Parameters:
     //    - entity:  An `NSEntityDescription` describing the object.
     //    - context: An `NSManagedObjectContext` the object should be inserted into.
-    @available(*, deprecated, renamed: "init(context:)",
-               message: "Use `init(context:)` or `init()` instead.")
     override init(entity: CoreData.NSEntityDescription, insertInto context: NSManagedObjectContext?)
     {
-      assert(entity === Self._$entity, "Attempt to initialize PersistentModel w/ different entity?")
-      super.init(entity: entity, insertInto: context)
+        super.init(entity: entity, insertInto: context)
     }
 
     /// Initialize a `Contact` object, optionally providing an
@@ -414,20 +411,13 @@ class Contact: NSManagedObject {
     /// - Parameters:
     //    - context: An `NSManagedObjectContext` the object should be inserted into.
     init(context: CoreData.NSManagedObjectContext?) {
-      super.init(entity: Self._$entity, insertInto: context)
+        super.init(entity: Self.entity(), insertInto: context)
     }
 
     /// Initialize a `Contact` object w/o inserting it into a
     /// context.
     init() {
-      super.init(entity: Self._$entity, insertInto: nil)
-    }
-
-    /// Returns an `NSFetchRequest` setup for the `Contact`.
-    @nonobjc class func fetchRequest() -> CoreData.NSFetchRequest<Contact> {
-        let fetchRequest = CoreData.NSFetchRequest<Contact>(entityName: "Contact")
-        fetchRequest.entity = Self._$entity
-        return fetchRequest
+        super.init(entity: Self._$entity, insertInto: nil)
     }
 
     static let schemaMetadata : [ CoreData.NSManagedObjectModel.PropertyMetadata ] = [
@@ -438,18 +428,8 @@ class Contact: NSManagedObject {
               defaultValue: nil,
               metadata: CoreData.NSAttributeDescription(name: "age", valueType: Int.self))]
 
-    /// Returns the `NSEntityDescription` associated w/ the `PersistentModel`.
-    override class func entity() -> NSEntityDescription {
-        _$entity
-    }
-
     static let _$originalName : String? = nil
     static let _$hashModifier : String? = nil
-
-    /// The shared `NSEntityDescription` for the `PersistentModel`.
-    /// Never modify the referred object!
-    static let _$entity =
-      ManagedModels.SchemaBuilder.shared._entity(for: Contact.self)
 }
 extension Contact: ManagedModels.PersistentModel {}
 ```
@@ -457,12 +437,6 @@ extension Contact: ManagedModels.PersistentModel {}
 Essentially:
 - Attaches setters and getters to properties, which hit the actual CoreData
   storage.
-- Generates the `_$entity` static variable, which holds the
-  [`NSEntityDescription`](https://developer.apple.com/documentation/coredata/nsentitydescription)
-  related to the model.
-  - An override of CoreData's
-    [`entity()`](https://developer.apple.com/documentation/coredata/nsmanagedobject/1640588-entity)
-    that ties the class to that entity.
 - Override of [`init(entity:insertInto:)`](https://developer.apple.com/documentation/coredata/nsmanagedobject/1506357-init), 
   that ties into the entity.
 - A helper `init(context:)` that calls `init(entity:insertInto:)` with the
