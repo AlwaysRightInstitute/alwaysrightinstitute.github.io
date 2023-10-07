@@ -443,7 +443,6 @@ Essentially:
   entity.
 - Two supporting attributes for CoreData migration: `_$originalName` and
   `_$hashModifier`.
-- And a `fetchRequest` class function, if the user didn't specify one.
     
 If someone has more specific questions, feel free to ping me.
       
