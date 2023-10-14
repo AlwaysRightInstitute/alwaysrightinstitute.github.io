@@ -71,6 +71,8 @@ struct ToDoListView: View {
 
 - Swift package: [https://github.com/Data-swift/ManagedModels.git](https://github.com/Data-swift/ManagedModels/)
 - Example ToDo list app: [https://github.com/Data-swift/ManagedToDosApp.git](https://github.com/Data-swift/ManagedToDosApp/)
+- Northwind database using ManagedModels (more complex example):
+  [Northwind for ManagedModels](https://github.com/Northwind-swift/NorthwindManagedModels)
 
 TL;DR ✔︎
 
@@ -356,6 +358,53 @@ It should be self-explanatory. Works on macOS 13 and iOS 16, due to the use
 of the new SwiftUI navigation views. Could be backported to even earlier 
 versions.
 
+### Northwind
+
+There is also a significantly more complex example:
+[Northwind for ManagedModels](https://github.com/Northwind-swift/NorthwindManagedModels).
+
+This is the old [Northwind database](https://github.com/jpwhite3/northwind-SQLite3) 
+packaged up as a Swift package that works with ManagedModels. 
+It contains a set of model classes and a prefilled database which makes it ideal for testing, to get started quickly.
+
+It is actually a straight port of a SwiftData version:
+[NorthwindSwiftData](https://github.com/Northwind-swift/NorthwindSwiftData)
+and as a result a good way to compare how SwiftData and ManagedModels differ.
+
+Sample usage 
+(import `https://github.com/Northwind-swift/NorthwindSwiftData.git`):
+```swift
+import SwiftUI
+import NorthwindSwiftData // @Northwind-swift/NorthwindManagedModels
+
+@main
+struct NorthwindApp: App {
+
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+        }
+        .modelContainer(try! NorthwindStore.modelContainer())
+    }
+}
+
+struct ContentView: View {
+
+    @FetchRequest(sort: \.name)
+    private var products: FetchedResults<Product>
+    
+    var body: some View {
+        List {
+            ForEach(products) { product in
+                Text(verbatim: product.name)
+            }
+        }
+    }    
+}
+```
+
+- [Northwind for ManagedModels Documentation](https://swiftpackageindex.com/Northwind-swift/NorthwindManagedModels/documentation/northwindswiftdata)
+
 
 ### Internals
 
@@ -471,6 +520,11 @@ Either way, I hope you like it!
 ### Links
 
 - [ManagedModels](https://github.com/Data-swift/ManagedModels/)
+  - [Example ToDo list app](https://github.com/Data-swift/ManagedToDosApp/)
+  - [Northwind for ManagedModels](https://github.com/Northwind-swift/NorthwindManagedModels) 
+    (more complex example, schema with many entities and a prefilled DB for
+     testing, [Documentation](https://swiftpackageindex.com/Northwind-swift/NorthwindManagedModels/documentation/northwindswiftdata))
+
 - Apple:
   - [CoreData](https://developer.apple.com/documentation/coredata)
   - [SwiftData](https://developer.apple.com/documentation/swiftdata)
